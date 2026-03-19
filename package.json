@@ -1,0 +1,48 @@
+{
+  "name": "honto-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "check:dead-code": "knip",
+    "check:docs-freshness": "node scripts/check-docs-freshness.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "check:docs": "npm run check:docs-freshness && npm run check:links",
+    "check:todos": "node scripts/check-todos.mjs",
+    "check:deps": "node scripts/check-deps.mjs",
+    "check:hygiene": "npm run check:todos && npm run check:deps",
+    "verify": "npm run lint && npm run format:check && npm run typecheck && npm test && npm run check:dead-code && npm run check:docs && npm run check:todos && npm run build"
+  },
+  "dependencies": {
+    "next": "^16.2.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.0",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.0",
+    "jsdom": "^29.0.0",
+    "knip": "^5.88.1",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0"
+  }
+}

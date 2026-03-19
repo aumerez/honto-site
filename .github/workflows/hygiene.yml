@@ -1,0 +1,35 @@
+name: Hygiene
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # Every Monday at 09:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hygiene:
+    name: Scheduled hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TODO/FIXME policy check
+        run: npm run check:todos
+
+      - name: Dependency freshness report
+        run: npm run check:deps
+
+      - name: Docs freshness check
+        run: npm run check:docs-freshness

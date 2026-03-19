@@ -1,0 +1,24 @@
+# CODEOWNERS for honto-site
+#
+# These owners are automatically requested for review on PRs
+# that modify matching paths. Requires branch protection with
+# "Require review from Code Owners" enabled.
+#
+# Update this file when ownership boundaries change.
+
+# Default: all changes require review
+* @bpolania
+
+# Root config files (package.json, tsconfig, eslint, prettier, etc.)
+/*.json @bpolania
+/*.mjs @bpolania
+/*.ts @bpolania
+
+# CI and GitHub governance
+/.github/ @bpolania
+
+# Documentation and policies
+/docs/ @bpolania
+
+# Application source
+/src/ @bpolania

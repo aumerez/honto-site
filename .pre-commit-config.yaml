@@ -1,0 +1,56 @@
+# Pre-commit hooks for honto-site
+# Phase 1: File hygiene, validation, security, and repo safety
+# Phase 2: Format enforcement (Prettier on staged files)
+# Docs: https://pre-commit.com
+#
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+#
+# Note: Full ESLint lint runs via `npm run lint`, not in pre-commit.
+# Prettier runs here on staged files for fast format enforcement.
+# ESLint is deferred to manual/CI because it requires Node context
+# and full-project analysis that would slow commits.
+
+repos:
+  # File hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Whitespace and line endings
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-merge-conflict
+
+      # File validation
+      - id: check-json
+      - id: check-yaml
+      - id: check-toml
+
+      # Repository safety
+      - id: check-added-large-files
+        args: [--maxkb=2048]
+      - id: check-case-conflict
+      - id: check-symlinks
+
+      # Security
+      - id: detect-private-key
+
+  # Format enforcement (Phase 2)
+  # Uses the project's installed Prettier via a local hook to ensure
+  # version consistency with `npm run format`.
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: npx prettier --write --ignore-unknown
+        language: system
+        types_or: [javascript, jsx, ts, tsx, json, yaml, markdown, css]
+
+  # Secret scanning
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: [--baseline, .secrets.baseline]
