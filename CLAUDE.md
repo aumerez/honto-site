@@ -107,6 +107,51 @@ Before coding UI, understand the context and commit to a clear aesthetic directi
 
 Choose a clear conceptual direction and execute it with precision. Bold maximalism and refined minimalism both work — the key is intentionality, not intensity.
 
+## Design Reference Research
+
+Before implementing any significant UI (pages, layouts, components, or redesigns), review a small set of high-quality reference sites from established galleries:
+
+- https://minimal.gallery/
+- https://webflow.com/made-in-webflow
+- https://www.awwwards.com/sites/
+
+### How to Use References
+
+Use these sources to inform:
+
+- layout and composition
+- typography direction
+- spacing and rhythm
+- color strategy
+- motion and interaction patterns
+- visual hierarchy
+
+Do not copy designs. Do not reproduce layouts, branding, or distinctive compositions from a single source. Always synthesize patterns from multiple references into an original result.
+
+### Required Workflow Before UI Implementation
+
+Before writing UI code, you must:
+
+1. Identify 2–4 relevant reference styles or patterns from these galleries
+2. Summarize what works well about them (brief, concrete observations)
+3. Extract reusable traits (e.g., “tight typographic scale”, “asymmetric layout”, “high contrast minimal palette”)
+4. Define a clear aesthetic direction for this project or page
+5. Only then proceed to implementation
+
+### Output Expectations
+
+When proposing or implementing UI:
+
+- state the intended aesthetic direction first
+- explain the key design choices briefly
+- ensure the result is coherent and intentional, not generic
+
+Avoid:
+
+- generic SaaS/AI layouts
+- default component-library aesthetics
+- overused gradient-heavy styles without purpose
+
 ### Aesthetics Rules
 
 - **Typography**: Choose distinctive, characterful fonts. Pair a display font with a refined body font. Never default to Inter, Roboto, Arial, or system fonts.
