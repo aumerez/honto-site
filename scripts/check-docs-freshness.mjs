@@ -26,7 +26,7 @@ const EXCLUDED_PATHS = [
   ".brv",
 ];
 
-const EXEMPT_FILES = ["README.md"];
+const EXEMPT_FILES = ["README.md", "CLAUDE.md"];
 
 async function findMarkdownFiles(dir) {
   const results = [];
