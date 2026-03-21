@@ -12,11 +12,41 @@ export default function CallToAction() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    /* Mock submission — replace with real API endpoint */
-    setSubmitted(true);
+    setSubmitting(true);
+    setError("");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          subject: `New discovery call request from ${formState.name}`,
+          from_name: "Honto Website",
+          name: formState.name,
+          email: formState.email,
+          company: formState.company || "Not provided",
+          message: formState.message || "No details provided",
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -192,11 +222,17 @@ export default function CallToAction() {
                     placeholder="Brief description of your AI needs..."
                   />
                 </div>
+                {error && (
+                  <p className="rounded-lg bg-danger/10 px-4 py-2.5 text-center text-sm text-danger">
+                    {error}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-accent py-3.5 text-base font-semibold text-bg transition-all hover:shadow-[0_0_32px_var(--color-accent-glow)] hover:brightness-110"
+                  disabled={submitting}
+                  className="w-full rounded-full bg-accent py-3.5 text-base font-semibold text-bg transition-all hover:shadow-[0_0_32px_var(--color-accent-glow)] hover:brightness-110 disabled:opacity-60"
                 >
-                  Book a Discovery Call
+                  {submitting ? "Sending..." : "Book a Discovery Call"}
                 </button>
                 <p className="text-center text-xs text-text-muted">
                   No commitment required. We respond within 24 hours.
