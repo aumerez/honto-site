@@ -38,7 +38,9 @@ describe("Bulwark case study page", () => {
     render(<BulwarkCaseStudy />);
     expect(screen.getByText("Policy Enforcement")).toBeTruthy();
     expect(screen.getByText("Credential Management")).toBeTruthy();
-    expect(screen.getAllByText("Content Inspection").length).toBeGreaterThanOrEqual(1);
+    expect(
+      screen.getAllByText("Content Inspection").length
+    ).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("Rate Limiting")).toBeTruthy();
     expect(screen.getByText("MCP-Native")).toBeTruthy();
   });
@@ -70,17 +72,16 @@ describe("Bulwark case study page", () => {
 
   it("renders breadcrumb navigation", () => {
     render(<BulwarkCaseStudy />);
-    const breadcrumbLink = screen.getAllByText("Case Studies")[0];
-    expect(breadcrumbLink.closest("a")?.getAttribute("href")).toBe(
-      "/case-studies"
+    const breadcrumbLinks = screen.getAllByText("Work");
+    const breadcrumb = breadcrumbLinks.find(
+      (el) => el.closest("a")?.getAttribute("href") === "/work"
     );
+    expect(breadcrumb).toBeTruthy();
   });
 
   it("renders Navigation and Footer", () => {
     render(<BulwarkCaseStudy />);
-    expect(
-      screen.getByRole("navigation", { name: /main/i })
-    ).toBeTruthy();
+    expect(screen.getByRole("navigation", { name: /main/i })).toBeTruthy();
     expect(screen.getByRole("contentinfo")).toBeTruthy();
   });
 });

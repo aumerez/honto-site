@@ -14,19 +14,30 @@ describe("Home page", () => {
     expect(navs.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("renders service cards", () => {
+  it("renders selected work section", () => {
     render(<Home />);
-    expect(screen.getAllByText(/AI Consulting/i).length).toBeGreaterThanOrEqual(
-      1
-    );
+    expect(
+      screen.getByRole("heading", { name: /projects that shipped/i })
+    ).toBeTruthy();
   });
 
-  it("renders the contact section", () => {
+  it("renders practice areas", () => {
     render(<Home />);
-    const buttons = screen.getAllByRole("button", {
-      name: /book a discovery call/i,
-    });
-    expect(buttons.length).toBeGreaterThanOrEqual(1);
+    expect(
+      screen.getByRole("heading", {
+        name: /from strategy through production/i,
+      })
+    ).toBeTruthy();
+  });
+
+  it("renders about section", () => {
+    render(<Home />);
+    expect(screen.getByRole("heading", { name: /small team/i })).toBeTruthy();
+  });
+
+  it("renders contact section", () => {
+    render(<Home />);
+    expect(screen.getByRole("heading", { name: /let's talk/i })).toBeTruthy();
   });
 
   it("renders the footer", () => {

@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Outfit, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-display",
   display: "swap",
 });
 
-const outfit = Outfit({
+const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -21,21 +21,18 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Honto — AI Systems Engineering",
+  title: "Honto",
   description:
-    "Production-grade AI infrastructure that captures, scales, and operationalizes expert knowledge across your organization.",
+    "Engineering consultancy for AI systems. We design, build, and operate production-grade AI infrastructure.",
   keywords: [
     "AI consulting",
-    "AI agents",
-    "RAG systems",
+    "AI engineering",
     "AI infrastructure",
-    "expert knowledge systems",
-    "AI strategy",
+    "AI systems",
   ],
   openGraph: {
-    title: "Honto — AI Systems Engineering",
-    description:
-      "We build production-grade AI systems that think like your best engineers.",
+    title: "Honto",
+    description: "Engineering consultancy for AI systems.",
     type: "website",
     locale: "en_US",
   },
@@ -48,7 +45,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#06060a",
+  themeColor: "#0c0b09",
 };
 
 export default function RootLayout({
@@ -59,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${spaceGrotesk.variable} ${outfit.variable} ${jetbrainsMono.variable}`}
+      className={`dark ${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <body className="bg-bg text-text-primary antialiased">{children}</body>
     </html>

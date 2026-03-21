@@ -1,11 +1,9 @@
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
+import SelectedWork from "./components/SelectedWork";
 import Services from "./components/Services";
-import CoreProduct from "./components/CoreProduct";
-import HowItWorks from "./components/HowItWorks";
-import WhyUs from "./components/WhyUs";
-import ChatAssistant from "./components/ChatAssistant";
-import CallToAction from "./components/CallToAction";
+import CompressedAbout from "./components/CompressedAbout";
+import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -14,14 +12,12 @@ export default function Home() {
       <Navigation />
       <main>
         <Hero />
+        <SelectedWork />
         <Services />
-        <CoreProduct />
-        <HowItWorks />
-        <WhyUs />
-        <CallToAction />
+        <CompressedAbout />
+        <ContactSection />
       </main>
       <Footer />
-      <ChatAssistant />
     </>
   );
 }

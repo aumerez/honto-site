@@ -3,38 +3,38 @@
 /* ─── Custom Theme ─── */
 
 @theme {
-  --color-bg: #06060a;
-  --color-bg-elevated: #0d0d14;
-  --color-bg-card: #11111a;
-  --color-bg-card-hover: #16162a;
-  --color-surface: #1a1a2e;
-  --color-border: #1e1e3a;
-  --color-border-light: #2a2a4a;
-  --color-text-primary: #f0f0f5;
-  --color-text-secondary: #8888a0;
-  --color-text-muted: #55556a;
-  --color-accent: #00e5ff;
-  --color-accent-dim: #00b8cc;
-  --color-accent-glow: #00e5ff33;
-  --color-violet: #8b5cf6;
-  --color-violet-dim: #7c3aed;
-  --color-violet-glow: #8b5cf633;
-  --color-success: #22c55e;
-  --color-danger: #ef4444;
+  /* Warm dark palette */
+  --color-bg: #0c0b09;
+  --color-bg-elevated: #151311;
+  --color-bg-card: #1c1916;
+  --color-bg-card-hover: #24201b;
+  --color-surface: #2a2520;
+  --color-border: #302a24;
+  --color-border-light: #40382f;
 
-  --font-heading: "Space Grotesk", system-ui, sans-serif;
-  --font-body: "Outfit", system-ui, sans-serif;
+  /* Text — warm off-whites and grays */
+  --color-text-primary: #ede9e3;
+  --color-text-secondary: #a09889;
+  --color-text-muted: #6b6155;
+
+  /* Accent duo: copper + muted teal */
+  --color-accent: #c49a6c;
+  --color-accent-dim: #a67d52;
+  --color-teal: #5a9a8a;
+  --color-teal-dim: #4a7d70;
+
+  --color-success: #5a9a6c;
+  --color-danger: #c46c6c;
+
+  /* Fonts */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
+  /* Animations */
   --animate-fade-in: fade-in 0.6s ease-out both;
-  --animate-fade-in-up: fade-in-up 0.6s ease-out both;
+  --animate-fade-in-up: fade-in-up 0.8s ease-out both;
   --animate-fade-in-down: fade-in-down 0.5s ease-out both;
-  --animate-slide-in-left: slide-in-left 0.6s ease-out both;
-  --animate-slide-in-right: slide-in-right 0.6s ease-out both;
-  --animate-scale-in: scale-in 0.5s ease-out both;
-  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-typing: typing 1.5s steps(3) infinite;
 }
 
 /* ─── Keyframes ─── */
@@ -51,7 +51,7 @@
 @keyframes fade-in-up {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -67,71 +67,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes pulse-glow {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
-@keyframes typing {
-  0% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.2;
   }
 }
 
@@ -154,6 +89,30 @@ body {
   color: var(--color-bg);
 }
 
+/* ─── Fluid Typography ─── */
+
+.text-fluid-xl {
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-fluid-lg {
+  font-size: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.text-fluid-md {
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  line-height: 1.3;
+}
+
+.text-fluid-body {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.7;
+}
+
 /* ─── Scroll Reveal ─── */
 
 .reveal {
@@ -169,41 +128,13 @@ body {
   transform: translateY(0);
 }
 
-/* ─── Gradient Text ─── */
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-violet));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ─── Glow Effects ─── */
-
-.glow-accent {
-  box-shadow: 0 0 40px var(--color-accent-glow);
-}
-
-.glow-violet {
-  box-shadow: 0 0 40px var(--color-violet-glow);
-}
-
-/* ─── Grid Background ─── */
-
-.grid-bg {
-  background-image:
-    linear-gradient(var(--color-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-
 /* ─── Noise Texture Overlay ─── */
 
 .noise-overlay::before {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.03;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
@@ -225,5 +156,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted);
+  background: var(--color-accent);
 }

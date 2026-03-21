@@ -10,16 +10,10 @@ describe("Navigation", () => {
 
   it("renders all navigation links", () => {
     render(<Navigation />);
-    expect(screen.getAllByText("Services").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("Product").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("How It Works").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("Why Honto").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("Case Studies").length).toBeGreaterThanOrEqual(1);
-  });
-
-  it("renders Book a Demo CTA", () => {
-    render(<Navigation />);
-    expect(screen.getAllByText("Book a Demo").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Work").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("About").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Insights").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Contact").length).toBeGreaterThanOrEqual(1);
   });
 
   it("has correct aria-label on nav element", () => {

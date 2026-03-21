@@ -2,21 +2,28 @@
 
 ## Project Overview
 
-**honto-site** — A Next.js + TypeScript website repository with development guardrails established before feature work. No application features have been built yet; only a minimal app shell exists.
+**honto-site** — Website for Honto, an AI systems engineering consultancy. Built with Next.js + TypeScript with comprehensive development guardrails.
 
 - **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript (strict mode)
 - **Package manager:** npm
 - **Node version:** 22 LTS
+- **Styling:** Tailwind CSS 4 with custom theme tokens in `globals.css`
 - **Deployment:** Not configured. No deployment target has been chosen.
 - **Environment variables:** None defined. No `.env` files exist.
-- **Design system / styling:** Not configured. No CSS framework or component library has been chosen.
 
 ### Directory Structure
 
 ```
 src/app/              # Next.js App Router pages and layouts
 src/app/__tests__/    # Co-located tests (Vitest + React Testing Library)
+src/app/components/   # Shared components (Navigation, Footer, Hero, Services, etc.)
+src/app/work/         # /work route — project listing and case studies
+src/app/work/bulwark/ # /work/bulwark — Bulwark case study
+src/app/about/        # /about route
+src/app/insights/     # /insights route (placeholder)
+src/app/contact/      # /contact route
+src/hooks/            # Custom React hooks (useScrollReveal, useScrollRevealMultiple)
 scripts/              # Custom Node.js check scripts (.mjs)
 docs/guardrails/      # Governance and policy documentation
 .github/workflows/    # CI and scheduled hygiene workflows

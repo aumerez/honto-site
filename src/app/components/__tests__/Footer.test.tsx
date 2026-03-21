@@ -5,7 +5,7 @@ import Footer from "../Footer";
 describe("Footer", () => {
   it("renders the logo", () => {
     render(<Footer />);
-    expect(screen.getByText(/honto/)).toBeTruthy();
+    expect(screen.getAllByText(/Honto/).length).toBeGreaterThanOrEqual(1);
   });
 
   it("renders the footer role", () => {
@@ -13,33 +13,19 @@ describe("Footer", () => {
     expect(screen.getByRole("contentinfo")).toBeTruthy();
   });
 
-  it("renders link column headings", () => {
+  it("renders navigation links", () => {
     render(<Footer />);
-    expect(screen.getByText("Services")).toBeTruthy();
-    expect(screen.getByText("Company")).toBeTruthy();
-    expect(screen.getByText("Resources")).toBeTruthy();
-  });
-
-  it("renders service links", () => {
-    render(<Footer />);
-    expect(screen.getByText("AI Consulting")).toBeTruthy();
-    expect(screen.getByText("AI Agents")).toBeTruthy();
-    expect(screen.getByText("AI Skills")).toBeTruthy();
-    expect(screen.getByText("RAG Systems")).toBeTruthy();
-  });
-
-  it("renders company links", () => {
-    render(<Footer />);
+    expect(screen.getByText("Work")).toBeTruthy();
     expect(screen.getByText("About")).toBeTruthy();
-    expect(screen.getByText("Careers")).toBeTruthy();
+    expect(screen.getByText("Insights")).toBeTruthy();
     expect(screen.getByText("Contact")).toBeTruthy();
   });
 
-  it("renders resources links", () => {
+  it("renders the description", () => {
     render(<Footer />);
-    expect(screen.getByText("Documentation")).toBeTruthy();
-    expect(screen.getByText("Blog")).toBeTruthy();
-    expect(screen.getByText("Case Studies")).toBeTruthy();
+    expect(
+      screen.getByText("Engineering consultancy for AI systems.")
+    ).toBeTruthy();
   });
 
   it("renders copyright notice with current year", () => {

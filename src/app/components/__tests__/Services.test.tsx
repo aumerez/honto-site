@@ -6,23 +6,21 @@ describe("Services", () => {
   it("renders the section heading", () => {
     render(<Services />);
     expect(
-      screen.getByRole("heading", { name: /end-to-end ai capabilities/i })
+      screen.getByRole("heading", { name: /from strategy through production/i })
     ).toBeTruthy();
   });
 
-  it("renders all five service cards", () => {
+  it("renders all four practice areas", () => {
     render(<Services />);
-    expect(screen.getByText("AI Consulting & Strategy")).toBeTruthy();
-    expect(screen.getByText("AI Agents & Autonomous Workflows")).toBeTruthy();
-    expect(screen.getByText("Domain-Specific AI Skills")).toBeTruthy();
-    expect(screen.getByText("AI Infrastructure")).toBeTruthy();
-    expect(screen.getByText("RAG & Knowledge Systems")).toBeTruthy();
+    expect(screen.getByText("Strategy & Architecture")).toBeTruthy();
+    expect(screen.getByText("Agent Systems")).toBeTruthy();
+    expect(screen.getByText("Knowledge Systems & RAG")).toBeTruthy();
+    expect(screen.getByText("Custom AI Modules")).toBeTruthy();
   });
 
-  it("renders service descriptions", () => {
+  it("renders practice descriptions", () => {
     render(<Services />);
-    expect(screen.getByText(/Actionable roadmaps for AI adoption/i)).toBeTruthy();
-    expect(screen.getByText(/Autonomous agents that execute/i)).toBeTruthy();
+    expect(screen.getByText(/Assessing your operations/i)).toBeTruthy();
   });
 
   it("has the correct section id", () => {
