@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Product", href: "#product" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Why Honto", href: "#why-us" },
+  { label: "Services", href: "/#services" },
+  { label: "Product", href: "/#product" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Why Honto", href: "/#why-us" },
+  { label: "Case Studies", href: "/case-studies" },
 ];
 
 export default function Navigation() {

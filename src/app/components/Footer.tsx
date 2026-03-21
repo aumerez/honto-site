@@ -9,12 +9,12 @@ const footerLinks = {
   Company: [
     { label: "About", href: "#" },
     { label: "Careers", href: "#" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "/#contact" },
   ],
   Resources: [
     { label: "Documentation", href: "#" },
     { label: "Blog", href: "#" },
-    { label: "Case Studies", href: "#" },
+    { label: "Case Studies", href: "/case-studies" },
   ],
 };
 
