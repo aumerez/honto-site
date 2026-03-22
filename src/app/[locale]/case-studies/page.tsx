@@ -40,6 +40,21 @@ export default function CaseStudies() {
       ],
       color: "accent" as const,
     },
+    {
+      slug: "engram",
+      eyebrow: cs.engramEyebrow,
+      title: cs.engramTitle,
+      subtitle: cs.engramSubtitle,
+      description: cs.engramDescription,
+      tags: [
+        "Rust",
+        "BM25 Search",
+        "Causal Graphs",
+        "Multi-Tier Cache",
+        "Tantivy",
+      ],
+      color: "violet" as const,
+    },
   ];
 
   return (
