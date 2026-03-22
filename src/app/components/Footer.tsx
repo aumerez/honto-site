@@ -1,24 +1,31 @@
-const footerLinks = {
-  Services: [
-    { label: "AI Consulting", href: "#services" },
-    { label: "AI Agents", href: "#services" },
-    { label: "AI Skills", href: "#services" },
-    { label: "AI Infrastructure", href: "#services" },
-    { label: "RAG Systems", href: "#services" },
-  ],
-  Company: [
-    { label: "About", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Contact", href: "/#contact" },
-  ],
-  Resources: [
-    { label: "Documentation", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "Case Studies", href: "/case-studies" },
-  ],
-};
+"use client";
+
+import { useLocale } from "@/context/LocaleContext";
 
 export default function Footer() {
+  const { locale, t } = useLocale();
+  const f = t.footer;
+
+  const footerLinks = {
+    [f.servicesHeading]: [
+      { label: f.aiConsulting, href: `/${locale}/#services` },
+      { label: f.aiAgents, href: `/${locale}/#services` },
+      { label: f.aiSkills, href: `/${locale}/#services` },
+      { label: f.aiInfrastructure, href: `/${locale}/#services` },
+      { label: f.ragSystems, href: `/${locale}/#services` },
+    ],
+    [f.companyHeading]: [
+      { label: f.about, href: "#" },
+      { label: f.careers, href: "#" },
+      { label: f.contact, href: `/${locale}/#contact` },
+    ],
+    [f.resourcesHeading]: [
+      { label: f.documentation, href: "#" },
+      { label: f.blog, href: "#" },
+      { label: f.caseStudies, href: `/${locale}/case-studies` },
+    ],
+  };
+
   return (
     <footer
       className="border-t border-border bg-bg-elevated"
@@ -29,14 +36,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <a
-              href="#"
+              href={`/${locale}`}
               className="font-heading text-xl font-bold tracking-tight text-text-primary"
             >
               honto<span className="text-accent">.</span>
             </a>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-text-secondary">
-              Production-grade AI systems built with engineering discipline. We
-              turn expert knowledge into scalable intelligence.
+              {f.brandDescription}
             </p>
           </div>
 
@@ -65,20 +71,20 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
           <p className="text-xs text-text-muted">
-            &copy; {new Date().getFullYear()} Honto. All rights reserved.
+            &copy; {new Date().getFullYear()} {f.copyright}
           </p>
           <div className="flex gap-6">
             <a
               href="#"
               className="text-xs text-text-muted transition-colors hover:text-text-secondary"
             >
-              Privacy Policy
+              {f.privacy}
             </a>
             <a
               href="#"
               className="text-xs text-text-muted transition-colors hover:text-text-secondary"
             >
-              Terms of Service
+              {f.terms}
             </a>
           </div>
         </div>

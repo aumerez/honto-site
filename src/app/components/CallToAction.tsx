@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useLocale } from "@/context/LocaleContext";
 
 export default function CallToAction() {
+  const { t } = useLocale();
+  const c = t.callToAction;
   const sectionRef = useScrollReveal<HTMLElement>();
   const [formState, setFormState] = useState({
     name: "",
@@ -40,10 +43,10 @@ export default function CallToAction() {
       if (data.success) {
         setSubmitted(true);
       } else {
-        setError("Something went wrong. Please try again.");
+        setError(c.errorGeneric);
       }
     } catch {
-      setError("Network error. Please try again.");
+      setError(c.errorNetwork);
     } finally {
       setSubmitting(false);
     }
@@ -56,7 +59,6 @@ export default function CallToAction() {
       className="reveal relative overflow-hidden py-24 md:py-32"
       aria-labelledby="contact-heading"
     >
-      {/* Background */}
       <div
         className="absolute inset-0 bg-gradient-to-b from-bg via-bg-elevated to-bg"
         aria-hidden="true"
@@ -75,28 +77,22 @@ export default function CallToAction() {
           {/* Left: Copy */}
           <div>
             <span className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-accent">
-              Get Started
+              {c.eyebrow}
             </span>
             <h2
               id="contact-heading"
               className="mt-4 font-heading text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl"
             >
-              Ready to build
+              {c.headingLine1}
               <br />
-              <span className="gradient-text">serious AI systems?</span>
+              <span className="gradient-text">{c.headingLine2}</span>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-              Book a discovery call with our engineering team. We&apos;ll assess
-              your needs and show you exactly how AI can transform your
-              operations.
+              {c.description}
             </p>
 
             <div className="mt-10 space-y-5">
-              {[
-                "30-minute technical discovery session",
-                "Custom assessment of AI opportunities",
-                "No-commitment, no-fluff conversation",
-              ].map((item) => (
+              {[c.bullet1, c.bullet2, c.bullet3].map((item) => (
                 <div key={item} className="flex items-center gap-3">
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/10">
                     <svg
@@ -139,11 +135,10 @@ export default function CallToAction() {
                   </svg>
                 </div>
                 <h3 className="font-heading text-xl font-bold">
-                  We&apos;ll be in touch
+                  {c.successTitle}
                 </h3>
                 <p className="mt-2 text-sm text-text-secondary">
-                  Our team will reach out within 24 hours to schedule your
-                  discovery call.
+                  {c.successMessage}
                 </p>
               </div>
             ) : (
@@ -153,7 +148,7 @@ export default function CallToAction() {
                     htmlFor="name"
                     className="mb-1.5 block text-sm font-medium text-text-secondary"
                   >
-                    Name
+                    {c.labelName}
                   </label>
                   <input
                     id="name"
@@ -164,7 +159,7 @@ export default function CallToAction() {
                       setFormState((s) => ({ ...s, name: e.target.value }))
                     }
                     className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-primary placeholder-text-muted outline-none transition-all focus:border-accent/50 focus:ring-1 focus:ring-accent/30"
-                    placeholder="Your name"
+                    placeholder={c.placeholderName}
                   />
                 </div>
                 <div>
@@ -172,7 +167,7 @@ export default function CallToAction() {
                     htmlFor="email"
                     className="mb-1.5 block text-sm font-medium text-text-secondary"
                   >
-                    Email
+                    {c.labelEmail}
                   </label>
                   <input
                     id="email"
@@ -183,7 +178,7 @@ export default function CallToAction() {
                       setFormState((s) => ({ ...s, email: e.target.value }))
                     }
                     className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-primary placeholder-text-muted outline-none transition-all focus:border-accent/50 focus:ring-1 focus:ring-accent/30"
-                    placeholder="you@company.com"
+                    placeholder={c.placeholderEmail}
                   />
                 </div>
                 <div>
@@ -191,7 +186,7 @@ export default function CallToAction() {
                     htmlFor="company"
                     className="mb-1.5 block text-sm font-medium text-text-secondary"
                   >
-                    Company
+                    {c.labelCompany}
                   </label>
                   <input
                     id="company"
@@ -201,7 +196,7 @@ export default function CallToAction() {
                       setFormState((s) => ({ ...s, company: e.target.value }))
                     }
                     className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-primary placeholder-text-muted outline-none transition-all focus:border-accent/50 focus:ring-1 focus:ring-accent/30"
-                    placeholder="Company name"
+                    placeholder={c.placeholderCompany}
                   />
                 </div>
                 <div>
@@ -209,7 +204,7 @@ export default function CallToAction() {
                     htmlFor="message"
                     className="mb-1.5 block text-sm font-medium text-text-secondary"
                   >
-                    What are you looking to build?
+                    {c.labelMessage}
                   </label>
                   <textarea
                     id="message"
@@ -219,7 +214,7 @@ export default function CallToAction() {
                       setFormState((s) => ({ ...s, message: e.target.value }))
                     }
                     className="w-full resize-none rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-primary placeholder-text-muted outline-none transition-all focus:border-accent/50 focus:ring-1 focus:ring-accent/30"
-                    placeholder="Brief description of your AI needs..."
+                    placeholder={c.placeholderMessage}
                   />
                 </div>
                 {error && (
@@ -232,10 +227,10 @@ export default function CallToAction() {
                   disabled={submitting}
                   className="w-full rounded-full bg-accent py-3.5 text-base font-semibold text-bg transition-all hover:shadow-[0_0_32px_var(--color-accent-glow)] hover:brightness-110 disabled:opacity-60"
                 >
-                  {submitting ? "Sending..." : "Book a Discovery Call"}
+                  {submitting ? c.submitting : c.submitButton}
                 </button>
                 <p className="text-center text-xs text-text-muted">
-                  No commitment required. We respond within 24 hours.
+                  {c.disclaimer}
                 </p>
               </form>
             )}

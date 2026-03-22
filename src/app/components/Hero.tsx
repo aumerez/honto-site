@@ -1,6 +1,11 @@
 "use client";
 
+import { useLocale } from "@/context/LocaleContext";
+
 export default function Hero() {
+  const { locale, t } = useLocale();
+  const h = t.hero;
+
   return (
     <section
       className="noise-overlay relative flex min-h-[100dvh] items-center overflow-hidden"
@@ -26,15 +31,15 @@ export default function Hero() {
           <div className="animate-fade-in mb-6 flex items-center gap-3">
             <span className="h-px w-8 bg-accent" aria-hidden="true" />
             <span className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-accent">
-              AI Systems Engineering
+              {h.eyebrow}
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="animate-fade-in-up font-heading text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            AI Systems That Think
+            {h.titleLine1}
             <br />
-            <span className="gradient-text">Like Your Best Engineers</span>
+            <span className="gradient-text">{h.titleLine2}</span>
           </h1>
 
           {/* Subheadline */}
@@ -42,8 +47,7 @@ export default function Hero() {
             className="animate-fade-in-up mt-6 max-w-2xl font-body text-lg leading-relaxed text-text-secondary md:text-xl"
             style={{ animationDelay: "0.15s" }}
           >
-            We build production-grade AI infrastructure that captures, scales,
-            and operationalizes expert knowledge across your organization.
+            {h.subtitle}
           </p>
 
           {/* CTAs */}
@@ -52,10 +56,10 @@ export default function Hero() {
             style={{ animationDelay: "0.3s" }}
           >
             <a
-              href="#contact"
+              href={`/${locale}/#contact`}
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-bg transition-all hover:shadow-[0_0_32px_var(--color-accent-glow)] hover:brightness-110"
             >
-              Book a Demo
+              {h.bookDemo}
               <svg
                 width="16"
                 height="16"
@@ -74,10 +78,10 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href="#services"
+              href={`/${locale}/#services`}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-7 py-3.5 text-base font-medium text-text-secondary transition-all hover:border-accent/40 hover:text-accent"
             >
-              Explore Services
+              {h.exploreServices}
             </a>
           </div>
 
@@ -87,9 +91,9 @@ export default function Hero() {
             style={{ animationDelay: "0.45s" }}
           >
             {[
-              { value: "99.9%", label: "System uptime" },
-              { value: "10x", label: "Faster decisions" },
-              { value: "<2s", label: "Response time" },
+              { value: "99.9%", label: h.statUptime },
+              { value: "10x", label: h.statDecisions },
+              { value: "<2s", label: h.statResponse },
             ].map((stat) => (
               <div key={stat.label}>
                 <div className="font-heading text-2xl font-bold text-accent md:text-3xl">

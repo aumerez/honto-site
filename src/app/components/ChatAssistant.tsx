@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useLocale } from "@/context/LocaleContext";
 
 interface Message {
   id: string;
@@ -8,86 +9,98 @@ interface Message {
   content: string;
 }
 
-const INITIAL_MESSAGES: Message[] = [
-  {
-    id: "welcome",
-    role: "assistant",
-    content:
-      "Hi! I'm Honto's AI assistant. I can answer questions about our services, how we work, or help you book a demo. What would you like to know?",
-  },
-];
-
-const QUICK_ACTIONS = [
-  "What services do you offer?",
-  "Can I book a demo?",
-  "How do you implement AI?",
-];
-
-/* Simple pattern-matched responses for the mock assistant. */
-function generateResponse(input: string): string {
+function generateResponse(input: string, chat: Record<string, string>): string {
   const lower = input.toLowerCase();
 
   if (
     lower.includes("service") ||
     lower.includes("offer") ||
-    lower.includes("do you do")
+    lower.includes("do you do") ||
+    lower.includes("servicio") ||
+    lower.includes("ofrecen")
   ) {
-    return "We offer five core services:\n\n**AI Consulting & Strategy** — Roadmaps for AI adoption with measurable ROI.\n**AI Agents** — Autonomous workflows that integrate with your systems.\n**Domain-Specific AI Skills** — Custom AI capabilities for your exact processes.\n**AI Infrastructure** — Scalable, secure deployment with DevSecOps.\n**RAG & Knowledge Systems** — AI grounded in your organization's actual data.\n\nWould you like to dive deeper into any of these?";
+    return chat.responseServices;
   }
 
   if (
     lower.includes("book") ||
     lower.includes("demo") ||
     lower.includes("call") ||
-    lower.includes("meeting")
+    lower.includes("meeting") ||
+    lower.includes("agendar") ||
+    lower.includes("reunión")
   ) {
-    return "I'd be happy to help you book a demo! You can use the scheduling section below, or I can connect you directly with our team.\n\nJust share your **name**, **company**, and **preferred time**, and we'll get back to you within 24 hours.";
+    return chat.responseBooking;
   }
 
   if (
     lower.includes("implement") ||
     lower.includes("how do you") ||
     lower.includes("process") ||
-    lower.includes("work")
+    lower.includes("work") ||
+    lower.includes("cómo") ||
+    lower.includes("proceso") ||
+    lower.includes("funciona")
   ) {
-    return "Our process has four phases:\n\n**1. Map** — We analyze your domain expertise and workflows.\n**2. Build** — We architect AI systems tailored to your needs.\n**3. Deploy** — Production-grade deployment with security built in.\n**4. Scale** — Expand across teams with continuous improvement.\n\nEvery engagement starts with a discovery session. Want to schedule one?";
+    return chat.responseProcess;
   }
 
   if (
     lower.includes("product") ||
     lower.includes("platform") ||
-    lower.includes("expert")
+    lower.includes("expert") ||
+    lower.includes("producto") ||
+    lower.includes("plataforma")
   ) {
-    return "Our **Expert Intelligence Platform** is an AI layer that augments your engineering experts. It captures institutional knowledge, makes it reusable, and ensures every AI response is reliable, traceable, and aligned with your proven expertise.\n\nThink of it as giving every team member access to your best engineer's thinking.";
+    return chat.responseProduct;
   }
 
   if (
     lower.includes("security") ||
     lower.includes("safe") ||
     lower.includes("compliance") ||
-    lower.includes("trust")
+    lower.includes("trust") ||
+    lower.includes("seguridad") ||
+    lower.includes("cumplimiento")
   ) {
-    return "Security is foundational, not an afterthought:\n\n- Full audit trails for every AI decision\n- DevSecOps pipelines with automated security scanning\n- Infrastructure as code with hardened configurations\n- Compliance-ready logging and traceability\n\nWe build AI systems the way critical infrastructure is built.";
+    return chat.responseSecurity;
   }
 
   if (
     lower.includes("price") ||
     lower.includes("cost") ||
-    lower.includes("pricing")
+    lower.includes("pricing") ||
+    lower.includes("precio") ||
+    lower.includes("costo")
   ) {
-    return "Pricing depends on scope, complexity, and integration requirements. We work on both project-based and retainer models.\n\nThe best way to get accurate pricing is to **book a discovery call** where we can understand your specific needs. Shall I help set that up?";
+    return chat.responsePricing;
   }
 
-  return "That's a great question. For the most detailed answer, I'd recommend speaking with one of our AI engineers directly.\n\nWould you like to **book a demo** or learn more about our **services** or **process**?";
+  return chat.responseFallback;
 }
 
 export default function ChatAssistant() {
-  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
+  const { t } = useLocale();
+  const chat = t.chat;
+
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: "welcome",
+      role: "assistant",
+      content: chat.welcomeMessage,
+    },
+  ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const quickActions = [
+    chat.quickAction1,
+    chat.quickAction2,
+    chat.quickAction3,
+  ];
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -117,10 +130,9 @@ export default function ChatAssistant() {
       setInput("");
       setIsTyping(true);
 
-      /* Simulate response delay */
       setTimeout(
         () => {
-          const response = generateResponse(text);
+          const response = generateResponse(text, chat);
           const assistantMsg: Message = {
             id: `assistant-${Date.now()}`,
             role: "assistant",
@@ -132,7 +144,7 @@ export default function ChatAssistant() {
         800 + Math.random() * 600
       );
     },
-    [isTyping]
+    [isTyping, chat]
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -151,7 +163,7 @@ export default function ChatAssistant() {
             ? "bg-bg-card border border-border rotate-0"
             : "bg-accent hover:shadow-[0_0_32px_var(--color-accent-glow)]"
         }`}
-        aria-label={isOpen ? "Close chat" : "Open chat assistant"}
+        aria-label={isOpen ? chat.closeChat : chat.openChat}
         aria-expanded={isOpen}
         aria-controls="chat-panel"
       >
@@ -219,8 +231,8 @@ export default function ChatAssistant() {
             <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-bg-card bg-success" />
           </div>
           <div>
-            <div className="text-sm font-semibold">Honto AI</div>
-            <div className="text-xs text-text-muted">Always available</div>
+            <div className="text-sm font-semibold">{chat.headerTitle}</div>
+            <div className="text-xs text-text-muted">{chat.headerStatus}</div>
           </div>
         </div>
 
@@ -272,7 +284,7 @@ export default function ChatAssistant() {
         {/* Quick Actions (show only if no user messages yet) */}
         {messages.length === 1 && (
           <div className="flex flex-wrap gap-2 border-t border-border px-5 py-3">
-            {QUICK_ACTIONS.map((action) => (
+            {quickActions.map((action) => (
               <button
                 key={action}
                 type="button"
@@ -295,16 +307,16 @@ export default function ChatAssistant() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask anything..."
+            placeholder={chat.inputPlaceholder}
             disabled={isTyping}
             className="flex-1 rounded-lg bg-surface px-3 py-2.5 text-sm text-text-primary placeholder-text-muted outline-none ring-1 ring-border transition-all focus:ring-accent/50 disabled:opacity-50"
-            aria-label="Type your message"
+            aria-label={chat.inputPlaceholder}
           />
           <button
             type="submit"
             disabled={!input.trim() || isTyping}
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent text-bg transition-all hover:brightness-110 disabled:opacity-30"
-            aria-label="Send message"
+            aria-label={chat.sendMessage}
           >
             <svg
               width="16"

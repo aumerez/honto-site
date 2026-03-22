@@ -1,32 +1,9 @@
+"use client";
+
 import Link from "next/link";
-import type { Metadata } from "next";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
-
-export const metadata: Metadata = {
-  title: "Case Studies — Honto",
-  description:
-    "Real-world AI systems we've designed and built. Explore how Honto delivers production-grade AI infrastructure.",
-};
-
-const caseStudies = [
-  {
-    slug: "bulwark",
-    eyebrow: "Authentication & Governance",
-    title: "Bulwark",
-    subtitle: "Open-source governance layer for AI agents",
-    description:
-      "A security-first middleware that sits between AI agents and external tools — enforcing policies, managing credentials, inspecting content, and maintaining tamper-evident audit trails.",
-    tags: [
-      "Rust",
-      "MCP Protocol",
-      "Policy Engine",
-      "Credential Vault",
-      "Audit Logging",
-    ],
-    color: "accent" as const,
-  },
-];
+import Navigation from "../../components/Navigation";
+import Footer from "../../components/Footer";
+import { useLocale } from "@/context/LocaleContext";
 
 const colorMap = {
   accent: {
@@ -44,6 +21,27 @@ const colorMap = {
 };
 
 export default function CaseStudies() {
+  const { locale, t } = useLocale();
+  const cs = t.caseStudiesPage;
+
+  const caseStudies = [
+    {
+      slug: "bulwark",
+      eyebrow: cs.bulwarkEyebrow,
+      title: cs.bulwarkTitle,
+      subtitle: cs.bulwarkSubtitle,
+      description: cs.bulwarkDescription,
+      tags: [
+        "Rust",
+        "MCP Protocol",
+        "Policy Engine",
+        "Credential Vault",
+        "Audit Logging",
+      ],
+      color: "accent" as const,
+    },
+  ];
+
   return (
     <>
       <Navigation />
@@ -60,15 +58,13 @@ export default function CaseStudies() {
           />
           <div className="relative mx-auto max-w-7xl px-5 md:px-8">
             <span className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-accent">
-              Case Studies
+              {cs.eyebrow}
             </span>
             <h1 className="mt-4 font-heading text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-              Systems we&apos;ve built
+              {cs.heading}
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-secondary">
-              Real-world AI infrastructure designed for production. Each project
-              represents our commitment to engineering-grade standards,
-              security, and operational excellence.
+              {cs.subtitle}
             </p>
           </div>
         </section>
@@ -82,10 +78,9 @@ export default function CaseStudies() {
                 return (
                   <Link
                     key={study.slug}
-                    href={`/case-studies/${study.slug}`}
+                    href={`/${locale}/case-studies/${study.slug}`}
                     className={`group relative overflow-hidden rounded-2xl border ${colors.border} bg-bg-card p-8 transition-all duration-300 hover:bg-bg-card-hover md:p-10`}
                   >
-                    {/* Hover glow */}
                     <div
                       className={`absolute -right-16 -top-16 h-64 w-64 rounded-full ${colors.glow} opacity-0 blur-[80px] transition-opacity duration-500 group-hover:opacity-100`}
                       aria-hidden="true"
@@ -129,7 +124,7 @@ export default function CaseStudies() {
                       </div>
 
                       <div className="mt-8 inline-flex items-center gap-2 font-medium text-accent transition-all group-hover:gap-3">
-                        Read case study
+                        {cs.readCaseStudy}
                         <svg
                           width="16"
                           height="16"

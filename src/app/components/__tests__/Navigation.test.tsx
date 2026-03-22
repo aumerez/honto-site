@@ -1,36 +1,41 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
+import { renderWithLocale } from "@/test-utils/renderWithLocale";
 import Navigation from "../Navigation";
 
 describe("Navigation", () => {
   it("renders the logo", () => {
-    render(<Navigation />);
+    renderWithLocale(<Navigation />);
     expect(screen.getByLabelText("Honto — Home")).toBeTruthy();
   });
 
   it("renders all navigation links", () => {
-    render(<Navigation />);
+    renderWithLocale(<Navigation />);
     expect(screen.getAllByText("Services").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("Product").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("How It Works").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("How It Works").length).toBeGreaterThanOrEqual(
+      1
+    );
     expect(screen.getAllByText("Why Honto").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("Case Studies").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Case Studies").length).toBeGreaterThanOrEqual(
+      1
+    );
   });
 
   it("renders Book a Demo CTA", () => {
-    render(<Navigation />);
+    renderWithLocale(<Navigation />);
     expect(screen.getAllByText("Book a Demo").length).toBeGreaterThanOrEqual(1);
   });
 
   it("has correct aria-label on nav element", () => {
-    render(<Navigation />);
+    renderWithLocale(<Navigation />);
     expect(
       screen.getByRole("navigation", { name: /main navigation/i })
     ).toBeTruthy();
   });
 
   it("toggles mobile menu on button click", () => {
-    render(<Navigation />);
+    renderWithLocale(<Navigation />);
     const button = screen.getByLabelText("Open menu");
     expect(button.getAttribute("aria-expanded")).toBe("false");
 
@@ -42,7 +47,7 @@ describe("Navigation", () => {
   });
 
   it("closes mobile menu when a link is clicked", () => {
-    render(<Navigation />);
+    renderWithLocale(<Navigation />);
     fireEvent.click(screen.getByLabelText("Open menu"));
 
     const mobileMenu = document.getElementById("mobile-menu");

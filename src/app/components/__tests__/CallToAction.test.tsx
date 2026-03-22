@@ -1,5 +1,6 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { renderWithLocale } from "@/test-utils/renderWithLocale";
 import CallToAction from "../CallToAction";
 
 describe("CallToAction", () => {
@@ -8,13 +9,13 @@ describe("CallToAction", () => {
   });
 
   it("renders the section heading", () => {
-    render(<CallToAction />);
+    renderWithLocale(<CallToAction />);
     expect(screen.getByText(/Ready to build/i)).toBeTruthy();
     expect(screen.getByText(/serious AI systems/i)).toBeTruthy();
   });
 
   it("renders the form with all fields", () => {
-    render(<CallToAction />);
+    renderWithLocale(<CallToAction />);
     expect(screen.getByLabelText("Name")).toBeTruthy();
     expect(screen.getByLabelText("Email")).toBeTruthy();
     expect(screen.getByLabelText("Company")).toBeTruthy();
@@ -24,14 +25,14 @@ describe("CallToAction", () => {
   });
 
   it("renders the submit button", () => {
-    render(<CallToAction />);
+    renderWithLocale(<CallToAction />);
     expect(
       screen.getByRole("button", { name: /book a discovery call/i })
     ).toBeTruthy();
   });
 
   it("renders benefit list items", () => {
-    render(<CallToAction />);
+    renderWithLocale(<CallToAction />);
     expect(
       screen.getByText("30-minute technical discovery session")
     ).toBeTruthy();
@@ -44,7 +45,7 @@ describe("CallToAction", () => {
   });
 
   it("updates form fields on input", () => {
-    render(<CallToAction />);
+    renderWithLocale(<CallToAction />);
     const nameInput = screen.getByLabelText("Name") as HTMLInputElement;
     const emailInput = screen.getByLabelText("Email") as HTMLInputElement;
 
@@ -60,7 +61,7 @@ describe("CallToAction", () => {
       json: () => Promise.resolve({ success: true }),
     } as Response);
 
-    render(<CallToAction />);
+    renderWithLocale(<CallToAction />);
 
     fireEvent.change(screen.getByLabelText("Name"), {
       target: { value: "Jane" },
@@ -68,7 +69,9 @@ describe("CallToAction", () => {
     fireEvent.change(screen.getByLabelText("Email"), {
       target: { value: "jane@test.com" },
     });
-    fireEvent.submit(screen.getByRole("button", { name: /book a discovery call/i }));
+    fireEvent.submit(
+      screen.getByRole("button", { name: /book a discovery call/i })
+    );
 
     await waitFor(() => {
       expect(screen.getByText("We'll be in touch")).toBeTruthy();
@@ -80,7 +83,7 @@ describe("CallToAction", () => {
       json: () => Promise.resolve({ success: false }),
     } as Response);
 
-    render(<CallToAction />);
+    renderWithLocale(<CallToAction />);
 
     fireEvent.change(screen.getByLabelText("Name"), {
       target: { value: "Jane" },
@@ -88,7 +91,9 @@ describe("CallToAction", () => {
     fireEvent.change(screen.getByLabelText("Email"), {
       target: { value: "jane@test.com" },
     });
-    fireEvent.submit(screen.getByRole("button", { name: /book a discovery call/i }));
+    fireEvent.submit(
+      screen.getByRole("button", { name: /book a discovery call/i })
+    );
 
     await waitFor(() => {
       expect(
@@ -100,7 +105,7 @@ describe("CallToAction", () => {
   it("shows network error on fetch failure", async () => {
     vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(new Error("Network"));
 
-    render(<CallToAction />);
+    renderWithLocale(<CallToAction />);
 
     fireEvent.change(screen.getByLabelText("Name"), {
       target: { value: "Jane" },
@@ -108,17 +113,17 @@ describe("CallToAction", () => {
     fireEvent.change(screen.getByLabelText("Email"), {
       target: { value: "jane@test.com" },
     });
-    fireEvent.submit(screen.getByRole("button", { name: /book a discovery call/i }));
+    fireEvent.submit(
+      screen.getByRole("button", { name: /book a discovery call/i })
+    );
 
     await waitFor(() => {
-      expect(
-        screen.getByText("Network error. Please try again.")
-      ).toBeTruthy();
+      expect(screen.getByText("Network error. Please try again.")).toBeTruthy();
     });
   });
 
   it("has the correct section id", () => {
-    render(<CallToAction />);
+    renderWithLocale(<CallToAction />);
     expect(document.getElementById("contact")).toBeTruthy();
   });
 });

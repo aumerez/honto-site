@@ -1,16 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
-const navLinks = [
-  { label: "Services", href: "/#services" },
-  { label: "Product", href: "/#product" },
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Why Honto", href: "/#why-us" },
-  { label: "Case Studies", href: "/case-studies" },
-];
+import { useLocale } from "@/context/LocaleContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navigation() {
+  const { locale, t } = useLocale();
+  const nav = t.nav;
+
+  const navLinks = [
+    { label: nav.services, href: `/${locale}/#services` },
+    { label: nav.product, href: `/${locale}/#product` },
+    { label: nav.howItWorks, href: `/${locale}/#how-it-works` },
+    { label: nav.whyHonto, href: `/${locale}/#why-us` },
+    { label: nav.caseStudies, href: `/${locale}/case-studies` },
+  ];
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -45,7 +50,7 @@ export default function Navigation() {
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
           <a
-            href="#"
+            href={`/${locale}`}
             className="font-heading text-xl font-bold tracking-tight text-text-primary md:text-2xl"
             aria-label="Honto — Home"
           >
@@ -64,11 +69,12 @@ export default function Navigation() {
                 {link.label}
               </a>
             ))}
+            <LanguageSwitcher />
             <a
-              href="#contact"
+              href={`/${locale}/#contact`}
               className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-bg transition-all hover:shadow-[0_0_24px_var(--color-accent-glow)] hover:brightness-110"
             >
-              Book a Demo
+              {nav.bookDemo}
             </a>
           </div>
 
@@ -79,7 +85,7 @@ export default function Navigation() {
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileOpen ? nav.closeMenu : nav.openMenu}
           >
             <svg
               width="24"
@@ -128,12 +134,15 @@ export default function Navigation() {
               {link.label}
             </a>
           ))}
+          <div className="px-4 py-3">
+            <LanguageSwitcher />
+          </div>
           <a
-            href="#contact"
+            href={`/${locale}/#contact`}
             className="mt-4 rounded-full bg-accent px-6 py-3 text-center text-base font-semibold text-bg transition-all hover:brightness-110"
             onClick={() => setMobileOpen(false)}
           >
-            Book a Demo
+            {nav.bookDemo}
           </a>
         </div>
       </div>

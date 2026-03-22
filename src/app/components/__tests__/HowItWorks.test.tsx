@@ -1,17 +1,16 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
+import { renderWithLocale } from "@/test-utils/renderWithLocale";
 import HowItWorks from "../HowItWorks";
 
 describe("HowItWorks", () => {
   it("renders the section heading", () => {
-    render(<HowItWorks />);
-    expect(
-      screen.getByRole("heading", { name: /how it works/i })
-    ).toBeTruthy();
+    renderWithLocale(<HowItWorks />);
+    expect(screen.getByRole("heading", { name: /how it works/i })).toBeTruthy();
   });
 
   it("renders all four steps", () => {
-    render(<HowItWorks />);
+    renderWithLocale(<HowItWorks />);
     expect(screen.getByText("Map")).toBeTruthy();
     expect(screen.getByText("Build")).toBeTruthy();
     expect(screen.getByText("Deploy")).toBeTruthy();
@@ -19,7 +18,7 @@ describe("HowItWorks", () => {
   });
 
   it("renders step numbers", () => {
-    render(<HowItWorks />);
+    renderWithLocale(<HowItWorks />);
     expect(screen.getByText("01")).toBeTruthy();
     expect(screen.getByText("02")).toBeTruthy();
     expect(screen.getByText("03")).toBeTruthy();
@@ -27,17 +26,13 @@ describe("HowItWorks", () => {
   });
 
   it("renders step descriptions", () => {
-    render(<HowItWorks />);
-    expect(
-      screen.getByText(/analyze your domain, processes/i)
-    ).toBeTruthy();
-    expect(
-      screen.getByText(/Production-grade deployment/i)
-    ).toBeTruthy();
+    renderWithLocale(<HowItWorks />);
+    expect(screen.getByText(/analyze your domain, processes/i)).toBeTruthy();
+    expect(screen.getByText(/Production-grade deployment/i)).toBeTruthy();
   });
 
   it("has the correct section id", () => {
-    render(<HowItWorks />);
+    renderWithLocale(<HowItWorks />);
     expect(document.getElementById("how-it-works")).toBeTruthy();
   });
 });

@@ -1,5 +1,6 @@
-import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
+import { screen, fireEvent, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { renderWithLocale } from "@/test-utils/renderWithLocale";
 import ChatAssistant from "../ChatAssistant";
 
 describe("ChatAssistant", () => {
@@ -12,12 +13,12 @@ describe("ChatAssistant", () => {
   });
 
   it("renders the toggle button", () => {
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     expect(screen.getByLabelText("Open chat assistant")).toBeTruthy();
   });
 
   it("opens the chat panel when toggle is clicked", () => {
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
 
     expect(screen.getByRole("dialog")).toBeTruthy();
@@ -25,14 +26,14 @@ describe("ChatAssistant", () => {
   });
 
   it("shows welcome message when opened", () => {
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
 
-    expect(screen.getByText(/I'm Honto's AI assistant/i)).toBeTruthy();
+    expect(screen.getByText(/Honto's AI assistant/i)).toBeTruthy();
   });
 
   it("shows quick action buttons initially", () => {
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
 
     expect(screen.getByText("What services do you offer?")).toBeTruthy();
@@ -41,10 +42,10 @@ describe("ChatAssistant", () => {
   });
 
   it("sends a user message via input", () => {
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
 
-    const input = screen.getByLabelText("Type your message");
+    const input = screen.getByLabelText("Ask anything...");
     fireEvent.change(input, { target: { value: "Hello" } });
     fireEvent.submit(input.closest("form")!);
 
@@ -52,10 +53,10 @@ describe("ChatAssistant", () => {
   });
 
   it("shows typing indicator after sending a message", () => {
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
 
-    const input = screen.getByLabelText("Type your message");
+    const input = screen.getByLabelText("Ask anything...");
     fireEvent.change(input, {
       target: { value: "What services do you offer?" },
     });
@@ -66,10 +67,10 @@ describe("ChatAssistant", () => {
 
   it("receives a response about services", async () => {
     vi.spyOn(Math, "random").mockReturnValue(0.5);
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
 
-    const input = screen.getByLabelText("Type your message");
+    const input = screen.getByLabelText("Ask anything...");
     fireEvent.change(input, {
       target: { value: "What services do you offer?" },
     });
@@ -84,10 +85,10 @@ describe("ChatAssistant", () => {
 
   it("receives a response about booking", async () => {
     vi.spyOn(Math, "random").mockReturnValue(0.5);
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
 
-    const input = screen.getByLabelText("Type your message");
+    const input = screen.getByLabelText("Ask anything...");
     fireEvent.change(input, {
       target: { value: "Can I book a demo?" },
     });
@@ -101,12 +102,12 @@ describe("ChatAssistant", () => {
   });
 
   it("hides quick actions after first user message", () => {
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
 
     expect(screen.getByText("What services do you offer?")).toBeTruthy();
 
-    const input = screen.getByLabelText("Type your message");
+    const input = screen.getByLabelText("Ask anything...");
     fireEvent.change(input, { target: { value: "Hello" } });
     fireEvent.submit(input.closest("form")!);
 
@@ -116,7 +117,7 @@ describe("ChatAssistant", () => {
   });
 
   it("closes the chat panel", () => {
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
     expect(screen.getByLabelText("Close chat")).toBeTruthy();
 
@@ -125,12 +126,10 @@ describe("ChatAssistant", () => {
   });
 
   it("disables input while typing indicator is active", () => {
-    render(<ChatAssistant />);
+    renderWithLocale(<ChatAssistant />);
     fireEvent.click(screen.getByLabelText("Open chat assistant"));
 
-    const input = screen.getByLabelText(
-      "Type your message"
-    ) as HTMLInputElement;
+    const input = screen.getByLabelText("Ask anything...") as HTMLInputElement;
     fireEvent.change(input, { target: { value: "Hello" } });
     fireEvent.submit(input.closest("form")!);
 

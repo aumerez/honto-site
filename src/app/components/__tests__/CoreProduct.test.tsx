@@ -1,16 +1,17 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
+import { renderWithLocale } from "@/test-utils/renderWithLocale";
 import CoreProduct from "../CoreProduct";
 
 describe("CoreProduct", () => {
   it("renders the section heading", () => {
-    render(<CoreProduct />);
+    renderWithLocale(<CoreProduct />);
     expect(screen.getByText("The Expert")).toBeTruthy();
     expect(screen.getByText("Intelligence Platform")).toBeTruthy();
   });
 
   it("renders all four feature cards", () => {
-    render(<CoreProduct />);
+    renderWithLocale(<CoreProduct />);
     expect(screen.getByText("Knowledge Capture")).toBeTruthy();
     expect(screen.getByText("Consistent Expertise")).toBeTruthy();
     expect(screen.getByText("Decision Support")).toBeTruthy();
@@ -18,19 +19,19 @@ describe("CoreProduct", () => {
   });
 
   it("renders feature descriptions", () => {
-    render(<CoreProduct />);
+    renderWithLocale(<CoreProduct />);
     expect(
       screen.getByText(/Automatically extract and structure/i)
     ).toBeTruthy();
   });
 
   it("renders the Learn more link", () => {
-    render(<CoreProduct />);
+    renderWithLocale(<CoreProduct />);
     expect(screen.getByText("Learn more")).toBeTruthy();
   });
 
   it("has the correct section id", () => {
-    render(<CoreProduct />);
+    renderWithLocale(<CoreProduct />);
     expect(document.getElementById("product")).toBeTruthy();
   });
 });
