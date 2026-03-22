@@ -483,10 +483,9 @@ export default function BulwarkCaseStudy() {
                   How we engineered Bulwark
                 </h2>
                 <p className="mt-6 text-fluid-body text-text-secondary">
-                  Bulwark represents our philosophy in practice:
-                  production-grade AI infrastructure built with engineering
-                  discipline. Every design decision prioritizes security,
-                  auditability, and operational reliability.
+                  Bulwark represents how we think about AI infrastructure. Every
+                  design decision prioritizes security, auditability, and the
+                  ability to run reliably without constant attention.
                 </p>
               </div>
               <div className="space-y-8">

@@ -5,7 +5,7 @@ import CompressedAbout from "../CompressedAbout";
 describe("CompressedAbout", () => {
   it("renders the section heading", () => {
     render(<CompressedAbout />);
-    expect(screen.getByRole("heading", { name: /small team/i })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: /focused work/i })).toBeTruthy();
   });
 
   it("renders the description", () => {
@@ -13,6 +13,12 @@ describe("CompressedAbout", () => {
     expect(
       screen.getByText(/engineering consultancy focused on AI systems/i)
     ).toBeTruthy();
+  });
+
+  it("renders the Bulwark inline mention", () => {
+    render(<CompressedAbout />);
+    const link = screen.getByText("Bulwark");
+    expect(link.closest("a")?.getAttribute("href")).toBe("/work/bulwark");
   });
 
   it("renders a link to the about page", () => {

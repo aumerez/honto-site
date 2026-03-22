@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 export const metadata: Metadata = {
   title: "Work — Honto",
   description:
-    "Selected projects from Honto. Production-grade AI systems built with engineering discipline.",
+    "Projects from Honto. AI systems built for real-world operation.",
 };
 
 const projects = [
@@ -38,8 +38,8 @@ export default function Work() {
               Work
             </h1>
             <p className="mt-5 max-w-xl text-fluid-body text-text-secondary">
-              Selected projects. Each represents our commitment to
-              engineering-grade AI infrastructure.
+              Projects we have built and operated. Each one runs in production
+              today.
             </p>
           </div>
         </section>

@@ -23,15 +23,26 @@ export default function CompressedAbout() {
             >
               Small team,
               <br />
-              deep expertise
+              focused work
             </h2>
           </div>
           <div className="flex flex-col justify-center">
             <p className="text-fluid-body text-text-secondary">
               Honto is an engineering consultancy focused on AI systems. We
-              favor small teams with deep expertise over large staffing
-              engagements. Our work ships with tests, documentation, and
-              operational runbooks — because building it is only half the job.
+              prefer small, senior teams over large staffing engagements. Our
+              work includes tests, documentation, and operational runbooks —
+              because building it is only half the job.
+            </p>
+            <p className="mt-4 text-fluid-body text-text-secondary">
+              Recently, we built{" "}
+              <Link
+                href="/work/bulwark"
+                className="text-accent transition-colors hover:text-accent-dim"
+              >
+                Bulwark
+              </Link>
+              , an open-source governance layer for AI agents — policy
+              enforcement, credential management, and audit logging in Rust.
             </p>
             <Link
               href="/about"

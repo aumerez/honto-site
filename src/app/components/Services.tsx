@@ -7,13 +7,13 @@ const practices = [
     number: "01",
     title: "Strategy & Architecture",
     description:
-      "Assessing your operations, identifying high-impact opportunities, and designing implementation roadmaps grounded in engineering reality — not slide decks.",
+      "We study your operations, identify where AI fits, and design implementation plans grounded in how your systems actually work — not slide decks.",
   },
   {
     number: "02",
     title: "Agent Systems",
     description:
-      "Autonomous agents, governance layers, and the production infrastructure to run them reliably. We build the guardrails so your agents can move fast.",
+      "Autonomous agents, governance layers, and the infrastructure to run them reliably. We build the guardrails so your agents can move fast.",
   },
   {
     number: "03",

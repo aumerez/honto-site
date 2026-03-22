@@ -14,13 +14,6 @@ describe("Home page", () => {
     expect(navs.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("renders selected work section", () => {
-    render(<Home />);
-    expect(
-      screen.getByRole("heading", { name: /projects that shipped/i })
-    ).toBeTruthy();
-  });
-
   it("renders practice areas", () => {
     render(<Home />);
     expect(
@@ -30,9 +23,10 @@ describe("Home page", () => {
     ).toBeTruthy();
   });
 
-  it("renders about section", () => {
+  it("renders about section with Bulwark mention", () => {
     render(<Home />);
-    expect(screen.getByRole("heading", { name: /small team/i })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: /focused work/i })).toBeTruthy();
+    expect(screen.getByText("Bulwark")).toBeTruthy();
   });
 
   it("renders contact section", () => {

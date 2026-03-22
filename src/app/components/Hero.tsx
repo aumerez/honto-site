@@ -21,21 +21,21 @@ export default function Hero() {
             AI Systems Engineering
           </p>
 
-          {/* Headline — serif display */}
+          {/* Headline */}
           <h1 className="animate-fade-in-up mt-6 font-display text-fluid-xl font-medium italic">
-            Your AI systems should work
+            We build the AI infrastructure
             <br />
-            as hard as <span className="text-accent">your engineers do</span>
+            that <span className="text-accent">actually runs</span>
           </h1>
 
-          {/* Subheadline — sans-serif body */}
+          {/* Subheadline */}
           <p
             className="animate-fade-in-up mt-8 max-w-xl text-fluid-body text-text-secondary"
             style={{ animationDelay: "0.15s" }}
           >
-            Most AI initiatives stall between prototype and production. We build
-            the infrastructure that gets them across that gap — and keeps them
-            running.
+            Most AI projects stall between prototype and production. We do the
+            engineering work that closes that distance — architecture, testing,
+            operations, and long-term reliability.
           </p>
 
           {/* CTA */}

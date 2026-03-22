@@ -23,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Honto",
   description:
-    "Engineering consultancy for AI systems. We design, build, and operate production-grade AI infrastructure.",
+    "Engineering consultancy for AI systems. We design, build, and operate AI infrastructure that works in production.",
   keywords: [
     "AI consulting",
     "AI engineering",

@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 export const metadata: Metadata = {
   title: "About — Honto",
   description:
-    "How we work. Honto is an engineering consultancy focused on production-grade AI systems.",
+    "How we work. Honto is an engineering consultancy that builds AI systems for production.",
 };
 
 export default function About() {
@@ -28,7 +28,7 @@ export default function About() {
             <p className="mt-6 max-w-xl text-fluid-body text-text-secondary">
               Honto is an engineering consultancy that designs, builds, and
               operates AI systems. We work with organizations that need
-              production-grade infrastructure — not prototypes.
+              infrastructure built for real workloads — not prototypes.
             </p>
           </div>
         </section>
@@ -51,7 +51,7 @@ export default function About() {
                     production load, not slide decks.
                   </p>
                   <p>
-                    We favor small teams with deep expertise over large staffing
+                    We prefer small, senior teams over large staffing
                     engagements. Our work ships with tests, documentation, and
                     operational runbooks — because building it is only half the
                     job.

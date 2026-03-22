@@ -7,7 +7,7 @@ describe("Hero", () => {
     render(<Hero />);
     const heading = screen.getByRole("heading", { level: 1 });
     expect(heading).toBeTruthy();
-    expect(heading.textContent).toContain("Your AI systems");
+    expect(heading.textContent).toContain("actually runs");
   });
 
   it("renders the eyebrow text", () => {
@@ -17,7 +17,7 @@ describe("Hero", () => {
 
   it("renders the subheadline", () => {
     render(<Hero />);
-    expect(screen.getByText(/Most AI initiatives stall/i)).toBeTruthy();
+    expect(screen.getByText(/Most AI projects stall/i)).toBeTruthy();
   });
 
   it("renders the CTA link", () => {

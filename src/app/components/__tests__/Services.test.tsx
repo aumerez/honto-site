@@ -20,7 +20,7 @@ describe("Services", () => {
 
   it("renders practice descriptions", () => {
     render(<Services />);
-    expect(screen.getByText(/Assessing your operations/i)).toBeTruthy();
+    expect(screen.getByText(/We study your operations/i)).toBeTruthy();
   });
 
   it("has the correct section id", () => {
