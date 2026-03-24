@@ -111,7 +111,7 @@ export default function CoreProduct() {
             </p>
             <div className="mt-8">
               <a
-                href={`/${locale}/#contact`}
+                href={`/${locale}/opsai`}
                 className="inline-flex items-center gap-2 font-medium text-accent transition-all hover:gap-3"
               >
                 {cp.learnMore}

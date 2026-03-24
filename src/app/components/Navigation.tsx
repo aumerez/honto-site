@@ -10,7 +10,7 @@ export default function Navigation() {
 
   const navLinks = [
     { label: nav.services, href: `/${locale}/#services` },
-    { label: nav.product, href: `/${locale}/#product` },
+    { label: nav.product, href: `/${locale}/opsai` },
     { label: nav.howItWorks, href: `/${locale}/#how-it-works` },
     { label: nav.whyHonto, href: `/${locale}/#why-us` },
     { label: nav.caseStudies, href: `/${locale}/case-studies` },
