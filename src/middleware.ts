@@ -34,10 +34,11 @@ function getLocaleFromRequest(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip public files, _next, api routes
+  // Skip public files, _next, api routes, and standalone pages
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
+    pathname.startsWith("/demo") ||
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next();
