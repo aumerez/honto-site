@@ -116,9 +116,7 @@ export default function DemoPage() {
   const [lang, setLang] = useState<Lang>("es");
   const t = useMemo(() => copy[lang], [lang]);
 
-  useEffect(() => {
-    setLang(detectLang());
-  }, []);
+  // Always default to Spanish; user can toggle manually
 
   /* Form state */
   const [form, setForm] = useState({
