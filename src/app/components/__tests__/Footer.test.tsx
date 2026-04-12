@@ -6,7 +6,7 @@ import Footer from "../Footer";
 describe("Footer", () => {
   it("renders the logo", () => {
     renderWithLocale(<Footer />);
-    expect(screen.getByText(/honto/)).toBeTruthy();
+    expect(screen.getAllByText(/honto/i).length).toBeGreaterThan(0);
   });
 
   it("renders the footer role", () => {
@@ -16,6 +16,7 @@ describe("Footer", () => {
 
   it("renders link column headings", () => {
     renderWithLocale(<Footer />);
+    expect(screen.getByText("Platform")).toBeTruthy();
     expect(screen.getByText("Services")).toBeTruthy();
     expect(screen.getByText("Company")).toBeTruthy();
     expect(screen.getByText("Resources")).toBeTruthy();

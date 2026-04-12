@@ -11,11 +11,9 @@ describe("Navigation", () => {
 
   it("renders all navigation links", () => {
     renderWithLocale(<Navigation />);
+    expect(screen.getAllByText("Platform").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("honto.ops").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("Services").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("Product").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("How It Works").length).toBeGreaterThanOrEqual(
-      1
-    );
     expect(screen.getAllByText("Why Honto").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("Case Studies").length).toBeGreaterThanOrEqual(
       1

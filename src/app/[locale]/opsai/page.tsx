@@ -5,6 +5,7 @@ import { useScrollRevealMultiple } from "@/hooks/useScrollRevealMultiple";
 import { useLocale } from "@/context/LocaleContext";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
+import PlatformArchitecture from "../../components/PlatformArchitecture";
 
 /* ──────────────────────────────────────────────
    Inline SVG icons — petroleum / industrial feel
@@ -282,10 +283,10 @@ function IconArrow() {
 }
 
 /* ──────────────────────────────────────────────
-   OpsAI Product Page
+   honto.ops Product Page
    ────────────────────────────────────────────── */
 
-export default function OpsAIPage() {
+export default function HontoOpsPage() {
   const { locale, t } = useLocale();
   const o = t.opsai;
 
@@ -413,7 +414,7 @@ export default function OpsAIPage() {
         ═══════════════════════════════════════════ */}
         <section
           className="noise-overlay relative flex min-h-[100dvh] items-center overflow-hidden"
-          aria-label="OpsAI Hero"
+          aria-label="honto.ops Hero"
         >
           {/* Industrial grid */}
           <div
@@ -737,6 +738,12 @@ export default function OpsAIPage() {
             </div>
           </div>
         </section>
+
+        {/* ═══════════════════════════════════════════
+            3.5 PLATFORM ARCHITECTURE
+            honto.ops in the context of the bigger platform
+        ═══════════════════════════════════════════ */}
+        <PlatformArchitecture variant="compact" />
 
         {/* ═══════════════════════════════════════════
             4. MULTI-CHANNEL ACCESS

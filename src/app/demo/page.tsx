@@ -11,20 +11,20 @@ const copy = {
   es: {
     /* Hero */
     headline: "Inteligencia operacional para tu empresa petrolera",
-    sub: "OpsAI captura el conocimiento de tus ingenieros y lo convierte en un sistema accesible para toda tu organización.",
+    sub: "honto.ops captura el conocimiento de tus ingenieros y lo convierte en un sistema accesible para toda tu organización.",
 
     /* Q&A */
     qaTitle: "Preguntas que tu empresa deberia hacerse",
     q1: "¿Tu equipo aprovecha todo el conocimiento acumulado en cada proyecto?",
-    a1: "OpsAI centraliza cada documento, reporte y conversación en un solo sistema buscable. Nada se pierde, todo se reutiliza.",
+    a1: "honto.ops centraliza cada documento, reporte y conversación en un solo sistema buscable. Nada se pierde, todo se reutiliza.",
     q2: "¿Cuánto has pagado dos veces por el mismo análisis?",
-    a2: "OpsAI detecta análisis previos y los conecta con proyectos nuevos. Cada análisis se hace una sola vez.",
+    a2: "honto.ops detecta análisis previos y los conecta con proyectos nuevos. Cada análisis se hace una sola vez.",
     q3: "Cuando se va un buen ingeniero, ¿cómo retienes lo que sabe?",
-    a3: "OpsAI captura el razonamiento experto antes de que se vaya. El conocimiento queda en la empresa, no en la persona.",
+    a3: "honto.ops captura el razonamiento experto antes de que se vaya. El conocimiento queda en la empresa, no en la persona.",
     q4: "¿Cuánto tiempo pierde un ingeniero nuevo buscando información que ya existe?",
-    a4: "OpsAI da acceso al historial completo desde el día uno. Meses de aprendizaje comprimidos en segundos.",
+    a4: "honto.ops da acceso al historial completo desde el día uno. Meses de aprendizaje comprimidos en segundos.",
     q5: "¿Tus lecciones aprendidas realmente llegan al siguiente pozo?",
-    a5: "OpsAI conecta automáticamente incidentes y soluciones entre campos. Cada operación mejora la siguiente.",
+    a5: "honto.ops conecta automáticamente incidentes y soluciones entre campos. Cada operación mejora la siguiente.",
 
     /* Form */
     formTitle: "Agenda una demo de 15 minutos",
@@ -55,19 +55,19 @@ const copy = {
   },
   en: {
     headline: "Operational intelligence for your petroleum company",
-    sub: "OpsAI captures your engineers' knowledge and turns it into a system accessible to your entire organization.",
+    sub: "honto.ops captures your engineers' knowledge and turns it into a system accessible to your entire organization.",
 
     qaTitle: "Questions your company should be asking",
     q1: "Is your team leveraging all accumulated knowledge on every project?",
-    a1: "OpsAI centralizes every document, report, and conversation into one searchable system. Nothing is lost, everything is reused.",
+    a1: "honto.ops centralizes every document, report, and conversation into one searchable system. Nothing is lost, everything is reused.",
     q2: "How much have you paid twice for the same analysis?",
-    a2: "OpsAI detects prior analyses and connects them to new projects. Every analysis is done once.",
+    a2: "honto.ops detects prior analyses and connects them to new projects. Every analysis is done once.",
     q3: "When a great engineer leaves, how do you retain what they know?",
-    a3: "OpsAI captures expert reasoning before they leave. Knowledge stays in the company, not the person.",
+    a3: "honto.ops captures expert reasoning before they leave. Knowledge stays in the company, not the person.",
     q4: "How much time does a new engineer waste searching for information that already exists?",
-    a4: "OpsAI gives access to the full history from day one. Months of learning compressed into seconds.",
+    a4: "honto.ops gives access to the full history from day one. Months of learning compressed into seconds.",
     q5: "Do your lessons learned actually reach the next well?",
-    a5: "OpsAI automatically connects incidents and solutions across fields. Every operation improves the next.",
+    a5: "honto.ops automatically connects incidents and solutions across fields. Every operation improves the next.",
 
     formTitle: "Book a 15-minute demo",
     formSub: "No commitment. We'll show you how it works with your data.",
@@ -141,8 +141,8 @@ export default function DemoPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
-          subject: `OpsAI Demo Request — ${form.name} (${form.company})`,
-          from_name: "OpsAI Landing Page",
+          subject: `honto.ops Demo Request — ${form.name} (${form.company})`,
+          from_name: "honto.ops Landing Page",
           name: form.name,
           email: form.email,
           phone: form.phone || "Not provided",
@@ -233,7 +233,7 @@ export default function DemoPage() {
               className="font-mono text-xs font-medium uppercase tracking-[0.2em]"
               style={{ color: "#f59e0b" }}
             >
-              OpsAI
+              honto.ops
             </span>
           </div>
           <h1 className="font-heading text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">

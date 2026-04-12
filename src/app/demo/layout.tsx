@@ -15,7 +15,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "OpsAI — Demo",
+  title: "honto.ops — Demo",
   description:
     "Convierte la experiencia de tus ingenieros en inteligencia operacional escalable. Agenda una demo de 15 minutos.",
   robots: { index: true, follow: true },

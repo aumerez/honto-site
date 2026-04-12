@@ -7,6 +7,12 @@ export default function Footer() {
   const f = t.footer;
 
   const footerLinks = {
+    [f.platformHeading]: [
+      { label: f.platformOverview, href: `/${locale}/platform` },
+      { label: f.hontoOps, href: `/${locale}/opsai` },
+      { label: f.hontoWholograph, href: `/${locale}/platform#wholo-heading` },
+      { label: f.hontoInfra, href: `/${locale}/platform#infra-heading` },
+    ],
     [f.servicesHeading]: [
       { label: f.aiConsulting, href: `/${locale}/#services` },
       { label: f.aiAgents, href: `/${locale}/#services` },
@@ -20,9 +26,9 @@ export default function Footer() {
       { label: f.contact, href: `/${locale}/#contact` },
     ],
     [f.resourcesHeading]: [
+      { label: f.caseStudies, href: `/${locale}/case-studies` },
       { label: f.documentation, href: "#" },
       { label: f.blog, href: "#" },
-      { label: f.caseStudies, href: `/${locale}/case-studies` },
     ],
   };
 
