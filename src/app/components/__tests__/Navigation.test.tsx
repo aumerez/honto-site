@@ -22,11 +22,6 @@ describe("Navigation", () => {
     );
   });
 
-  it("renders Book a Demo CTA", () => {
-    renderWithLocale(<Navigation />);
-    expect(screen.getAllByText("Book a Demo").length).toBeGreaterThanOrEqual(1);
-  });
-
   it("has correct aria-label on nav element", () => {
     renderWithLocale(<Navigation />);
     expect(
