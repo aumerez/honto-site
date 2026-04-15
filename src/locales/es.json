@@ -14,8 +14,8 @@
     "titleLine1": "Sistemas de IA Que Piensan",
     "titleLine2": "Como Tus Mejores Ingenieros",
     "subtitle": "Construimos infraestructura de IA de nivel productivo que captura, escala y operacionaliza el conocimiento experto en toda tu organización.",
-    "bookDemo": "Agendar Demo",
     "exploreServices": "Explorar Servicios",
+    "contactUs": "Contáctanos",
     "statUptime": "Disponibilidad",
     "statDecisions": "Decisiones más rápidas",
     "statResponse": "Tiempo de respuesta"
@@ -81,28 +81,11 @@
     "domainDesc": "No atornillamos IA genérica a tu flujo de trabajo. Construimos IA que entiende tu dominio desde cero."
   },
   "callToAction": {
-    "eyebrow": "Comenzar",
-    "headingLine1": "¿Listo para construir",
-    "headingLine2": "sistemas de IA serios?",
-    "description": "Agenda una llamada de descubrimiento con nuestro equipo de ingeniería. Evaluaremos tus necesidades y te mostraremos exactamente cómo la IA puede transformar tus operaciones.",
-    "bullet1": "Sesión técnica de descubrimiento de 30 minutos",
-    "bullet2": "Evaluación personalizada de oportunidades de IA",
-    "bullet3": "Conversación sin compromiso y sin relleno",
-    "labelName": "Nombre",
-    "labelEmail": "Correo electrónico",
-    "labelCompany": "Empresa",
-    "labelMessage": "¿Qué quieres construir?",
-    "placeholderName": "Tu nombre",
-    "placeholderEmail": "tu@empresa.com",
-    "placeholderCompany": "Nombre de la empresa",
-    "placeholderMessage": "Breve descripción de tus necesidades de IA...",
-    "submitButton": "Agendar Llamada de Descubrimiento",
-    "submitting": "Enviando...",
-    "successTitle": "Nos pondremos en contacto",
-    "successMessage": "Nuestro equipo se comunicará contigo dentro de 24 horas para programar tu llamada de descubrimiento.",
-    "disclaimer": "Sin compromiso requerido. Respondemos dentro de 24 horas.",
-    "errorGeneric": "Algo salió mal. Por favor, intenta de nuevo.",
-    "errorNetwork": "Error de red. Por favor, intenta de nuevo."
+    "eyebrow": "Contacto",
+    "headingLine1": "Hablemos sobre",
+    "headingLine2": "tus sistemas de IA",
+    "description": "Cuéntanos qué estás construyendo. Respondemos en menos de 24 horas.",
+    "disclaimer": "Directo a nuestro equipo de ingeniería."
   },
   "footer": {
     "brandDescription": "Sistemas de IA de nivel productivo construidos con disciplina de ingeniería. Convertimos el conocimiento experto en inteligencia escalable.",
@@ -335,7 +318,7 @@
     "valueProp1": "Haz preguntas y obtén respuestas basadas en el conocimiento de tu empresa",
     "valueProp2": "Accede a la experiencia a través de chat, reportes, documentos y multimedia",
     "valueProp3": "Preserva y escala décadas de experiencia operacional",
-    "bookDemo": "Agendar Demo",
+    "contactUs": "Contáctanos",
     "learnMore": "Ver Cómo Funciona",
     "statWells": "Pozos gestionados",
     "statRetention": "Conocimiento retenido",
@@ -437,14 +420,14 @@
     "diffRow5Generic": "Talla única",
     "diffRow5Opsai": "Inteligencia nativa petrolera",
 
-    "ctaEyebrow": "Comenzar",
+    "ctaEyebrow": "Contacto",
     "ctaHeadingLine1": "Tus Mejores Ingenieros,",
     "ctaHeadingLine2": "Disponibles en Todas Partes — Siempre",
     "ctaDescription": "OpsAI asegura que el conocimiento que tu empresa construye durante décadas nunca se pierda, siempre sea accesible y mejore continuamente. Convierte la experiencia en ventaja competitiva.",
     "ctaBullet1": "Nunca se pierde — conocimiento preservado más allá de cualquier individuo",
     "ctaBullet2": "Siempre accesible — cualquier equipo, cualquier ubicación, cualquier dispositivo",
     "ctaBullet3": "Mejora continua — cada operación hace el sistema más inteligente",
-    "ctaButton": "Agendar Demo"
+    "ctaButton": "Contáctanos"
   },
   "metadata": {
     "homeTitle": "Honto — Ingeniería de Sistemas de IA",

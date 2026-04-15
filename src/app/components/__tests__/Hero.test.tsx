@@ -25,8 +25,8 @@ describe("Hero", () => {
 
   it("renders CTA buttons", () => {
     renderWithLocale(<Hero />);
-    expect(screen.getByText("Book a Demo")).toBeTruthy();
     expect(screen.getByText("Explore Services")).toBeTruthy();
+    expect(screen.getByText("Contact Us")).toBeTruthy();
   });
 
   it("renders the three stats", () => {

@@ -70,12 +70,6 @@ export default function Navigation() {
               </a>
             ))}
             <LanguageSwitcher />
-            <a
-              href={`/${locale}/#contact`}
-              className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-bg transition-all hover:shadow-[0_0_24px_var(--color-accent-glow)] hover:brightness-110"
-            >
-              {nav.bookDemo}
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -137,13 +131,6 @@ export default function Navigation() {
           <div className="px-4 py-3">
             <LanguageSwitcher />
           </div>
-          <a
-            href={`/${locale}/#contact`}
-            className="mt-4 rounded-full bg-accent px-6 py-3 text-center text-base font-semibold text-bg transition-all hover:brightness-110"
-            onClick={() => setMobileOpen(false)}
-          >
-            {nav.bookDemo}
-          </a>
         </div>
       </div>
     </nav>

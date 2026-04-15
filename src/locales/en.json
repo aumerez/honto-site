@@ -14,8 +14,8 @@
     "titleLine1": "AI Systems That Think",
     "titleLine2": "Like Your Best Engineers",
     "subtitle": "We build production-grade AI infrastructure that captures, scales, and operationalizes expert knowledge across your organization.",
-    "bookDemo": "Book a Demo",
     "exploreServices": "Explore Services",
+    "contactUs": "Contact Us",
     "statUptime": "System uptime",
     "statDecisions": "Faster decisions",
     "statResponse": "Response time"
@@ -81,28 +81,11 @@
     "domainDesc": "We don't bolt generic AI onto your workflow. We build AI that understands your domain from the ground up."
   },
   "callToAction": {
-    "eyebrow": "Get Started",
-    "headingLine1": "Ready to build",
-    "headingLine2": "serious AI systems?",
-    "description": "Book a discovery call with our engineering team. We'll assess your needs and show you exactly how AI can transform your operations.",
-    "bullet1": "30-minute technical discovery session",
-    "bullet2": "Custom assessment of AI opportunities",
-    "bullet3": "No-commitment, no-fluff conversation",
-    "labelName": "Name",
-    "labelEmail": "Email",
-    "labelCompany": "Company",
-    "labelMessage": "What are you looking to build?",
-    "placeholderName": "Your name",
-    "placeholderEmail": "you@company.com",
-    "placeholderCompany": "Company name",
-    "placeholderMessage": "Brief description of your AI needs...",
-    "submitButton": "Book a Discovery Call",
-    "submitting": "Sending...",
-    "successTitle": "We'll be in touch",
-    "successMessage": "Our team will reach out within 24 hours to schedule your discovery call.",
-    "disclaimer": "No commitment required. We respond within 24 hours.",
-    "errorGeneric": "Something went wrong. Please try again.",
-    "errorNetwork": "Network error. Please try again."
+    "eyebrow": "Contact",
+    "headingLine1": "Let's talk about",
+    "headingLine2": "your AI systems",
+    "description": "Tell us what you're building. We respond within 24 hours.",
+    "disclaimer": "Straight to our engineering team."
   },
   "footer": {
     "brandDescription": "Production-grade AI systems built with engineering discipline. We turn expert knowledge into scalable intelligence.",
@@ -335,7 +318,7 @@
     "valueProp1": "Ask questions and get answers grounded in your company's knowledge",
     "valueProp2": "Access expertise through chat, reports, documents, and multimedia",
     "valueProp3": "Preserve and scale decades of operational experience",
-    "bookDemo": "Book a Demo",
+    "contactUs": "Contact us",
     "learnMore": "See How It Works",
     "statWells": "Wells managed",
     "statRetention": "Knowledge retained",
@@ -437,14 +420,14 @@
     "diffRow5Generic": "One-size-fits-all",
     "diffRow5Opsai": "Petroleum-native intelligence",
 
-    "ctaEyebrow": "Get Started",
+    "ctaEyebrow": "Contact",
     "ctaHeadingLine1": "Your Best Engineers,",
     "ctaHeadingLine2": "Available Everywhere — Forever",
     "ctaDescription": "OpsAI ensures that the knowledge your company builds over decades is never lost, always accessible, and continuously improving. Turn experience into a competitive advantage.",
     "ctaBullet1": "Never lost — knowledge preserved beyond any individual",
     "ctaBullet2": "Always accessible — any team, any location, any device",
     "ctaBullet3": "Continuously improving — every operation makes the system smarter",
-    "ctaButton": "Book a Demo"
+    "ctaButton": "Contact us"
   },
   "metadata": {
     "homeTitle": "Honto — AI Systems Engineering",

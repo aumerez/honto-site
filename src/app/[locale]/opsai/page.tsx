@@ -537,7 +537,7 @@ export default function OpsAIPage() {
                       "0 0 0 0 rgba(245,158,11,0)")
                   }
                 >
-                  {o.bookDemo}
+                  {o.contactUs}
                   <IconArrow />
                 </a>
                 <a

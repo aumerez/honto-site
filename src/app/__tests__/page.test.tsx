@@ -22,12 +22,13 @@ describe("Home page", () => {
     );
   });
 
-  it("renders the contact section", () => {
+  it("renders the contact section with email", () => {
     renderWithLocale(<Home />);
-    const buttons = screen.getAllByRole("button", {
-      name: /book a discovery call/i,
+    const emailLinks = screen.getAllByRole("link", {
+      name: /info@honto\.ai/i,
     });
-    expect(buttons.length).toBeGreaterThanOrEqual(1);
+    expect(emailLinks.length).toBeGreaterThanOrEqual(1);
+    expect(emailLinks[0].getAttribute("href")).toBe("mailto:info@honto.ai");
   });
 
   it("renders the footer", () => {

@@ -56,10 +56,10 @@ export default function Hero() {
             style={{ animationDelay: "0.3s" }}
           >
             <a
-              href={`/${locale}/#contact`}
+              href={`/${locale}/#services`}
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-bg transition-all hover:shadow-[0_0_32px_var(--color-accent-glow)] hover:brightness-110"
             >
-              {h.bookDemo}
+              {h.exploreServices}
               <svg
                 width="16"
                 height="16"
@@ -78,10 +78,10 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href={`/${locale}/#services`}
+              href={`/${locale}/#contact`}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-7 py-3.5 text-base font-medium text-text-secondary transition-all hover:border-accent/40 hover:text-accent"
             >
-              {h.exploreServices}
+              {h.contactUs}
             </a>
           </div>
 
