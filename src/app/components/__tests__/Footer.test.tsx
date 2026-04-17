@@ -1,57 +1,22 @@
-import { screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import { renderWithLocale } from "@/test-utils/renderWithLocale";
 import Footer from "../Footer";
 
 describe("Footer", () => {
-  it("renders the logo", () => {
-    renderWithLocale(<Footer />);
-    expect(screen.getByText(/honto/)).toBeTruthy();
-  });
-
-  it("renders the footer role", () => {
-    renderWithLocale(<Footer />);
+  it("renders the contentinfo role", () => {
+    render(<Footer />);
     expect(screen.getByRole("contentinfo")).toBeTruthy();
   });
 
-  it("renders link column headings", () => {
-    renderWithLocale(<Footer />);
-    expect(screen.getByText("Services")).toBeTruthy();
-    expect(screen.getByText("Company")).toBeTruthy();
-    expect(screen.getByText("Resources")).toBeTruthy();
+  it("renders the copyright and tagline", () => {
+    render(<Footer />);
+    expect(screen.getByText(/© 2026 Honto/)).toBeTruthy();
+    expect(screen.getByText(/AI systems engineering/i)).toBeTruthy();
   });
 
-  it("renders service links", () => {
-    renderWithLocale(<Footer />);
-    expect(screen.getByText("AI Consulting")).toBeTruthy();
-    expect(screen.getByText("AI Agents")).toBeTruthy();
-    expect(screen.getByText("AI Skills")).toBeTruthy();
-    expect(screen.getByText("RAG Systems")).toBeTruthy();
-  });
-
-  it("renders company links", () => {
-    renderWithLocale(<Footer />);
-    expect(screen.getByText("About")).toBeTruthy();
-    expect(screen.getByText("Careers")).toBeTruthy();
-    expect(screen.getByText("Contact")).toBeTruthy();
-  });
-
-  it("renders resources links", () => {
-    renderWithLocale(<Footer />);
-    expect(screen.getByText("Documentation")).toBeTruthy();
-    expect(screen.getByText("Blog")).toBeTruthy();
-    expect(screen.getByText("Case Studies")).toBeTruthy();
-  });
-
-  it("renders copyright notice with current year", () => {
-    renderWithLocale(<Footer />);
-    const year = new Date().getFullYear().toString();
-    expect(screen.getByText(new RegExp(`${year}`))).toBeTruthy();
-  });
-
-  it("renders legal links", () => {
-    renderWithLocale(<Footer />);
-    expect(screen.getByText("Privacy Policy")).toBeTruthy();
-    expect(screen.getByText("Terms of Service")).toBeTruthy();
+  it("renders locations and language tokens", () => {
+    render(<Footer />);
+    expect(screen.getByText(/Zürich \/ Madrid \/ Remote/)).toBeTruthy();
+    expect(screen.getByText(/EN · ES/)).toBeTruthy();
   });
 });

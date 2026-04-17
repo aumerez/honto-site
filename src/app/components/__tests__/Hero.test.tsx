@@ -1,46 +1,32 @@
-import { screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import { renderWithLocale } from "@/test-utils/renderWithLocale";
 import Hero from "../Hero";
 
 describe("Hero", () => {
-  it("renders the main heading", () => {
-    renderWithLocale(<Hero />);
+  it("renders the main heading with the tagline", () => {
+    render(<Hero />);
     const heading = screen.getByRole("heading", { level: 1 });
     expect(heading).toBeTruthy();
-    expect(heading.textContent).toContain("AI Systems That Think");
-  });
-
-  it("renders the eyebrow text", () => {
-    renderWithLocale(<Hero />);
-    expect(screen.getByText("AI Systems Engineering")).toBeTruthy();
+    expect(heading.textContent).toMatch(/AI systems that/i);
+    expect(heading.textContent).toMatch(/engineers\./i);
   });
 
   it("renders the subheadline", () => {
-    renderWithLocale(<Hero />);
-    expect(
-      screen.getByText(/production-grade AI infrastructure/i)
-    ).toBeTruthy();
+    render(<Hero />);
+    expect(screen.getByText(/what your senior engineers know/i)).toBeTruthy();
   });
 
-  it("renders CTA buttons", () => {
-    renderWithLocale(<Hero />);
-    expect(screen.getByText("Explore Services")).toBeTruthy();
-    expect(screen.getByText("Contact Us")).toBeTruthy();
-  });
+  it("renders both CTA buttons with anchor targets", () => {
+    render(<Hero />);
+    const primary = screen.getByRole("link", { name: /start an engagement/i });
+    expect(primary.getAttribute("href")).toBe("#contact");
 
-  it("renders the three stats", () => {
-    renderWithLocale(<Hero />);
-    expect(screen.getByText("99.9%")).toBeTruthy();
-    expect(screen.getByText("System uptime")).toBeTruthy();
-    expect(screen.getByText("10x")).toBeTruthy();
-    expect(screen.getByText("Faster decisions")).toBeTruthy();
-    expect(screen.getByText("<2s")).toBeTruthy();
-    expect(screen.getByText("Response time")).toBeTruthy();
+    const secondary = screen.getByRole("link", { name: /see what we solve/i });
+    expect(secondary.getAttribute("href")).toBe("#problems");
   });
 
   it("has an aria-label on the hero section", () => {
-    renderWithLocale(<Hero />);
+    render(<Hero />);
     expect(document.querySelector('section[aria-label="Hero"]')).toBeTruthy();
   });
 });
