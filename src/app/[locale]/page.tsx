@@ -1,10 +1,12 @@
 import Navigation from "../components/Navigation";
 import Hero from "../components/Hero";
-import Services from "../components/Services";
-import CoreProduct from "../components/CoreProduct";
-import HowItWorks from "../components/HowItWorks";
-import WhyUs from "../components/WhyUs";
-import CallToAction from "../components/CallToAction";
+import Marquee from "../components/Marquee";
+import Problems from "../components/Problems";
+import Process from "../components/Process";
+import Capabilities from "../components/Capabilities";
+import OpsAISection from "../components/OpsAISection";
+import Principles from "../components/Principles";
+import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
 export default function Home() {
@@ -13,11 +15,13 @@ export default function Home() {
       <Navigation />
       <main>
         <Hero />
-        <Services />
-        <CoreProduct />
-        <HowItWorks />
-        <WhyUs />
-        <CallToAction />
+        <Marquee />
+        <Problems />
+        <Process />
+        <Capabilities />
+        <OpsAISection />
+        <Principles />
+        <Contact />
       </main>
       <Footer />
     </>
