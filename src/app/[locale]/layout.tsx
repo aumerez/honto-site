@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Outfit, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, JetBrains_Mono, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { isValidLocale } from "@/lib/locales";
 import type { Locale } from "@/lib/locales";
@@ -7,21 +7,23 @@ import { getDictionary } from "@/lib/i18n";
 import { LocaleProvider } from "@/context/LocaleContext";
 import "../globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-body",
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -38,12 +40,13 @@ export async function generateMetadata({
     title: m.homeTitle,
     description: m.homeDescription,
     keywords: [
+      "AI systems engineering",
       "AI consulting",
-      "AI agents",
+      "autonomous agents",
       "RAG systems",
       "AI infrastructure",
-      "expert knowledge systems",
-      "AI strategy",
+      "domain skills",
+      "AI evals",
     ],
     openGraph: {
       title: m.homeOgTitle,
@@ -67,7 +70,7 @@ export async function generateMetadata({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#06060a",
+  themeColor: "#0e0d0b",
 };
 
 export default async function LocaleLayout({
@@ -88,9 +91,9 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`dark ${spaceGrotesk.variable} ${outfit.variable} ${jetbrainsMono.variable}`}
+      className={`${instrumentSerif.variable} ${jetbrainsMono.variable} ${inter.variable}`}
     >
-      <body className="bg-bg text-text-primary antialiased">
+      <body>
         <LocaleProvider locale={locale} dictionary={dictionary}>
           {children}
         </LocaleProvider>
