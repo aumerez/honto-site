@@ -7,6 +7,7 @@ type ContactPayload = {
   name?: unknown;
   email?: unknown;
   company?: unknown;
+  phone?: unknown;
   message?: unknown;
 };
 
@@ -50,11 +51,12 @@ export async function POST(request: Request) {
   const name = sanitize(body.name, 120);
   const emailRaw = sanitize(body.email, 254);
   const company = sanitize(body.company, 160);
+  const phone = sanitize(body.phone, 40);
   const message = sanitize(body.message, 5000);
 
-  if (!name || !emailRaw || !message || !EMAIL_RE.test(emailRaw)) {
+  if (!name || !emailRaw || !EMAIL_RE.test(emailRaw)) {
     return NextResponse.json(
-      { error: "Name, a valid email, and message are required." },
+      { error: "Name and a valid email are required." },
       { status: 400 }
     );
   }
@@ -65,10 +67,11 @@ export async function POST(request: Request) {
     `Name: ${name}`,
     `Email: ${emailRaw}`,
     company ? `Company: ${company}` : null,
+    phone ? `Phone: ${phone}` : null,
     "",
-    message,
+    message ?? "(no message provided)",
   ]
-    .filter(Boolean)
+    .filter((line) => line !== null)
     .join("\n");
 
   const html = `
@@ -76,7 +79,12 @@ export async function POST(request: Request) {
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(emailRaw)}</p>
       ${company ? `<p><strong>Company:</strong> ${escapeHtml(company)}</p>` : ""}
-      <p style="white-space:pre-wrap;margin-top:16px">${escapeHtml(message)}</p>
+      ${phone ? `<p><strong>Phone:</strong> ${escapeHtml(phone)}</p>` : ""}
+      ${
+        message
+          ? `<p style="white-space:pre-wrap;margin-top:16px">${escapeHtml(message)}</p>`
+          : `<p style="color:#6f6960;margin-top:16px"><em>No message provided</em></p>`
+      }
     </div>
   `.trim();
 
@@ -90,6 +98,7 @@ export async function POST(request: Request) {
   });
 
   if (error) {
+    console.error("[/api/contact] Resend error:", error);
     return NextResponse.json(
       { error: "Could not send message. Please try again." },
       { status: 502 }

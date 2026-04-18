@@ -37,7 +37,11 @@ describe("Contact", () => {
     expect(document.querySelector('input[name="name"]')).toBeTruthy();
     expect(document.querySelector('input[name="email"]')).toBeTruthy();
     expect(document.querySelector('input[name="company"]')).toBeTruthy();
+    expect(document.querySelector('input[name="phone"]')).toBeTruthy();
     expect(document.querySelector('textarea[name="message"]')).toBeTruthy();
+    expect(
+      document.querySelector('textarea[name="message"]')?.hasAttribute("required")
+    ).toBe(false);
     expect(screen.getByRole("button", { name: /send message/i })).toBeTruthy();
   });
 
@@ -53,6 +57,9 @@ describe("Contact", () => {
     const companyInput = document.querySelector(
       'input[name="company"]'
     ) as HTMLInputElement;
+    const phoneInput = document.querySelector(
+      'input[name="phone"]'
+    ) as HTMLInputElement;
     const messageInput = document.querySelector(
       'textarea[name="message"]'
     ) as HTMLTextAreaElement;
@@ -60,6 +67,7 @@ describe("Contact", () => {
     fireEvent.change(nameInput, { target: { value: "Ada Lovelace" } });
     fireEvent.change(emailInput, { target: { value: "ada@example.com" } });
     fireEvent.change(companyInput, { target: { value: "Analytical Engine" } });
+    fireEvent.change(phoneInput, { target: { value: "+1 555 123 4567" } });
     fireEvent.change(messageInput, { target: { value: "Need help shipping." } });
 
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
@@ -79,6 +87,7 @@ describe("Contact", () => {
       name: "Ada Lovelace",
       email: "ada@example.com",
       company: "Analytical Engine",
+      phone: "+1 555 123 4567",
       message: "Need help shipping.",
     });
   });
@@ -103,13 +112,8 @@ describe("Contact", () => {
     const nameInput = document.querySelector(
       'input[name="name"]'
     ) as HTMLInputElement;
-    const messageInput = document.querySelector(
-      'textarea[name="message"]'
-    ) as HTMLTextAreaElement;
-
     fireEvent.change(nameInput, { target: { value: "Grace" } });
     fireEvent.change(emailInput, { target: { value: "grace@example.com" } });
-    fireEvent.change(messageInput, { target: { value: "Hello." } });
 
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 

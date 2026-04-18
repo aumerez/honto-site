@@ -18,6 +18,7 @@ export default function ContactForm() {
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
       company: String(data.get("company") ?? ""),
+      phone: String(data.get("phone") ?? ""),
       message: String(data.get("message") ?? ""),
     };
 
@@ -108,10 +109,20 @@ export default function ContactForm() {
       </label>
 
       <label className="contact-field">
-        <span className="contact-field-label">Problem</span>
+        <span className="contact-field-label">Phone</span>
+        <input
+          name="phone"
+          type="tel"
+          maxLength={40}
+          autoComplete="tel"
+          disabled={submitting}
+        />
+      </label>
+
+      <label className="contact-field">
+        <span className="contact-field-label">Request</span>
         <textarea
           name="message"
-          required
           rows={5}
           maxLength={5000}
           disabled={submitting}
