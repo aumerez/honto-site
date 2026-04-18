@@ -1,12 +1,29 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useLocale } from "@/context/LocaleContext";
 
 type Status = "idle" | "submitting" | "success" | "error";
+
+type ContactFormCopy = {
+  nameLabel: string;
+  emailLabel: string;
+  companyLabel: string;
+  phoneLabel: string;
+  requestLabel: string;
+  submit: string;
+  submitting: string;
+  successEyebrow: string;
+  successBody: string;
+  sendAnother: string;
+  errorFallback: string;
+};
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  const { t } = useLocale();
+  const copy = (t.landing as { contactForm: ContactFormCopy }).contactForm;
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -36,14 +53,14 @@ export default function ContactForm() {
         const body = (await res.json().catch(() => null)) as {
           error?: string;
         } | null;
-        throw new Error(body?.error ?? "Something went wrong.");
+        throw new Error(body?.error ?? copy.errorFallback);
       }
 
       setStatus("success");
       form.reset();
     } catch (err) {
       setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : copy.errorFallback);
     }
   }
 
@@ -51,19 +68,16 @@ export default function ContactForm() {
     return (
       <div className="contact-form-success" role="status" aria-live="polite">
         <div className="eyebrow" style={{ marginBottom: 16 }}>
-          [Received]
+          {copy.successEyebrow}
         </div>
-        <p>
-          Thanks — your message is in. Someone from engineering will be in touch
-          within 24 hours.
-        </p>
+        <p>{copy.successBody}</p>
         <button
           type="button"
           className="btn"
           style={{ marginTop: 24 }}
           onClick={() => setStatus("idle")}
         >
-          Send another
+          {copy.sendAnother}
         </button>
       </div>
     );
@@ -74,7 +88,7 @@ export default function ContactForm() {
   return (
     <form className="contact-form" onSubmit={onSubmit} noValidate>
       <label className="contact-field">
-        <span className="contact-field-label">Name</span>
+        <span className="contact-field-label">{copy.nameLabel}</span>
         <input
           name="name"
           type="text"
@@ -86,7 +100,7 @@ export default function ContactForm() {
       </label>
 
       <label className="contact-field">
-        <span className="contact-field-label">Email</span>
+        <span className="contact-field-label">{copy.emailLabel}</span>
         <input
           name="email"
           type="email"
@@ -98,7 +112,7 @@ export default function ContactForm() {
       </label>
 
       <label className="contact-field">
-        <span className="contact-field-label">Company</span>
+        <span className="contact-field-label">{copy.companyLabel}</span>
         <input
           name="company"
           type="text"
@@ -109,7 +123,7 @@ export default function ContactForm() {
       </label>
 
       <label className="contact-field">
-        <span className="contact-field-label">Phone</span>
+        <span className="contact-field-label">{copy.phoneLabel}</span>
         <input
           name="phone"
           type="tel"
@@ -120,7 +134,7 @@ export default function ContactForm() {
       </label>
 
       <label className="contact-field">
-        <span className="contact-field-label">Request</span>
+        <span className="contact-field-label">{copy.requestLabel}</span>
         <textarea
           name="message"
           rows={5}
@@ -141,7 +155,7 @@ export default function ContactForm() {
         style={{ alignSelf: "flex-start", marginTop: 8 }}
         disabled={submitting}
       >
-        {submitting ? "Sending…" : "Send message"}
+        {submitting ? copy.submitting : copy.submit}
         <svg
           width="14"
           height="10"

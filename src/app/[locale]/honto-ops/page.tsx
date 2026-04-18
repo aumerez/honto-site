@@ -287,7 +287,7 @@ function IconArrow() {
 
 export default function HontoOpsPage() {
   const { locale, t } = useLocale();
-  const o = t.hontoOps;
+  const o = t.hontoOps as Record<string, string>;
 
   /* Scroll reveal refs */
   const heroRef = useScrollReveal<HTMLDivElement>();

@@ -34,7 +34,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
-  const m = dict.metadata;
+  const m = dict.metadata as {
+    homeTitle: string;
+    homeDescription: string;
+    homeOgTitle: string;
+    homeOgDescription: string;
+  };
 
   return {
     title: m.homeTitle,

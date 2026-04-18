@@ -2,8 +2,7 @@
 
 import { createContext, useContext } from "react";
 import type { Locale } from "@/lib/locales";
-
-type Dictionary = Record<string, Record<string, string>>;
+import type { Dictionary } from "@/lib/i18n";
 
 interface LocaleContextValue {
   locale: Locale;

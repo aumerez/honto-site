@@ -1,9 +1,29 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useLocale } from "@/context/LocaleContext";
+
+type HeroCopy = {
+  ariaLabel: string;
+  tagline: string;
+  version: string;
+  titleLine1: string;
+  titleLine2Pre: string;
+  titleLine2Italic: string;
+  titleLine3: string;
+  subtitle: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+  strip1: string;
+  strip2: string;
+  strip3: string;
+  location: string;
+};
 
 export default function Hero() {
   const orbRef = useRef<HTMLDivElement | null>(null);
+  const { t } = useLocale();
+  const hero = (t.landing as { hero: HeroCopy }).hero;
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -17,38 +37,34 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="hero" id="top" aria-label="Hero">
+    <section className="hero" id="top" aria-label={hero.ariaLabel}>
       <div ref={orbRef} className="hero-orb" aria-hidden="true" />
       <div className="container-x">
         <div className="hero-grid">
           <div className="hero-meta">
             <div className="row">
               <span className="sq" />
-              <span>Honto — the enterprise second brain</span>
+              <span>{hero.tagline}</span>
             </div>
             <div className="row" style={{ color: "var(--fg-mute)" }}>
-              v.26 / EN · ES
+              {hero.version}
             </div>
           </div>
 
           <h1 className="hero-title">
-            <span className="line">From static knowledge</span>
+            <span className="line">{hero.titleLine1}</span>
             <span className="line">
-              to <i>scaled</i>
+              {hero.titleLine2Pre}
+              <i>{hero.titleLine2Italic}</i>
             </span>
-            <span className="line">execution.</span>
+            <span className="line">{hero.titleLine3}</span>
           </h1>
 
-          <p className="hero-sub">
-            Honto captures your company&apos;s expertise — decisions,
-            heuristics, standards — and puts it to work as AI agents. What used
-            to live in docs, silos, and people&apos;s heads now runs across
-            every team.
-          </p>
+          <p className="hero-sub">{hero.subtitle}</p>
 
           <div className="hero-cta">
             <a href="#contact" className="btn primary">
-              Start an engagement
+              {hero.ctaPrimary}
               <svg
                 width="14"
                 height="10"
@@ -64,17 +80,17 @@ export default function Hero() {
               </svg>
             </a>
             <a href="#problems" className="btn">
-              See what we solve
+              {hero.ctaSecondary}
             </a>
           </div>
 
           <div className="hero-strip">
             <div className="l">
-              <span>[01] Production-proven</span>
-              <span>[02] Audited &amp; traceable</span>
-              <span>[03] Domain-native</span>
+              <span>{hero.strip1}</span>
+              <span>{hero.strip2}</span>
+              <span>{hero.strip3}</span>
             </div>
-            <div>Palo Alto, CA</div>
+            <div>{hero.location}</div>
           </div>
         </div>
       </div>

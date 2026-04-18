@@ -22,7 +22,7 @@ const colorMap = {
 
 export default function CaseStudies() {
   const { locale, t } = useLocale();
-  const cs = t.caseStudiesPage;
+  const cs = t.caseStudiesPage as Record<string, string>;
 
   const caseStudies = [
     {

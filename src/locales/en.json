@@ -438,5 +438,267 @@
     "caseStudiesDescription": "Real-world AI systems we've designed and built. Explore how Honto delivers production-grade AI infrastructure.",
     "hontoOpsTitle": "honto.ops — Operational Intelligence Platform | Honto",
     "hontoOpsDescription": "Turn your engineers' experience into scalable operational intelligence. honto.ops captures knowledge from documents, reports, and operations for petroleum companies."
+  },
+  "landing": {
+    "nav": {
+      "ariaLabel": "Main navigation",
+      "problems": "Problems",
+      "method": "Method",
+      "capabilities": "Capabilities",
+      "hontoOps": "honto.ops",
+      "principles": "Principles",
+      "contact": "Contact →",
+      "languageLabel": "Change language",
+      "languageOptionEn": "English",
+      "languageOptionEs": "Spanish"
+    },
+    "hero": {
+      "ariaLabel": "Hero",
+      "tagline": "Honto — the enterprise second brain",
+      "version": "v.26 / EN · ES",
+      "titleLine1": "From static knowledge",
+      "titleLine2Pre": "to ",
+      "titleLine2Italic": "scaled",
+      "titleLine3": "execution.",
+      "subtitle": "Honto captures your company's expertise — decisions, heuristics, standards — and puts it to work as AI agents. What used to live in docs, silos, and people's heads now runs across every team.",
+      "ctaPrimary": "Start an engagement",
+      "ctaSecondary": "See what we solve",
+      "strip1": "[01] Production-proven",
+      "strip2": "[02] Audited & traceable",
+      "strip3": "[03] Domain-native",
+      "location": "Palo Alto, CA"
+    },
+    "marquee": {
+      "items": [
+        "Knowledge capture",
+        "Autonomous agents",
+        "Retrieval pipelines",
+        "DevSecOps for AI",
+        "Model evaluation",
+        "Domain skills",
+        "Decision support",
+        "Observability",
+        "Safe rollouts"
+      ]
+    },
+    "problems": {
+      "eyebrow": "[01] Problems we solve",
+      "titlePre": "Six signs your ",
+      "titleItalic": "AI strategy",
+      "titlePost": " is not the right one.",
+      "items": [
+        {
+          "pre": "Your people use AI every day. ",
+          "italic": "Your company",
+          "post": " still works the old way.",
+          "answer": "Individual productivity isn't an operating model. We identify the workflows where AI rewrites the dynamic of your business and build the systems that make the shift real."
+        },
+        {
+          "pre": "Your senior experts are ",
+          "italic": "still the bottleneck.",
+          "post": " The tools don't know what they know.",
+          "answer": "We extract the judgement your experts carry — standards, heuristics, edge cases — and encode it into AI skills the rest of the team can consult without interrupting them."
+        },
+        {
+          "pre": "Your data lives in ",
+          "italic": "fifteen systems.",
+          "post": " Only a few are available to the AI.",
+          "answer": "We build the connective layer — adapters, extractors, and retrieval — that lets AI reason across your IoT platforms, ERPs, design files, and PDFs. From oilfield telemetry to accounting ledgers, every source becomes a first-class input to your business intelligence."
+        },
+        {
+          "pre": "Generic models give ",
+          "italic": "confident answers",
+          "post": " that are wrong for your business.",
+          "answer": "Grounded in your documents, your data, your decisions. The system cites its sources, refuses when it shouldn't guess, and defers to the people who should decide."
+        },
+        {
+          "pre": "Legal and risk said ",
+          "italic": "no",
+          "post": " to the interesting use cases.",
+          "answer": "Every prompt, retrieval, and tool call is traced and policy-checked in-line. Exportable audit trails for SOC 2, HIPAA, the EU AI Act — whatever you're accountable to."
+        },
+        {
+          "pre": "You need an ",
+          "italic": "AI operating model",
+          "post": ", not another license.",
+          "answer": "Architecture, team shape, data contracts, review loops. We build it with your engineers so that when we leave, the method — not just the system — stays."
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": "[02] Method",
+      "titlePre": "From ",
+      "titleItalic1": "expert judgment",
+      "titleMid": " to ",
+      "titleItalic2": "production system",
+      "titlePost": ", in four deliberate phases.",
+      "steps": [
+        {
+          "num": "01",
+          "label": "Phase / Discovery",
+          "title": "Map",
+          "desc": "We sit with your experts, shadow workflows, and surface the 20% of decisions that move 80% of outcomes."
+        },
+        {
+          "num": "02",
+          "label": "Phase / Engineering",
+          "title": "Build",
+          "desc": "Architecture, skills, retrieval, evals. Every component version-controlled, documented, and reviewed like critical infrastructure."
+        },
+        {
+          "num": "03",
+          "label": "Phase / Rollout",
+          "title": "Deploy",
+          "desc": "Shadow-mode → assisted → autonomous, with guardrails and rollback. Observability, SLOs, and audit trails live from day one."
+        },
+        {
+          "num": "04",
+          "label": "Phase / Continuous",
+          "title": "Operate",
+          "desc": "We stay on as the SRE layer for your AI — evals on every change, drift monitoring, upgrades, and the runbooks your team owns."
+        }
+      ]
+    },
+    "capabilities": {
+      "eyebrow": "[03] Capabilities",
+      "titlePre": "A full stack. ",
+      "titleItalic": "One team.",
+      "titlePost": " No handoffs.",
+      "items": [
+        {
+          "num": "C.01",
+          "titlePre": "AI ",
+          "titleItalic": "Strategy",
+          "titlePost": "",
+          "desc": "An assessment of where AI creates real leverage in your ops — and a 90-day plan to get there, not a 200-slide deck.",
+          "meta": ["Roadmap", "ROI model", "Risk register"]
+        },
+        {
+          "num": "C.02",
+          "titlePre": "Autonomous ",
+          "titleItalic": "Agents",
+          "titlePost": "",
+          "desc": "Multi-step workers that read your systems, make bounded decisions, and hand off to humans when they hit the edge of their authority.",
+          "meta": ["Tool use", "Guardrails", "Handoff protocols"]
+        },
+        {
+          "num": "C.03",
+          "titlePre": "Domain ",
+          "titleItalic": "Skills",
+          "titlePost": "",
+          "desc": "Reusable AI modules encoded with your methodologies — a skill for cost estimation, another for code review, another for compliance triage.",
+          "meta": ["Skill registry", "Versioned prompts", "Evals"]
+        },
+        {
+          "num": "C.04",
+          "titlePre": "RAG & ",
+          "titleItalic": "Knowledge",
+          "titlePost": "",
+          "desc": "Retrieval grounded in your real artifacts — code, specs, Slack, Confluence, the 800 PDFs nobody opens — with citations on every answer.",
+          "meta": ["Hybrid retrieval", "Reranking", "Grounding evals"]
+        },
+        {
+          "num": "C.05",
+          "titlePre": "AI ",
+          "titleItalic": "Infrastructure",
+          "titlePost": "",
+          "desc": "Serving, queues, vector stores, secrets. Kubernetes or serverless, your cloud, your compliance posture. No vendor lock.",
+          "meta": ["Terraform", "Observability", "SOC2-ready"]
+        },
+        {
+          "num": "C.06",
+          "titlePre": "Evals & ",
+          "titleItalic": "Ops",
+          "titlePost": "",
+          "desc": "The part most teams skip: a test harness that catches regressions before your users do. We run it on every change.",
+          "meta": ["Golden sets", "LLM-as-judge", "Drift monitors"]
+        }
+      ]
+    },
+    "hontoOpsSection": {
+      "eyebrow": "[04] Product · honto.ops",
+      "titlePre": "The expert ",
+      "titleItalic": "second brain",
+      "titlePost": " for your engineering org.",
+      "description": "honto.ops watches your systems, reads your docs, and answers the questions your senior engineers field fifty times a week — with the same judgment, at 2am, in every timezone.",
+      "features": [
+        { "k": "Capture", "v": "Every decision, indexed." },
+        { "k": "Scale", "v": "One expert, whole org." },
+        { "k": "Ground", "v": "Cites every answer." },
+        { "k": "Audit", "v": "Logged, replayable." }
+      ],
+      "cta": "Explore honto.ops",
+      "imageAlt": "honto.ops product visualization"
+    },
+    "principles": {
+      "eyebrow": "[05] Principles",
+      "titlePre": "Six commitments. ",
+      "titleItalic": "Non-negotiable.",
+      "titlePost": "",
+      "items": [
+        {
+          "k": "P.01",
+          "title": "Engineering, not prompting.",
+          "desc": "Version-controlled, reviewed, tested. We treat AI systems like any critical service — because they are."
+        },
+        {
+          "k": "P.02",
+          "title": "Grounded or silent.",
+          "desc": "If the system isn't sure, it says so. If it can't cite, it refuses. We engineer for calibrated answers, not confident ones."
+        },
+        {
+          "k": "P.03",
+          "title": "Traceable by default.",
+          "desc": "Every prompt, retrieval, tool call, and decision is logged. Exportable for any audit."
+        },
+        {
+          "k": "P.04",
+          "title": "Your data, your cloud.",
+          "desc": "We deploy into your environment. Your secrets stay where they are. No vendor lock-in."
+        },
+        {
+          "k": "P.05",
+          "title": "Production or don't ship.",
+          "desc": "We don't do demos. First milestone is a system serving real traffic with SLOs attached."
+        },
+        {
+          "k": "P.06",
+          "title": "Handoff is part of the build.",
+          "desc": "Every engagement ends with your team owning what we built — docs, runbooks, on-call trained."
+        }
+      ]
+    },
+    "contact": {
+      "eyebrow": "[06] Contact",
+      "titlePre": "Tell us about",
+      "titleBreak": "the ",
+      "titleItalic": "problem.",
+      "metaEmailKey": "Email",
+      "metaEmailValue": "info@honto.ai",
+      "metaResponseKey": "Response",
+      "metaResponseValue": "< 24 hours",
+      "metaRoutingKey": "Routing",
+      "metaRoutingValue": "Straight to engineering",
+      "metaNdaKey": "NDA",
+      "metaNdaValue": "On request · same day"
+    },
+    "contactForm": {
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "companyLabel": "Company",
+      "phoneLabel": "Phone",
+      "requestLabel": "Request",
+      "submit": "Send message",
+      "submitting": "Sending…",
+      "successEyebrow": "[Received]",
+      "successBody": "Thanks — your message is in. Someone from engineering will be in touch within 24 hours.",
+      "sendAnother": "Send another",
+      "errorFallback": "Something went wrong."
+    },
+    "footer": {
+      "copyright": "© 2026 Honto — the enterprise second brain",
+      "location": "Palo Alto, CA",
+      "languages": "EN · ES"
+    }
   }
 }
