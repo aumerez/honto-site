@@ -24,14 +24,10 @@ export default function Navigation() {
         <a href="#problems">Problems</a>
         <a href="#process">Method</a>
         <a href="#capabilities">Capabilities</a>
-        <a href="#opsai">OpsAI</a>
+        <a href="#honto-ops">honto.ops</a>
         <a href="#principles">Principles</a>
       </div>
       <div className="nav-cta">
-        <span className="pill">
-          <span className="dot" />
-          Booking Q3 · 2026
-        </span>
         <a href="#contact" className="pill solid">
           Contact →
         </a>

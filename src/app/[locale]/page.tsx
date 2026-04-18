@@ -4,7 +4,7 @@ import Marquee from "../components/Marquee";
 import Problems from "../components/Problems";
 import Process from "../components/Process";
 import Capabilities from "../components/Capabilities";
-import OpsAISection from "../components/OpsAISection";
+import HontoOpsSection from "../components/HontoOpsSection";
 import Principles from "../components/Principles";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
@@ -19,7 +19,7 @@ export default function Home() {
         <Problems />
         <Process />
         <Capabilities />
-        <OpsAISection />
+        <HontoOpsSection />
         <Principles />
         <Contact />
       </main>

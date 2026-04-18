@@ -5,7 +5,7 @@ import Navigation from "../Navigation";
 describe("Navigation", () => {
   it("renders the logo", () => {
     render(<Navigation />);
-    expect(screen.getByText(/honto/)).toBeTruthy();
+    expect(screen.getByRole("link", { name: /^honto\.$/i })).toBeTruthy();
   });
 
   it("renders anchor links to each section", () => {
@@ -15,15 +15,16 @@ describe("Navigation", () => {
     expect(screen.getByText("Capabilities").getAttribute("href")).toBe(
       "#capabilities"
     );
-    expect(screen.getByText("OpsAI").getAttribute("href")).toBe("#opsai");
+    expect(screen.getByText("honto.ops").getAttribute("href")).toBe(
+      "#honto-ops"
+    );
     expect(screen.getByText("Principles").getAttribute("href")).toBe(
       "#principles"
     );
   });
 
-  it("renders the booking pill and contact CTA", () => {
+  it("renders the contact CTA", () => {
     render(<Navigation />);
-    expect(screen.getByText(/Booking Q3/)).toBeTruthy();
     const contact = screen.getByText(/Contact/);
     expect(contact.getAttribute("href")).toBe("#contact");
   });
