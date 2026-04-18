@@ -24,7 +24,7 @@ export default function Hero() {
           <div className="hero-meta">
             <div className="row">
               <span className="sq" />
-              <span>Honto — AI systems engineering</span>
+              <span>Honto — the enterprise second brain</span>
             </div>
             <div className="row" style={{ color: "var(--fg-mute)" }}>
               v.26 / EN · ES
@@ -32,29 +32,18 @@ export default function Hero() {
           </div>
 
           <h1 className="hero-title">
-            <span className="line">AI systems that</span>
+            <span className="line">From static knowledge</span>
             <span className="line">
-              think <i>like your</i>
+              to <i>scaled</i>
             </span>
-            <span className="line">
-              best{" "}
-              <span className="tag">
-                <span className="signal" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                </span>
-                production-grade
-              </span>
-              engineers.
-            </span>
+            <span className="line">execution.</span>
           </h1>
 
           <p className="hero-sub">
-            We capture what your senior engineers know — their decisions,
-            heuristics, and standards — and ship it as production AI your whole
-            organization can use.
+            Honto captures your company&apos;s expertise — decisions,
+            heuristics, standards — and puts it to work as AI agents. What used
+            to live in docs, silos, and people&apos;s heads now runs across
+            every team.
           </p>
 
           <div className="hero-cta">
@@ -85,7 +74,7 @@ export default function Hero() {
               <span>[02] Audited &amp; traceable</span>
               <span>[03] Domain-native</span>
             </div>
-            <div>Zürich / Madrid / Remote</div>
+            <div>Palo Alto, CA</div>
           </div>
         </div>
       </div>

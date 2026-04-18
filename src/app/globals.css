@@ -27,7 +27,7 @@ html.light {
   --accent-ink: #ede8dc;
 }
 
-/* Keep existing Tailwind theme for legacy routes (opsai, case-studies, demo). */
+/* Keep existing Tailwind theme for legacy routes (honto-ops, case-studies, demo). */
 @theme {
   --color-bg: #06060a;
   --color-bg-elevated: #0d0d14;
@@ -413,7 +413,7 @@ button {
   z-index: 0;
 }
 
-.hero > * {
+.hero > .container-x {
   position: relative;
   z-index: 1;
 }
@@ -727,15 +727,15 @@ button {
   border-radius: 50%;
 }
 
-/* ─── OpsAI ─── */
+/* ─── honto.ops ─── */
 
-.opsai {
+.honto-ops {
   background: var(--bg-2);
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
 
-.opsai-inner {
+.honto-ops-inner {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
   gap: 80px;
@@ -743,7 +743,7 @@ button {
   min-height: 600px;
 }
 
-.opsai-left h2 {
+.honto-ops-left h2 {
   font-family: var(--serif);
   font-size: clamp(40px, 5vw, 72px);
   line-height: 1;
@@ -751,12 +751,12 @@ button {
   letter-spacing: -0.02em;
 }
 
-.opsai-left h2 i {
+.honto-ops-left h2 i {
   font-style: italic;
   color: var(--accent);
 }
 
-.opsai-left p {
+.honto-ops-left p {
   color: var(--fg-dim);
   font-size: 17px;
   line-height: 1.6;
@@ -764,19 +764,19 @@ button {
   margin: 0 0 32px;
 }
 
-.opsai-feat {
+.honto-ops-feat {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   margin: 32px 0;
 }
 
-.opsai-feat .f {
+.honto-ops-feat .f {
   padding: 18px 0;
   border-top: 1px solid var(--rule);
 }
 
-.opsai-feat .f .k {
+.honto-ops-feat .f .k {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.15em;
@@ -785,10 +785,19 @@ button {
   margin-bottom: 6px;
 }
 
-.opsai-feat .f .v {
+.honto-ops-feat .f .v {
   font-family: var(--serif);
   font-size: 22px;
   line-height: 1.15;
+}
+
+.honto-ops-img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  display: block;
 }
 
 .term {
@@ -1039,7 +1048,7 @@ button {
   .cap:nth-child(even) {
     padding-left: 0;
   }
-  .opsai-inner {
+  .honto-ops-inner {
     grid-template-columns: 1fr;
     gap: 40px;
     padding: 80px 0;

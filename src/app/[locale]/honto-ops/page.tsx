@@ -282,12 +282,12 @@ function IconArrow() {
 }
 
 /* ──────────────────────────────────────────────
-   OpsAI Product Page
+   honto.ops Product Page
    ────────────────────────────────────────────── */
 
-export default function OpsAIPage() {
+export default function HontoOpsPage() {
   const { locale, t } = useLocale();
-  const o = t.opsai;
+  const o = t.hontoOps;
 
   /* Scroll reveal refs */
   const heroRef = useScrollReveal<HTMLDivElement>();
@@ -397,11 +397,11 @@ export default function OpsAIPage() {
   ];
 
   const diffRows = [
-    { generic: o.diffRow1Generic, opsai: o.diffRow1Opsai },
-    { generic: o.diffRow2Generic, opsai: o.diffRow2Opsai },
-    { generic: o.diffRow3Generic, opsai: o.diffRow3Opsai },
-    { generic: o.diffRow4Generic, opsai: o.diffRow4Opsai },
-    { generic: o.diffRow5Generic, opsai: o.diffRow5Opsai },
+    { generic: o.diffRow1Generic, hontoOps: o.diffRow1HontoOps },
+    { generic: o.diffRow2Generic, hontoOps: o.diffRow2HontoOps },
+    { generic: o.diffRow3Generic, hontoOps: o.diffRow3HontoOps },
+    { generic: o.diffRow4Generic, hontoOps: o.diffRow4HontoOps },
+    { generic: o.diffRow5Generic, hontoOps: o.diffRow5HontoOps },
   ];
 
   return (
@@ -413,7 +413,7 @@ export default function OpsAIPage() {
         ═══════════════════════════════════════════ */}
         <section
           className="noise-overlay relative flex min-h-[100dvh] items-center overflow-hidden"
-          aria-label="OpsAI Hero"
+          aria-label="honto.ops Hero"
         >
           {/* Industrial grid */}
           <div
@@ -452,7 +452,7 @@ export default function OpsAIPage() {
                 {o.breadcrumbHome}
               </a>
               <span aria-hidden="true">/</span>
-              <span className="text-amber-400">{o.breadcrumbOpsAI}</span>
+              <span className="text-amber-400">{o.breadcrumbHontoOps}</span>
             </nav>
 
             <div ref={heroRef} className="reveal max-w-4xl">
@@ -1065,7 +1065,7 @@ export default function OpsAIPage() {
                     className="font-heading text-sm font-semibold"
                     style={{ color: "#f59e0b" }}
                   >
-                    {o.diffHeaderOpsai}
+                    {o.diffHeaderHontoOps}
                   </span>
                 </div>
               </div>
@@ -1073,7 +1073,7 @@ export default function OpsAIPage() {
               {/* Rows */}
               {diffRows.map((row, i) => (
                 <div
-                  key={row.opsai}
+                  key={row.hontoOps}
                   className={`grid grid-cols-2 ${i < diffRows.length - 1 ? "border-b border-border" : ""}`}
                 >
                   <div className="border-r border-border bg-bg-card px-6 py-4 text-sm text-text-muted">
@@ -1087,7 +1087,7 @@ export default function OpsAIPage() {
                       color: "#fbbf24",
                     }}
                   >
-                    {row.opsai}
+                    {row.hontoOps}
                   </div>
                 </div>
               ))}
@@ -1100,7 +1100,7 @@ export default function OpsAIPage() {
         ═══════════════════════════════════════════ */}
         <section
           className="relative overflow-hidden py-24 md:py-32"
-          aria-labelledby="opsai-cta-heading"
+          aria-labelledby="honto-ops-cta-heading"
         >
           <div className="absolute inset-0 bg-bg-elevated" aria-hidden="true" />
           <div
@@ -1121,7 +1121,7 @@ export default function OpsAIPage() {
                 {o.ctaEyebrow}
               </span>
               <h2
-                id="opsai-cta-heading"
+                id="honto-ops-cta-heading"
                 className="mt-4 font-heading text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl"
               >
                 {o.ctaHeadingLine1}

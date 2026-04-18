@@ -11,12 +11,12 @@ describe("Footer", () => {
   it("renders the copyright and tagline", () => {
     render(<Footer />);
     expect(screen.getByText(/© 2026 Honto/)).toBeTruthy();
-    expect(screen.getByText(/AI systems engineering/i)).toBeTruthy();
+    expect(screen.getByText(/enterprise second brain/i)).toBeTruthy();
   });
 
   it("renders locations and language tokens", () => {
     render(<Footer />);
-    expect(screen.getByText(/Zürich \/ Madrid \/ Remote/)).toBeTruthy();
+    expect(screen.getByText(/Palo Alto, CA/)).toBeTruthy();
     expect(screen.getByText(/EN · ES/)).toBeTruthy();
   });
 });

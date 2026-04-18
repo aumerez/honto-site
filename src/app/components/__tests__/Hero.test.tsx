@@ -7,13 +7,13 @@ describe("Hero", () => {
     render(<Hero />);
     const heading = screen.getByRole("heading", { level: 1 });
     expect(heading).toBeTruthy();
-    expect(heading.textContent).toMatch(/AI systems that/i);
-    expect(heading.textContent).toMatch(/engineers\./i);
+    expect(heading.textContent).toMatch(/From static knowledge/i);
+    expect(heading.textContent).toMatch(/execution\./i);
   });
 
   it("renders the subheadline", () => {
     render(<Hero />);
-    expect(screen.getByText(/what your senior engineers know/i)).toBeTruthy();
+    expect(screen.getByText(/captures your company's expertise/i)).toBeTruthy();
   });
 
   it("renders both CTA buttons with anchor targets", () => {
