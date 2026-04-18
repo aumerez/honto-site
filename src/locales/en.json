@@ -455,10 +455,11 @@
     "hero": {
       "ariaLabel": "Hero",
       "tagline": "Honto — the enterprise second brain",
-      "version": "v.26 / EN · ES",
+      "version": "v.26",
       "titleLine1": "From static knowledge",
       "titleLine2Pre": "to ",
       "titleLine2Italic": "scaled",
+      "titleLine3Italic": "",
       "titleLine3": "execution.",
       "subtitle": "Honto captures your company's expertise — decisions, heuristics, standards — and puts it to work as AI agents. What used to live in docs, silos, and people's heads now runs across every team.",
       "ctaPrimary": "Start an engagement",
@@ -564,6 +565,7 @@
       "titlePre": "A full stack. ",
       "titleItalic": "One team.",
       "titlePost": " No handoffs.",
+      "titleTail": "",
       "items": [
         {
           "num": "C.01",
@@ -619,8 +621,8 @@
       "eyebrow": "[04] Product · honto.ops",
       "titlePre": "The expert ",
       "titleItalic": "second brain",
-      "titlePost": " for your engineering org.",
-      "description": "honto.ops watches your systems, reads your docs, and answers the questions your senior engineers field fifty times a week — with the same judgment, at 2am, in every timezone.",
+      "titlePost": " for your teams.",
+      "description": "honto.ops watches your systems, reads your docs, and answers the questions your senior experts field fifty times a week — with the same judgment, at 2am, in every timezone.",
       "features": [
         { "k": "Capture", "v": "Every decision, indexed." },
         { "k": "Scale", "v": "One expert, whole org." },

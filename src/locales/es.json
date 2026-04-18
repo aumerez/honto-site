@@ -455,10 +455,11 @@
     "hero": {
       "ariaLabel": "Portada",
       "tagline": "Honto — el segundo cerebro de la empresa",
-      "version": "v.26 / EN · ES",
+      "version": "v.26",
       "titleLine1": "Del conocimiento estático",
-      "titleLine2Pre": "a la ejecución ",
-      "titleLine2Italic": "a escala",
+      "titleLine2Pre": "a la ejecución",
+      "titleLine2Italic": "",
+      "titleLine3Italic": "a escala",
       "titleLine3": ".",
       "subtitle": "Honto captura la experiencia de tu empresa — decisiones, heurísticas, estándares — y la pone a trabajar como agentes de IA. Lo que antes vivía en documentos, silos y en la cabeza de algunas personas ahora corre en todos los equipos.",
       "ctaPrimary": "Iniciar un proyecto",
@@ -563,7 +564,8 @@
       "eyebrow": "[03] Capacidades",
       "titlePre": "Stack completo. ",
       "titleItalic": "Un solo equipo.",
-      "titlePost": " Sin transferencias.",
+      "titlePost": "",
+      "titleTail": "Sin transferencias.",
       "items": [
         {
           "num": "C.01",
@@ -631,8 +633,8 @@
       "eyebrow": "[04] Producto · honto.ops",
       "titlePre": "El ",
       "titleItalic": "segundo cerebro",
-      "titlePost": " experto para tu área de ingeniería.",
-      "description": "honto.ops observa tus sistemas, lee tus documentos y responde las preguntas que tus ingenieros senior reciben cincuenta veces a la semana — con el mismo criterio, a las 2am, en cualquier zona horaria.",
+      "titlePost": " experto para tus equipos.",
+      "description": "honto.ops observa tus sistemas, lee tus documentos y responde las preguntas que tus expertos senior reciben cincuenta veces a la semana — con el mismo criterio, a las 2am, en cualquier zona horaria.",
       "features": [
         { "k": "Captura", "v": "Cada decisión, indexada." },
         { "k": "Escala", "v": "Un experto, toda la empresa." },

@@ -10,6 +10,7 @@ type HeroCopy = {
   titleLine1: string;
   titleLine2Pre: string;
   titleLine2Italic: string;
+  titleLine3Italic: string;
   titleLine3: string;
   subtitle: string;
   ctaPrimary: string;
@@ -55,9 +56,12 @@ export default function Hero() {
             <span className="line">{hero.titleLine1}</span>
             <span className="line">
               {hero.titleLine2Pre}
-              <i>{hero.titleLine2Italic}</i>
+              {hero.titleLine2Italic ? <i>{hero.titleLine2Italic}</i> : null}
             </span>
-            <span className="line">{hero.titleLine3}</span>
+            <span className="line">
+              {hero.titleLine3Italic ? <i>{hero.titleLine3Italic}</i> : null}
+              {hero.titleLine3}
+            </span>
           </h1>
 
           <p className="hero-sub">{hero.subtitle}</p>
