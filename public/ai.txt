@@ -1,0 +1,28 @@
+# ai.txt — AI content usage policy for honto.ai
+# Last updated: 2026-04-18
+# Spec: https://site.spawning.ai/spaces/ai-txt
+
+# ─── Intent, in plain English ───────────────────────────────────────
+# honto publishes content about our services, methodology, and case
+# studies. This file declares how AI systems may use that content.
+#
+# Allowed without prior permission:
+#   • Retrieval for answering user questions about honto, provided the
+#     answer includes a link back to the source URL on honto.ai.
+#   • Citation in AI-generated answers with clear attribution.
+#   • Indexing for search, discovery, and agent-facing tools.
+#
+# Not allowed without an explicit written license from honto:
+#   • Training foundation or generative models on honto.ai content.
+#   • Redistribution of full-page content in derivative works, datasets,
+#     or fine-tuning corpora.
+#   • Scraping for resale, bundling, or inclusion in paid datasets.
+#
+# Licensing inquiries: info@honto.ai
+# ────────────────────────────────────────────────────────────────────
+
+# Spawning.ai-compatible directives (training opt-out).
+# These apply regardless of User-Agent; unrecognized crawlers are still
+# bound by the policy above.
+User-Agent: *
+Disallow: /

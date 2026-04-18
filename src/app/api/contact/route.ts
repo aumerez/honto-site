@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { CONTACT_FIELDS, type ContactField } from "./descriptor";
 
 export const runtime = "nodejs";
 
@@ -12,6 +13,10 @@ type ContactPayload = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const FIELD_LIMITS = Object.fromEntries(
+  CONTACT_FIELDS.map((f) => [f.name, f.maxLength])
+) as Record<ContactField["name"], number>;
 
 function sanitize(value: unknown, max: number): string | null {
   if (typeof value !== "string") return null;
@@ -51,11 +56,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const name = sanitize(body.name, 120);
-  const emailRaw = sanitize(body.email, 254);
-  const company = sanitize(body.company, 160);
-  const phone = sanitize(body.phone, 40);
-  const message = sanitize(body.message, 5000);
+  const name = sanitize(body.name, FIELD_LIMITS.name);
+  const emailRaw = sanitize(body.email, FIELD_LIMITS.email);
+  const company = sanitize(body.company, FIELD_LIMITS.company);
+  const phone = sanitize(body.phone, FIELD_LIMITS.phone);
+  const message = sanitize(body.message, FIELD_LIMITS.message);
 
   if (!name || !emailRaw || !EMAIL_RE.test(emailRaw)) {
     return NextResponse.json(

@@ -5,6 +5,7 @@ import { isValidLocale } from "@/lib/locales";
 import type { Locale } from "@/lib/locales";
 import { getDictionary } from "@/lib/i18n";
 import { LocaleProvider } from "@/context/LocaleContext";
+import { organizationSchema } from "@/lib/structuredData";
 import "../globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -93,12 +94,18 @@ export default async function LocaleLayout({
 
   const dictionary = await getDictionary(locale);
 
+  const orgSchema = organizationSchema(locale);
+
   return (
     <html
       lang={locale}
       className={`${instrumentSerif.variable} ${jetbrainsMono.variable} ${inter.variable}`}
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
         <LocaleProvider locale={locale} dictionary={dictionary}>
           {children}
         </LocaleProvider>

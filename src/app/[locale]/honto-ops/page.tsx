@@ -3,6 +3,8 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useScrollRevealMultiple } from "@/hooks/useScrollRevealMultiple";
 import { useLocale } from "@/context/LocaleContext";
+import { productSchema } from "@/lib/structuredData";
+import type { Locale } from "@/lib/locales";
 import Navigation from "../../components/Navigation";
 import Footer from "../../components/Footer";
 
@@ -406,6 +408,12 @@ export default function HontoOpsPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema(locale as Locale)),
+        }}
+      />
       <Navigation />
       <main>
         {/* ═══════════════════════════════════════════
