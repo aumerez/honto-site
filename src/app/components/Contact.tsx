@@ -1,39 +1,47 @@
+"use client";
+
+import { useLocale } from "@/context/LocaleContext";
+
 export default function Contact() {
+  const { t } = useLocale();
+  const c = t.contact;
+
   return (
     <section className="contact" id="contact">
       <div className="container-x">
         <div className="eyebrow" style={{ marginBottom: 32 }}>
-          [06] Contact
+          {c.eyebrow}
         </div>
         <div className="contact-grid">
           <h2>
-            Tell us about
+            {c.titleLine1}
             <br />
-            the <i>problem.</i>
+            {c.titleLine2Pre}
+            <i>{c.titleLine2Italic}</i>
           </h2>
           <div className="contact-right">
             <div className="contact-row">
-              <span className="k">Email</span>
-              <span className="v">info@honto.ai</span>
+              <span className="k">{c.emailLabel}</span>
+              <span className="v">{c.emailValue}</span>
             </div>
             <div className="contact-row">
-              <span className="k">Response</span>
-              <span className="v">&lt; 24 hours</span>
+              <span className="k">{c.responseLabel}</span>
+              <span className="v">{c.responseValue}</span>
             </div>
             <div className="contact-row">
-              <span className="k">Routing</span>
-              <span className="v">Straight to engineering</span>
+              <span className="k">{c.routingLabel}</span>
+              <span className="v">{c.routingValue}</span>
             </div>
             <div className="contact-row">
-              <span className="k">NDA</span>
-              <span className="v">On request · same day</span>
+              <span className="k">{c.ndaLabel}</span>
+              <span className="v">{c.ndaValue}</span>
             </div>
             <a
-              href="mailto:info@honto.ai"
+              href={`mailto:${c.emailValue}`}
               className="btn primary"
               style={{ marginTop: 12, alignSelf: "flex-start" }}
             >
-              Start a conversation
+              {c.cta}
               <svg
                 width="14"
                 height="10"

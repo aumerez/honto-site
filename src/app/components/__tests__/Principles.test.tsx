@@ -1,17 +1,18 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import Principles from "../Principles";
+import { renderWithLocale } from "@/test/renderWithLocale";
 
 describe("Principles", () => {
   it("renders six principles numbered P.01 through P.06", () => {
-    render(<Principles />);
+    renderWithLocale(<Principles />);
     for (let i = 1; i <= 6; i += 1) {
       expect(screen.getByText(`P.0${i}`)).toBeTruthy();
     }
   });
 
   it("renders the section heading", () => {
-    render(<Principles />);
+    renderWithLocale(<Principles />);
     expect(
       screen.getByRole("heading", { level: 2, name: /non-negotiable/i })
     ).toBeTruthy();
