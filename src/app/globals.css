@@ -249,7 +249,6 @@ button {
 
 .hero {
   position: relative;
-  min-height: 100vh;
   padding: 140px 0 80px;
   overflow: hidden;
 }
@@ -258,14 +257,10 @@ button {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 24px;
-  align-items: end;
-  min-height: calc(100vh - 220px);
 }
 
 .hero-meta {
   grid-column: 1 / 4;
-  align-self: start;
-  padding-top: 24px;
 }
 
 .hero-meta .row {
@@ -413,7 +408,7 @@ button {
   z-index: 0;
 }
 
-.hero > * {
+.hero > .container-x {
   position: relative;
   z-index: 1;
 }
