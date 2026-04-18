@@ -1,41 +1,46 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale } from "@/context/LocaleContext";
+
+type HontoOpsCopy = {
+  eyebrow: string;
+  titlePre: string;
+  titleItalic: string;
+  titlePost: string;
+  description: string;
+  features: Array<{ k: string; v: string }>;
+  cta: string;
+  imageAlt: string;
+};
 
 export default function HontoOpsSection() {
+  const { t, locale } = useLocale();
+  const copy = (t.landing as { hontoOpsSection: HontoOpsCopy }).hontoOpsSection;
+
   return (
     <section className="sec honto-ops" id="honto-ops">
       <div className="container-x">
         <div className="honto-ops-inner">
           <div className="honto-ops-left">
-            <div className="eyebrow">[04] Product · honto.ops</div>
+            <div className="eyebrow">{copy.eyebrow}</div>
             <h2>
-              The expert <i>second brain</i> for your engineering org.
+              {copy.titlePre}
+              <i>{copy.titleItalic}</i>
+              {copy.titlePost}
             </h2>
-            <p>
-              honto.ops watches your systems, reads your docs, and answers the
-              questions your senior engineers field fifty times a week — with
-              the same judgment, at 2am, in every timezone.
-            </p>
+            <p>{copy.description}</p>
             <div className="honto-ops-feat">
-              <div className="f">
-                <div className="k">Capture</div>
-                <div className="v">Every decision, indexed.</div>
-              </div>
-              <div className="f">
-                <div className="k">Scale</div>
-                <div className="v">One expert, whole org.</div>
-              </div>
-              <div className="f">
-                <div className="k">Ground</div>
-                <div className="v">Cites every answer.</div>
-              </div>
-              <div className="f">
-                <div className="k">Audit</div>
-                <div className="v">Logged, replayable.</div>
-              </div>
+              {copy.features.map((f) => (
+                <div className="f" key={f.k}>
+                  <div className="k">{f.k}</div>
+                  <div className="v">{f.v}</div>
+                </div>
+              ))}
             </div>
-            <Link href="/honto-ops" className="btn primary">
-              Explore honto.ops
+            <Link href={`/${locale}/honto-ops`} className="btn primary">
+              {copy.cta}
               <svg
                 width="14"
                 height="10"
@@ -54,7 +59,7 @@ export default function HontoOpsSection() {
           <div className="honto-ops-right">
             <Image
               src="/honto-ops-v2.jpeg"
-              alt="honto.ops product visualization"
+              alt={copy.imageAlt}
               width={1205}
               height={963}
               sizes="(max-width: 900px) 100vw, 50vw"

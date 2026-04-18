@@ -438,5 +438,279 @@
     "caseStudiesDescription": "Sistemas de IA del mundo real que hemos diseñado y construido. Explora cómo Honto entrega infraestructura de IA de nivel productivo.",
     "hontoOpsTitle": "honto.ops — Plataforma de Inteligencia Operacional | Honto",
     "hontoOpsDescription": "Convierte la experiencia de tus ingenieros en inteligencia operacional escalable. honto.ops captura conocimiento de documentos, reportes y operaciones para empresas petroleras."
+  },
+  "landing": {
+    "nav": {
+      "ariaLabel": "Navegación principal",
+      "problems": "Problemas",
+      "method": "Método",
+      "capabilities": "Capacidades",
+      "hontoOps": "honto.ops",
+      "principles": "Principios",
+      "contact": "Contacto →",
+      "languageLabel": "Cambiar idioma",
+      "languageOptionEn": "Inglés",
+      "languageOptionEs": "Español"
+    },
+    "hero": {
+      "ariaLabel": "Portada",
+      "tagline": "Honto — el segundo cerebro de la empresa",
+      "version": "v.26 / EN · ES",
+      "titleLine1": "Del conocimiento estático",
+      "titleLine2Pre": "a la ejecución ",
+      "titleLine2Italic": "a escala",
+      "titleLine3": ".",
+      "subtitle": "Honto captura la experiencia de tu empresa — decisiones, heurísticas, estándares — y la pone a trabajar como agentes de IA. Lo que antes vivía en documentos, silos y en la cabeza de algunas personas ahora corre en todos los equipos.",
+      "ctaPrimary": "Iniciar un proyecto",
+      "ctaSecondary": "Ver qué resolvemos",
+      "strip1": "[01] Probado en producción",
+      "strip2": "[02] Auditado y trazable",
+      "strip3": "[03] Nativo del dominio",
+      "location": "Palo Alto, CA"
+    },
+    "marquee": {
+      "items": [
+        "Captura de conocimiento",
+        "Agentes autónomos",
+        "Pipelines de recuperación",
+        "DevSecOps para IA",
+        "Evaluación de modelos",
+        "Habilidades de dominio",
+        "Soporte de decisiones",
+        "Observabilidad",
+        "Despliegues seguros"
+      ]
+    },
+    "problems": {
+      "eyebrow": "[01] Problemas que resolvemos",
+      "titlePre": "Seis señales de que tu ",
+      "titleItalic": "estrategia de IA",
+      "titlePost": " no es la correcta.",
+      "items": [
+        {
+          "pre": "Tu gente usa IA todos los días. ",
+          "italic": "Tu empresa",
+          "post": " sigue funcionando a la vieja usanza.",
+          "answer": "La productividad individual no es un modelo operativo. Identificamos los flujos donde la IA reescribe la dinámica de tu negocio y construimos los sistemas que hacen real el cambio."
+        },
+        {
+          "pre": "Tus expertos senior siguen siendo ",
+          "italic": "el cuello de botella.",
+          "post": " Las herramientas no saben lo que ellos saben.",
+          "answer": "Extraemos el criterio que cargan tus expertos — estándares, heurísticas, casos extremos — y lo codificamos en habilidades de IA que el resto del equipo puede consultar sin interrumpirlos."
+        },
+        {
+          "pre": "Tus datos viven en ",
+          "italic": "quince sistemas.",
+          "post": " Sólo algunos están disponibles para la IA.",
+          "answer": "Construimos la capa conectora — adaptadores, extractores y recuperación — que permite a la IA razonar sobre tus plataformas IoT, ERPs, archivos de diseño y PDFs. Desde telemetría de campo hasta libros contables, cada fuente se convierte en entrada de primera clase para tu inteligencia de negocio."
+        },
+        {
+          "pre": "Los modelos genéricos dan ",
+          "italic": "respuestas seguras",
+          "post": " que son incorrectas para tu negocio.",
+          "answer": "Fundamentadas en tus documentos, tus datos, tus decisiones. El sistema cita sus fuentes, se niega cuando no debería adivinar, y cede a las personas que deberían decidir."
+        },
+        {
+          "pre": "Legal y riesgos dijeron ",
+          "italic": "no",
+          "post": " a los casos de uso interesantes.",
+          "answer": "Cada prompt, recuperación y llamada a herramienta es trazada y verificada contra la política en línea. Bitácoras de auditoría exportables para SOC 2, HIPAA, el EU AI Act — lo que sea a lo que respondas."
+        },
+        {
+          "pre": "Necesitas un ",
+          "italic": "modelo operativo de IA",
+          "post": ", no otra licencia.",
+          "answer": "Arquitectura, forma del equipo, contratos de datos, ciclos de revisión. Lo construimos con tus ingenieros para que, cuando nos vayamos, lo que quede sea el método, no sólo el sistema."
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": "[02] Método",
+      "titlePre": "Del ",
+      "titleItalic1": "criterio experto",
+      "titleMid": " al ",
+      "titleItalic2": "sistema en producción",
+      "titlePost": ", en cuatro fases deliberadas.",
+      "steps": [
+        {
+          "num": "01",
+          "label": "Fase / Descubrimiento",
+          "title": "Mapear",
+          "desc": "Nos sentamos con tus expertos, acompañamos flujos y descubrimos el 20% de las decisiones que mueven el 80% de los resultados."
+        },
+        {
+          "num": "02",
+          "label": "Fase / Ingeniería",
+          "title": "Construir",
+          "desc": "Arquitectura, habilidades, recuperación, evaluaciones. Cada componente versionado, documentado y revisado como infraestructura crítica."
+        },
+        {
+          "num": "03",
+          "label": "Fase / Despliegue",
+          "title": "Desplegar",
+          "desc": "Modo sombra → asistido → autónomo, con salvaguardas y rollback. Observabilidad, SLOs y bitácoras de auditoría desde el día uno."
+        },
+        {
+          "num": "04",
+          "label": "Fase / Continuo",
+          "title": "Operar",
+          "desc": "Nos quedamos como la capa SRE de tu IA — evaluaciones en cada cambio, monitoreo de drift, actualizaciones y los runbooks que tu equipo mantiene."
+        }
+      ]
+    },
+    "capabilities": {
+      "eyebrow": "[03] Capacidades",
+      "titlePre": "Stack completo. ",
+      "titleItalic": "Un solo equipo.",
+      "titlePost": " Sin transferencias.",
+      "items": [
+        {
+          "num": "C.01",
+          "titlePre": "Estrategia ",
+          "titleItalic": "de IA",
+          "titlePost": "",
+          "desc": "Una evaluación de dónde la IA genera apalancamiento real en tus operaciones — y un plan de 90 días para llegar allí, no un deck de 200 diapositivas.",
+          "meta": ["Hoja de ruta", "Modelo de ROI", "Registro de riesgos"]
+        },
+        {
+          "num": "C.02",
+          "titlePre": "Agentes ",
+          "titleItalic": "autónomos",
+          "titlePost": "",
+          "desc": "Trabajadores multi-paso que leen tus sistemas, toman decisiones acotadas y transfieren a humanos cuando llegan al borde de su autoridad.",
+          "meta": [
+            "Uso de herramientas",
+            "Salvaguardas",
+            "Protocolos de transferencia"
+          ]
+        },
+        {
+          "num": "C.03",
+          "titlePre": "Habilidades ",
+          "titleItalic": "de dominio",
+          "titlePost": "",
+          "desc": "Módulos de IA reutilizables codificados con tus metodologías — una habilidad para estimación de costos, otra para revisión de código, otra para triage de cumplimiento.",
+          "meta": [
+            "Registro de habilidades",
+            "Prompts versionados",
+            "Evaluaciones"
+          ]
+        },
+        {
+          "num": "C.04",
+          "titlePre": "RAG y ",
+          "titleItalic": "Conocimiento",
+          "titlePost": "",
+          "desc": "Recuperación fundamentada en tus artefactos reales — código, especificaciones, Slack, Confluence, los 800 PDFs que nadie abre — con citas en cada respuesta.",
+          "meta": [
+            "Recuperación híbrida",
+            "Re-ranking",
+            "Evaluaciones de grounding"
+          ]
+        },
+        {
+          "num": "C.05",
+          "titlePre": "Infraestructura ",
+          "titleItalic": "de IA",
+          "titlePost": "",
+          "desc": "Serving, colas, vector stores, secretos. Kubernetes o serverless, tu nube, tu postura de cumplimiento. Sin vendor lock.",
+          "meta": ["Terraform", "Observabilidad", "Listo para SOC2"]
+        },
+        {
+          "num": "C.06",
+          "titlePre": "Evaluaciones y ",
+          "titleItalic": "Operaciones",
+          "titlePost": "",
+          "desc": "La parte que la mayoría de equipos se salta: un arnés de pruebas que atrapa regresiones antes que tus usuarios. Lo corremos en cada cambio.",
+          "meta": ["Golden sets", "LLM como juez", "Monitores de drift"]
+        }
+      ]
+    },
+    "hontoOpsSection": {
+      "eyebrow": "[04] Producto · honto.ops",
+      "titlePre": "El ",
+      "titleItalic": "segundo cerebro",
+      "titlePost": " experto para tu área de ingeniería.",
+      "description": "honto.ops observa tus sistemas, lee tus documentos y responde las preguntas que tus ingenieros senior reciben cincuenta veces a la semana — con el mismo criterio, a las 2am, en cualquier zona horaria.",
+      "features": [
+        { "k": "Captura", "v": "Cada decisión, indexada." },
+        { "k": "Escala", "v": "Un experto, toda la empresa." },
+        { "k": "Fundamenta", "v": "Cita cada respuesta." },
+        { "k": "Audita", "v": "Registrado y reproducible." }
+      ],
+      "cta": "Explorar honto.ops",
+      "imageAlt": "Visualización del producto honto.ops"
+    },
+    "principles": {
+      "eyebrow": "[05] Principios",
+      "titlePre": "Seis compromisos. ",
+      "titleItalic": "No negociables.",
+      "titlePost": "",
+      "items": [
+        {
+          "k": "P.01",
+          "title": "Ingeniería, no prompting.",
+          "desc": "Versionado, revisado, probado. Tratamos los sistemas de IA como cualquier servicio crítico — porque lo son."
+        },
+        {
+          "k": "P.02",
+          "title": "Fundamentado o en silencio.",
+          "desc": "Si el sistema no está seguro, lo dice. Si no puede citar, se niega. Diseñamos para respuestas calibradas, no seguras."
+        },
+        {
+          "k": "P.03",
+          "title": "Trazable por defecto.",
+          "desc": "Cada prompt, recuperación, llamada a herramienta y decisión queda registrada. Exportable para cualquier auditoría."
+        },
+        {
+          "k": "P.04",
+          "title": "Tus datos, tu nube.",
+          "desc": "Desplegamos en tu entorno. Tus secretos se quedan donde están. Sin vendor lock-in."
+        },
+        {
+          "k": "P.05",
+          "title": "Producción o no se lanza.",
+          "desc": "No hacemos demos. El primer hito es un sistema que sirve tráfico real con SLOs."
+        },
+        {
+          "k": "P.06",
+          "title": "La transferencia es parte de la construcción.",
+          "desc": "Cada proyecto termina con tu equipo operando lo que construimos — documentación, runbooks, on-call entrenado."
+        }
+      ]
+    },
+    "contact": {
+      "eyebrow": "[06] Contacto",
+      "titlePre": "Cuéntanos",
+      "titleBreak": "el ",
+      "titleItalic": "problema.",
+      "metaEmailKey": "Email",
+      "metaEmailValue": "info@honto.ai",
+      "metaResponseKey": "Respuesta",
+      "metaResponseValue": "< 24 horas",
+      "metaRoutingKey": "Ruteo",
+      "metaRoutingValue": "Directo a ingeniería",
+      "metaNdaKey": "NDA",
+      "metaNdaValue": "Bajo solicitud · mismo día"
+    },
+    "contactForm": {
+      "nameLabel": "Nombre",
+      "emailLabel": "Email",
+      "companyLabel": "Empresa",
+      "phoneLabel": "Teléfono",
+      "requestLabel": "Solicitud",
+      "submit": "Enviar mensaje",
+      "submitting": "Enviando…",
+      "successEyebrow": "[Recibido]",
+      "successBody": "Gracias — tu mensaje llegó. Alguien de ingeniería se pondrá en contacto dentro de 24 horas.",
+      "sendAnother": "Enviar otro",
+      "errorFallback": "Algo salió mal."
+    },
+    "footer": {
+      "copyright": "© 2026 Honto — el segundo cerebro de la empresa",
+      "location": "Palo Alto, CA",
+      "languages": "EN · ES"
+    }
   }
 }

@@ -177,6 +177,85 @@ button {
   align-items: center;
 }
 
+.lang-switcher {
+  position: relative;
+}
+
+.lang-switcher-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.lang-switcher-btn:hover {
+  border-color: var(--fg);
+  color: var(--fg);
+}
+
+.lang-switcher-btn svg {
+  opacity: 0.8;
+}
+
+.lang-switcher-current {
+  line-height: 1;
+}
+
+.lang-switcher-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  z-index: 60;
+}
+
+.lang-switcher-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--fg-dim);
+  text-align: left;
+  border-radius: var(--radius);
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.lang-switcher-option:hover {
+  background: var(--bg-2);
+  color: var(--fg);
+}
+
+.lang-switcher-option.active {
+  color: var(--fg);
+  background: var(--bg-2);
+}
+
+.lang-switcher-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
 .pill {
   display: inline-flex;
   align-items: center;

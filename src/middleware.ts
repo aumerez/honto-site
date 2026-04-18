@@ -4,14 +4,23 @@ import { defaultLocale, locales, spanishCountries } from "@/lib/locales";
 const PUBLIC_FILE = /\.(.*)$/;
 
 function getLocaleFromRequest(request: NextRequest): string {
-  // 1. Check geo country (works on Vercel; falls through elsewhere)
+  // 1. Explicit user choice via cookie trumps everything else
+  const cookieLocale = request.cookies.get("NEXT_LOCALE")?.value;
+  if (
+    cookieLocale &&
+    locales.includes(cookieLocale as (typeof locales)[number])
+  ) {
+    return cookieLocale;
+  }
+
+  // 2. Check geo country (works on Vercel; falls through elsewhere)
   const geo = (request as NextRequest & { geo?: { country?: string } }).geo;
   const country = geo?.country;
   if (country && spanishCountries.has(country)) {
     return "es";
   }
 
-  // 2. Check Accept-Language header
+  // 3. Check Accept-Language header
   const acceptLang = request.headers.get("accept-language") ?? "";
   if (acceptLang) {
     const preferred = acceptLang

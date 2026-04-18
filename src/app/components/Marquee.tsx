@@ -1,17 +1,13 @@
-const ITEMS = [
-  "Knowledge capture",
-  "Autonomous agents",
-  "Retrieval pipelines",
-  "DevSecOps for AI",
-  "Model evaluation",
-  "Domain skills",
-  "Decision support",
-  "Observability",
-  "Safe rollouts",
-];
+"use client";
+
+import { useLocale } from "@/context/LocaleContext";
+
+type MarqueeCopy = { items: string[] };
 
 export default function Marquee() {
-  const row = <span>{ITEMS.join("   ·   ")}</span>;
+  const { t } = useLocale();
+  const items = (t.landing as { marquee: MarqueeCopy }).marquee.items;
+  const row = <span>{items.join("   ·   ")}</span>;
   return (
     <div className="marquee" aria-hidden="true">
       <div className="marquee-track">

@@ -1,6 +1,7 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import Contact from "../Contact";
+import { renderWithLocale } from "./testHelpers";
 
 describe("Contact", () => {
   beforeEach(() => {
@@ -22,7 +23,7 @@ describe("Contact", () => {
   });
 
   it("renders the contact metadata rows", () => {
-    render(<Contact />);
+    renderWithLocale(<Contact />);
     const meta = document.querySelector(".contact-meta");
     expect(meta).toBeTruthy();
     expect(meta?.textContent).toContain("Email");
@@ -33,7 +34,7 @@ describe("Contact", () => {
   });
 
   it("renders the lead capture form fields", () => {
-    render(<Contact />);
+    renderWithLocale(<Contact />);
     expect(document.querySelector('input[name="name"]')).toBeTruthy();
     expect(document.querySelector('input[name="email"]')).toBeTruthy();
     expect(document.querySelector('input[name="company"]')).toBeTruthy();
@@ -48,7 +49,7 @@ describe("Contact", () => {
   });
 
   it("submits the form to /api/contact and shows a success state", async () => {
-    render(<Contact />);
+    renderWithLocale(<Contact />);
 
     const nameInput = document.querySelector(
       'input[name="name"]'
@@ -112,7 +113,7 @@ describe("Contact", () => {
       )
     );
 
-    render(<Contact />);
+    renderWithLocale(<Contact />);
     const emailInput = document.querySelector(
       'input[name="email"]'
     ) as HTMLInputElement;
@@ -134,7 +135,7 @@ describe("Contact", () => {
   });
 
   it("submits successfully with only name + email (all optional fields blank)", async () => {
-    render(<Contact />);
+    renderWithLocale(<Contact />);
 
     fireEvent.change(document.querySelector('input[name="name"]')!, {
       target: { value: "Solo" },
@@ -172,7 +173,7 @@ describe("Contact", () => {
       )
     );
 
-    render(<Contact />);
+    renderWithLocale(<Contact />);
     fireEvent.change(document.querySelector('input[name="name"]')!, {
       target: { value: "Grace" },
     });
@@ -201,7 +202,7 @@ describe("Contact", () => {
   });
 
   it("resets to the idle form when 'Send another' is clicked after success", async () => {
-    render(<Contact />);
+    renderWithLocale(<Contact />);
     fireEvent.change(document.querySelector('input[name="name"]')!, {
       target: { value: "Ada" },
     });
@@ -226,7 +227,7 @@ describe("Contact", () => {
       vi.fn(() => Promise.reject(new Error("Network request failed")))
     );
 
-    render(<Contact />);
+    renderWithLocale(<Contact />);
     fireEvent.change(document.querySelector('input[name="name"]')!, {
       target: { value: "Ada" },
     });

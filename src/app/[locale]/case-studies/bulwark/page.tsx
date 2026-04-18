@@ -136,7 +136,7 @@ const colorClasses = {
 
 export default function BulwarkCaseStudy() {
   const { locale, t } = useLocale();
-  const b = t.bulwark;
+  const b = t.bulwark as Record<string, string>;
 
   const heroRef = useScrollReveal<HTMLDivElement>();
   const capabilitiesRef = useScrollRevealMultiple(0.08, 120);

@@ -137,7 +137,7 @@ const colorClasses = {
 
 export default function EngramCaseStudy() {
   const { locale, t } = useLocale();
-  const e = t.engram;
+  const e = t.engram as Record<string, string>;
 
   const heroRef = useScrollReveal<HTMLDivElement>();
   const capabilitiesRef = useScrollRevealMultiple(0.08, 120);
