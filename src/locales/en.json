@@ -619,8 +619,8 @@
       "eyebrow": "[04] Product · honto.ops",
       "titlePre": "The expert ",
       "titleItalic": "second brain",
-      "titlePost": " for your engineering org.",
-      "description": "honto.ops watches your systems, reads your docs, and answers the questions your senior engineers field fifty times a week — with the same judgment, at 2am, in every timezone.",
+      "titlePost": " for your teams.",
+      "description": "honto.ops watches your systems, reads your docs, and answers the questions your senior experts field fifty times a week — with the same judgment, at 2am, in every timezone.",
       "features": [
         { "k": "Capture", "v": "Every decision, indexed." },
         { "k": "Scale", "v": "One expert, whole org." },
