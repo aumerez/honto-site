@@ -1,0 +1,29 @@
+# honto
+
+> honto builds production-grade AI systems — agents, skills, retrieval-augmented knowledge, and operational intelligence — grounded in your company's expertise, data, and decisions. Based in Palo Alto, CA.
+
+honto captures what your senior experts know (standards, heuristics, edge cases), encodes it into AI agents and skills, and deploys them into your environment with audit trails, evals, and production SLOs. Not prototypes or demos — systems that serve real traffic.
+
+## Core
+
+- [Landing (English)](https://honto.ai/en): Main site — problems we solve, method, capabilities, principles, contact.
+- [Landing (Spanish)](https://honto.ai/es): Spanish version of the main site.
+
+## Product
+
+- [honto.ops (English)](https://honto.ai/en/honto-ops): Operational intelligence platform — the expert second brain for your teams. Answers questions grounded in your docs, systems, and decisions with citations and full audit trails.
+- [honto.ops (Spanish)](https://honto.ai/es/honto-ops): Spanish version.
+
+## Case studies
+
+- [Bulwark](https://honto.ai/en/case-studies/bulwark): Open-source governance layer for AI agents — policy enforcement, credential management, content inspection, tamper-evident audit trails. Built in Rust.
+- [Engram](https://honto.ai/en/case-studies/engram): Knowledge compiler and query engine for AI agent memory — BM25 search, causal graph traversal, multi-tier caching, governance controls.
+
+## For AI agents
+
+- [Contact form descriptor](https://honto.ai/.well-known/lead-form.json): Machine-readable JSON describing the contact form schema. AI agents can fetch this and POST a filled payload to `/api/contact` to submit a lead on behalf of a user.
+
+## Contact
+
+- Email: info@honto.ai
+- Response time: under 24 hours, straight to the engineering team.
