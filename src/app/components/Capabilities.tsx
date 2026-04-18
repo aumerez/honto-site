@@ -16,6 +16,7 @@ type CapabilitiesCopy = {
   titlePre: string;
   titleItalic: string;
   titlePost: string;
+  titleTail?: string;
   items: CapItem[];
 };
 
@@ -34,6 +35,12 @@ export default function Capabilities() {
             {copy.titlePre}
             <i>{copy.titleItalic}</i>
             {copy.titlePost}
+            {copy.titleTail ? (
+              <>
+                <br />
+                {copy.titleTail}
+              </>
+            ) : null}
           </h2>
         </div>
         <div className="caps">
