@@ -125,4 +125,114 @@ describe("Contact", () => {
       "Email service is not configured."
     );
   });
+
+  it("submits successfully with only name + email (all optional fields blank)", async () => {
+    render(<Contact />);
+
+    fireEvent.change(document.querySelector('input[name="name"]')!, {
+      target: { value: "Solo" },
+    });
+    fireEvent.change(document.querySelector('input[name="email"]')!, {
+      target: { value: "solo@example.com" },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/your message is in/i)).toBeTruthy();
+    });
+
+    const init = (fetch as unknown as { mock: { calls: unknown[][] } }).mock
+      .calls[0][1] as RequestInit;
+    expect(JSON.parse(init.body as string)).toEqual({
+      name: "Solo",
+      email: "solo@example.com",
+      company: "",
+      phone: "",
+      message: "",
+    });
+  });
+
+  it('disables the submit button and shows "Sending…" while the request is in flight', async () => {
+    let resolve: (value: Response) => void = () => {};
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(
+        () =>
+          new Promise<Response>((r) => {
+            resolve = r;
+          })
+      )
+    );
+
+    render(<Contact />);
+    fireEvent.change(document.querySelector('input[name="name"]')!, {
+      target: { value: "Grace" },
+    });
+    fireEvent.change(document.querySelector('input[name="email"]')!, {
+      target: { value: "grace@example.com" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    const submitting = await screen.findByRole("button", { name: /sending/i });
+    expect(submitting).toHaveProperty("disabled", true);
+    expect(document.querySelector('input[name="name"]')).toHaveProperty(
+      "disabled",
+      true
+    );
+
+    resolve(
+      new Response(JSON.stringify({ ok: true }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      })
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/your message is in/i)).toBeTruthy();
+    });
+  });
+
+  it("resets to the idle form when 'Send another' is clicked after success", async () => {
+    render(<Contact />);
+    fireEvent.change(document.querySelector('input[name="name"]')!, {
+      target: { value: "Ada" },
+    });
+    fireEvent.change(document.querySelector('input[name="email"]')!, {
+      target: { value: "ada@example.com" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/your message is in/i)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /send another/i }));
+
+    expect(screen.getByRole("button", { name: /send message/i })).toBeTruthy();
+    expect(document.querySelector('input[name="name"]')).toBeTruthy();
+  });
+
+  it("surfaces an error when fetch itself rejects (network failure)", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.reject(new Error("Network request failed")))
+    );
+
+    render(<Contact />);
+    fireEvent.change(document.querySelector('input[name="name"]')!, {
+      target: { value: "Ada" },
+    });
+    fireEvent.change(document.querySelector('input[name="email"]')!, {
+      target: { value: "ada@example.com" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    await waitFor(() => {
+      expect(screen.getByRole("alert")).toBeTruthy();
+    });
+    expect(screen.getByRole("alert").textContent).toContain(
+      "Network request failed"
+    );
+  });
 });
