@@ -22,10 +22,9 @@ describe("Home page", () => {
     ).toBeTruthy();
   });
 
-  it("renders the contact mailto link", () => {
+  it("renders the contact form submit button", () => {
     render(<Home />);
-    const link = screen.getByRole("link", { name: /start a conversation/i });
-    expect(link.getAttribute("href")).toBe("mailto:info@honto.ai");
+    expect(screen.getByRole("button", { name: /send message/i })).toBeTruthy();
   });
 
   it("renders the footer", () => {
