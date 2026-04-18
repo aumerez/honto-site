@@ -40,7 +40,9 @@ describe("Contact", () => {
     expect(document.querySelector('input[name="phone"]')).toBeTruthy();
     expect(document.querySelector('textarea[name="message"]')).toBeTruthy();
     expect(
-      document.querySelector('textarea[name="message"]')?.hasAttribute("required")
+      document
+        .querySelector('textarea[name="message"]')
+        ?.hasAttribute("required")
     ).toBe(false);
     expect(screen.getByRole("button", { name: /send message/i })).toBeTruthy();
   });
@@ -68,7 +70,9 @@ describe("Contact", () => {
     fireEvent.change(emailInput, { target: { value: "ada@example.com" } });
     fireEvent.change(companyInput, { target: { value: "Analytical Engine" } });
     fireEvent.change(phoneInput, { target: { value: "+1 555 123 4567" } });
-    fireEvent.change(messageInput, { target: { value: "Need help shipping." } });
+    fireEvent.change(messageInput, {
+      target: { value: "Need help shipping." },
+    });
 
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
@@ -97,10 +101,13 @@ describe("Contact", () => {
       "fetch",
       vi.fn(() =>
         Promise.resolve(
-          new Response(JSON.stringify({ error: "Email service is not configured." }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-          })
+          new Response(
+            JSON.stringify({ error: "Email service is not configured." }),
+            {
+              status: 500,
+              headers: { "Content-Type": "application/json" },
+            }
+          )
         )
       )
     );

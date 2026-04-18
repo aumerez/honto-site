@@ -24,9 +24,7 @@ describe("Home page", () => {
 
   it("renders the contact form submit button", () => {
     render(<Home />);
-    expect(
-      screen.getByRole("button", { name: /send message/i })
-    ).toBeTruthy();
+    expect(screen.getByRole("button", { name: /send message/i })).toBeTruthy();
   });
 
   it("renders the footer", () => {

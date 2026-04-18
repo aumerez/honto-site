@@ -45,7 +45,10 @@ export async function POST(request: Request) {
   try {
     body = (await request.json()) as ContactPayload;
   } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 }
+    );
   }
 
   const name = sanitize(body.name, 120);

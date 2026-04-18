@@ -193,9 +193,7 @@ describe("/api/contact POST", () => {
     });
 
     it('falls back to "(no message provided)" when message omitted', async () => {
-      await POST(
-        makeRequest({ name: "Ada", email: "ada@example.com" })
-      );
+      await POST(makeRequest({ name: "Ada", email: "ada@example.com" }));
       const args = sendMock.mock.calls[0][0] as { text: string; html: string };
       expect(args.text).toContain("(no message provided)");
       expect(args.html).toContain("No message provided");
@@ -221,9 +219,7 @@ describe("/api/contact POST", () => {
 
   describe("downstream failure", () => {
     it("returns 502 and logs when Resend rejects the send", async () => {
-      const errorSpy = vi
-        .spyOn(console, "error")
-        .mockImplementation(() => {});
+      const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
       sendMock.mockResolvedValueOnce({
         data: null,
