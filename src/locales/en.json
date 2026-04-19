@@ -450,7 +450,8 @@
       "contact": "Contact →",
       "languageLabel": "Change language",
       "languageOptionEn": "English",
-      "languageOptionEs": "Spanish"
+      "languageOptionEs": "Spanish",
+      "languageOptionPt": "Portuguese"
     },
     "hero": {
       "ariaLabel": "Hero",
@@ -700,7 +701,7 @@
     "footer": {
       "copyright": "© 2026 Honto — the enterprise second brain",
       "location": "Palo Alto, CA",
-      "languages": "EN · ES",
+      "languages": "EN · ES · PT",
       "linkedin": "LinkedIn"
     }
   }

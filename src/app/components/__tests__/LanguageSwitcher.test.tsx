@@ -33,6 +33,7 @@ describe("LanguageSwitcher", () => {
     expect(trigger.getAttribute("aria-expanded")).toBe("true");
     expect(screen.getByRole("option", { name: /english/i })).toBeTruthy();
     expect(screen.getByRole("option", { name: /spanish/i })).toBeTruthy();
+    expect(screen.getByRole("option", { name: /portuguese/i })).toBeTruthy();
   });
 
   it("swaps the locale segment and sets the NEXT_LOCALE cookie on selection", () => {
@@ -57,5 +58,11 @@ describe("LanguageSwitcher", () => {
     renderWithLocale(<LanguageSwitcher />, { locale: "es" });
     const trigger = screen.getByRole("button", { name: /cambiar idioma/i });
     expect(trigger.textContent).toContain("ES");
+  });
+
+  it("shows Portuguese labels when active locale is pt", () => {
+    renderWithLocale(<LanguageSwitcher />, { locale: "pt" });
+    const trigger = screen.getByRole("button", { name: /mudar idioma/i });
+    expect(trigger.textContent).toContain("PT");
   });
 });

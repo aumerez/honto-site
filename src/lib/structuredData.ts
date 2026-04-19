@@ -27,7 +27,7 @@ export function organizationSchema(locale: Locale): JsonLd {
       "@type": "ContactPoint",
       email: "info@honto.ai",
       contactType: "sales",
-      availableLanguage: ["en", "es"],
+      availableLanguage: ["en", "es", "pt"],
     },
     sameAs: ["https://www.linkedin.com/company/honto-ai"],
   };

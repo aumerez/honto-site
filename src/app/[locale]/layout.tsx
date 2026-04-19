@@ -70,12 +70,13 @@ export async function generateMetadata({
       title: m.homeOgTitle,
       description: m.homeOgDescription,
       type: "website",
-      locale: locale === "es" ? "es_ES" : "en_US",
+      locale: locale === "es" ? "es_ES" : locale === "pt" ? "pt_BR" : "en_US",
     },
     alternates: {
       languages: {
         en: "/en",
         es: "/es",
+        pt: "/pt",
       },
     },
     robots: {
