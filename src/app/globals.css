@@ -1160,6 +1160,22 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.foot-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.foot-links a {
+  transition: color 0.2s;
+}
+
+.foot-links a:hover {
+  color: var(--fg);
 }
 
 /* ─── Scroll reveal (legacy, kept for sub-routes) ─── */

@@ -712,7 +712,8 @@
     "footer": {
       "copyright": "© 2026 Honto — el segundo cerebro de la empresa",
       "location": "Palo Alto, CA",
-      "languages": "EN · ES"
+      "languages": "EN · ES",
+      "linkedin": "LinkedIn"
     }
   }
 }

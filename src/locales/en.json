@@ -700,7 +700,8 @@
     "footer": {
       "copyright": "© 2026 Honto — the enterprise second brain",
       "location": "Palo Alto, CA",
-      "languages": "EN · ES"
+      "languages": "EN · ES",
+      "linkedin": "LinkedIn"
     }
   }
 }

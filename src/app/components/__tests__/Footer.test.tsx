@@ -25,4 +25,14 @@ describe("Footer", () => {
     renderWithLocale(<Footer />, { locale: "es" });
     expect(screen.getByText(/el segundo cerebro de la empresa/i)).toBeTruthy();
   });
+
+  it("links to the honto LinkedIn company page", () => {
+    renderWithLocale(<Footer />);
+    const link = screen.getByRole("link", { name: /linkedin/i });
+    expect(link.getAttribute("href")).toBe(
+      "https://www.linkedin.com/company/honto-ai"
+    );
+    expect(link.getAttribute("target")).toBe("_blank");
+    expect(link.getAttribute("rel")).toContain("noopener");
+  });
 });
