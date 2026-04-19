@@ -29,6 +29,7 @@ export function organizationSchema(locale: Locale): JsonLd {
       contactType: "sales",
       availableLanguage: ["en", "es"],
     },
+    sameAs: ["https://www.linkedin.com/company/honto-ai"],
   };
 }
 

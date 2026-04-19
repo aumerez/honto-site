@@ -14,6 +14,13 @@ describe("organizationSchema", () => {
     const es = organizationSchema("es");
     expect(es.url).toMatch(/\/es$/);
   });
+
+  it("includes the LinkedIn page in sameAs", () => {
+    const schema = organizationSchema("en");
+    expect(schema.sameAs).toEqual([
+      "https://www.linkedin.com/company/honto-ai",
+    ]);
+  });
 });
 
 describe("productSchema", () => {
