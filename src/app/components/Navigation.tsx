@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useLocale } from "@/context/LocaleContext";
 import LanguageSwitcher from "./LanguageSwitcher";
+import Logo from "./Logo";
 
 type NavCopy = {
   ariaLabel: string;
@@ -31,8 +32,8 @@ export default function Navigation() {
       role="navigation"
       aria-label={nav.ariaLabel}
     >
-      <a href="#top" className="logo">
-        honto<em>.</em>
+      <a href="#top" className="logo" aria-label="honto.">
+        <Logo size={24} label="honto." />
       </a>
       <div className="nav-links">
         <a href="#problems">{nav.problems}</a>

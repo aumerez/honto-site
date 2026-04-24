@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, JetBrains_Mono, Inter } from "next/font/google";
+import {
+  Instrument_Serif,
+  JetBrains_Mono,
+  Inter,
+  Manrope,
+} from "next/font/google";
 import { notFound } from "next/navigation";
 import { isValidLocale } from "@/lib/locales";
 import type { Locale } from "@/lib/locales";
@@ -25,6 +30,13 @@ const jetbrainsMono = JetBrains_Mono({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-brand",
   display: "swap",
 });
 
@@ -99,7 +111,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${instrumentSerif.variable} ${jetbrainsMono.variable} ${inter.variable}`}
+      className={`${instrumentSerif.variable} ${jetbrainsMono.variable} ${inter.variable} ${manrope.variable}`}
     >
       <body>
         <script
