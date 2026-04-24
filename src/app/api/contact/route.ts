@@ -48,7 +48,10 @@ function checkRateLimit(
   if (recent.length >= RATE_LIMIT_MAX) {
     rateLimitBuckets.set(ip, recent);
     const retryAfterMs = recent[0]! + RATE_LIMIT_WINDOW_MS - now;
-    return { ok: false, retryAfterSec: Math.max(1, Math.ceil(retryAfterMs / 1000)) };
+    return {
+      ok: false,
+      retryAfterSec: Math.max(1, Math.ceil(retryAfterMs / 1000)),
+    };
   }
   recent.push(now);
   rateLimitBuckets.set(ip, recent);
@@ -88,8 +91,7 @@ export async function POST(request: Request) {
   if (!limit.ok) {
     return NextResponse.json(
       {
-        error:
-          "Too many requests from this network. Please try again later.",
+        error: "Too many requests from this network. Please try again later.",
       },
       {
         status: 429,
@@ -120,14 +122,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const phoneRaw =
-    typeof body.phone === "string" ? body.phone.trim() : "";
+  const phoneRaw = typeof body.phone === "string" ? body.phone.trim() : "";
   let phone: string | null = null;
   if (phoneRaw) {
-    if (
-      phoneRaw.length > FIELD_LIMITS.phone ||
-      !PHONE_RE.test(phoneRaw)
-    ) {
+    if (phoneRaw.length > FIELD_LIMITS.phone || !PHONE_RE.test(phoneRaw)) {
       return NextResponse.json(
         { error: "Phone must contain only digits (7–15 digits)." },
         { status: 400 }
