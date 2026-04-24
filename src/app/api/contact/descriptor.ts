@@ -41,8 +41,9 @@ export const CONTACT_FIELDS: readonly ContactField[] = [
     name: "phone",
     type: "tel",
     required: false,
-    maxLength: 40,
-    description: "Optional phone number for direct follow-up.",
+    maxLength: 15,
+    description:
+      "Optional phone number for direct follow-up. Digits only, 7–15 digits (E.164 without the leading +).",
   },
   {
     name: "message",
