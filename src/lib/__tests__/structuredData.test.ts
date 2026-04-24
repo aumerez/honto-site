@@ -13,6 +13,14 @@ describe("organizationSchema", () => {
   it("switches the URL per locale", () => {
     const es = organizationSchema("es");
     expect(es.url).toMatch(/\/es$/);
+    const pt = organizationSchema("pt");
+    expect(pt.url).toMatch(/\/pt$/);
+  });
+
+  it("advertises all supported languages on the contact point", () => {
+    const schema = organizationSchema("en");
+    const cp = schema.contactPoint as { availableLanguage: string[] };
+    expect(cp.availableLanguage).toEqual(["en", "es", "pt"]);
   });
 
   it("includes the LinkedIn page in sameAs", () => {

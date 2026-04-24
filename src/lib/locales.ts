@@ -1,6 +1,9 @@
 export const defaultLocale = "en" as const;
-export const locales = ["en", "es"] as const;
+export const locales = ["en", "es", "pt"] as const;
 export type Locale = (typeof locales)[number];
+
+/** ISO 3166-1 alpha-2 country codes for Portuguese-speaking countries we target (Brazil). */
+export const portugueseCountries = new Set(["BR"]);
 
 /** ISO 3166-1 alpha-2 country codes for Spanish-speaking countries. */
 export const spanishCountries = new Set([

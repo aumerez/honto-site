@@ -450,7 +450,8 @@
       "contact": "Contacto →",
       "languageLabel": "Cambiar idioma",
       "languageOptionEn": "Inglés",
-      "languageOptionEs": "Español"
+      "languageOptionEs": "Español",
+      "languageOptionPt": "Portugués"
     },
     "hero": {
       "ariaLabel": "Portada",
@@ -712,7 +713,7 @@
     "footer": {
       "copyright": "© 2026 Honto — el segundo cerebro de la empresa",
       "location": "Palo Alto, CA",
-      "languages": "EN · ES",
+      "languages": "EN · ES · PT",
       "linkedin": "LinkedIn"
     }
   }

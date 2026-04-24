@@ -8,11 +8,13 @@ honto captures what your senior experts know (standards, heuristics, edge cases)
 
 - [Landing (English)](https://honto.ai/en): Main site — problems we solve, method, capabilities, principles, contact.
 - [Landing (Spanish)](https://honto.ai/es): Spanish version of the main site.
+- [Landing (Portuguese)](https://honto.ai/pt): Brazilian Portuguese version of the main site.
 
 ## Product
 
 - [honto.ops (English)](https://honto.ai/en/honto-ops): Operational intelligence platform — the expert second brain for your teams. Answers questions grounded in your docs, systems, and decisions with citations and full audit trails.
 - [honto.ops (Spanish)](https://honto.ai/es/honto-ops): Spanish version.
+- [honto.ops (Portuguese)](https://honto.ai/pt/honto-ops): Brazilian Portuguese version.
 
 ## Case studies
 
