@@ -13,10 +13,50 @@ type ContactPayload = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^\d{7,15}$/;
 
 const FIELD_LIMITS = Object.fromEntries(
   CONTACT_FIELDS.map((f) => [f.name, f.maxLength])
 ) as Record<ContactField["name"], number>;
+
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const RATE_LIMIT_MAX = 2;
+const rateLimitBuckets = new Map<string, number[]>();
+
+export function __resetRateLimitForTest() {
+  rateLimitBuckets.clear();
+}
+
+function clientIp(request: Request): string {
+  const xff = request.headers.get("x-forwarded-for");
+  if (xff) {
+    const first = xff.split(",")[0]?.trim();
+    if (first) return first;
+  }
+  const xri = request.headers.get("x-real-ip");
+  if (xri) return xri.trim();
+  return "unknown";
+}
+
+function checkRateLimit(
+  ip: string,
+  now: number
+): { ok: true } | { ok: false; retryAfterSec: number } {
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
+  const prior = rateLimitBuckets.get(ip) ?? [];
+  const recent = prior.filter((t) => t > windowStart);
+  if (recent.length >= RATE_LIMIT_MAX) {
+    rateLimitBuckets.set(ip, recent);
+    const retryAfterMs = recent[0]! + RATE_LIMIT_WINDOW_MS - now;
+    return {
+      ok: false,
+      retryAfterSec: Math.max(1, Math.ceil(retryAfterMs / 1000)),
+    };
+  }
+  recent.push(now);
+  rateLimitBuckets.set(ip, recent);
+  return { ok: true };
+}
 
 function sanitize(value: unknown, max: number): string | null {
   if (typeof value !== "string") return null;
@@ -46,6 +86,20 @@ export async function POST(request: Request) {
     );
   }
 
+  const ip = clientIp(request);
+  const limit = checkRateLimit(ip, Date.now());
+  if (!limit.ok) {
+    return NextResponse.json(
+      {
+        error: "Too many requests from this network. Please try again later.",
+      },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limit.retryAfterSec) },
+      }
+    );
+  }
+
   let body: ContactPayload;
   try {
     body = (await request.json()) as ContactPayload;
@@ -59,7 +113,6 @@ export async function POST(request: Request) {
   const name = sanitize(body.name, FIELD_LIMITS.name);
   const emailRaw = sanitize(body.email, FIELD_LIMITS.email);
   const company = sanitize(body.company, FIELD_LIMITS.company);
-  const phone = sanitize(body.phone, FIELD_LIMITS.phone);
   const message = sanitize(body.message, FIELD_LIMITS.message);
 
   if (!name || !emailRaw || !EMAIL_RE.test(emailRaw)) {
@@ -67,6 +120,18 @@ export async function POST(request: Request) {
       { error: "Name and a valid email are required." },
       { status: 400 }
     );
+  }
+
+  const phoneRaw = typeof body.phone === "string" ? body.phone.trim() : "";
+  let phone: string | null = null;
+  if (phoneRaw) {
+    if (phoneRaw.length > FIELD_LIMITS.phone || !PHONE_RE.test(phoneRaw)) {
+      return NextResponse.json(
+        { error: "Phone must contain only digits (7–15 digits)." },
+        { status: 400 }
+      );
+    }
+    phone = phoneRaw;
   }
 
   const resend = new Resend(apiKey);

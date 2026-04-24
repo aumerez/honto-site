@@ -127,7 +127,9 @@ export default function ContactForm() {
         <input
           name="phone"
           type="tel"
-          maxLength={40}
+          inputMode="numeric"
+          pattern="\d{7,15}"
+          maxLength={15}
           autoComplete="tel"
           disabled={submitting}
         />

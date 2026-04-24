@@ -11,10 +11,12 @@
   --rule: #2a2722;
   --accent: oklch(0.78 0.14 70);
   --accent-ink: #161513;
+  --brand-gold: #c9a34a;
   --radius: 2px;
   --serif: var(--font-serif), "Times New Roman", serif;
   --mono: var(--font-mono), ui-monospace, monospace;
   --sans: var(--font-sans), system-ui, sans-serif;
+  --brand: var(--font-brand), "Manrope", system-ui, sans-serif;
 }
 
 html.light {
@@ -148,14 +150,45 @@ button {
 }
 
 .nav .logo {
-  font-family: var(--serif);
-  font-size: 24px;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.12em;
+  line-height: 1;
 }
 
-.nav .logo em {
-  font-style: italic;
-  color: var(--accent);
+/* ─── Brand: Nucleus logo ─── */
+
+.brand-logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.12em;
+  line-height: 1;
+  color: var(--fg);
+  font-family: var(--brand);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  font-feature-settings:
+    "ss01" on,
+    "kern" on;
+}
+
+.brand-logo__wordmark {
+  display: inline-block;
+  font: inherit;
+}
+
+.brand-logo__nucleus {
+  display: inline-block;
+  width: auto;
+  height: 0.95em;
+  flex: none;
+  transform: translateY(0.12em);
+  overflow: visible;
+}
+
+.brand-logo__nucleus .core,
+.brand-logo__nucleus .satellite {
+  fill: var(--brand-gold);
 }
 
 .nav-links {
