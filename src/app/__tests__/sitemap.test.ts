@@ -4,24 +4,28 @@ import sitemap from "../sitemap";
 describe("sitemap", () => {
   const entries = sitemap();
 
-  it("includes the landing in both locales", () => {
+  it("includes the landing in every locale", () => {
     const urls = entries.map((e) => e.url);
     expect(urls).toContain("https://honto.ai/en");
     expect(urls).toContain("https://honto.ai/es");
+    expect(urls).toContain("https://honto.ai/pt");
   });
 
-  it("includes the honto.ops product page in both locales", () => {
+  it("includes the honto.ops product page in every locale", () => {
     const urls = entries.map((e) => e.url);
     expect(urls).toContain("https://honto.ai/en/honto-ops");
     expect(urls).toContain("https://honto.ai/es/honto-ops");
+    expect(urls).toContain("https://honto.ai/pt/honto-ops");
   });
 
-  it("includes case study pages in both locales", () => {
+  it("includes case study pages in every locale", () => {
     const urls = entries.map((e) => e.url);
     expect(urls).toContain("https://honto.ai/en/case-studies/bulwark");
     expect(urls).toContain("https://honto.ai/es/case-studies/bulwark");
+    expect(urls).toContain("https://honto.ai/pt/case-studies/bulwark");
     expect(urls).toContain("https://honto.ai/en/case-studies/engram");
     expect(urls).toContain("https://honto.ai/es/case-studies/engram");
+    expect(urls).toContain("https://honto.ai/pt/case-studies/engram");
   });
 
   it("annotates each entry with hreflang alternates for every locale", () => {
@@ -29,6 +33,7 @@ describe("sitemap", () => {
       expect(entry.alternates?.languages).toEqual({
         en: expect.stringMatching(/^https:\/\/honto\.ai\/en/),
         es: expect.stringMatching(/^https:\/\/honto\.ai\/es/),
+        pt: expect.stringMatching(/^https:\/\/honto\.ai\/pt/),
       });
     }
   });

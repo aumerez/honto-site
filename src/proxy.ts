@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { defaultLocale, locales, spanishCountries } from "@/lib/locales";
+import {
+  defaultLocale,
+  locales,
+  portugueseCountries,
+  spanishCountries,
+} from "@/lib/locales";
 
 const PUBLIC_FILE = /\.(.*)$/;
 
@@ -16,6 +21,9 @@ function getLocaleFromRequest(request: NextRequest): string {
   // 2. Check geo country (works on Vercel; falls through elsewhere)
   const geo = (request as NextRequest & { geo?: { country?: string } }).geo;
   const country = geo?.country;
+  if (country && portugueseCountries.has(country)) {
+    return "pt";
+  }
   if (country && spanishCountries.has(country)) {
     return "es";
   }
@@ -32,6 +40,7 @@ function getLocaleFromRequest(request: NextRequest): string {
       .sort((a, b) => b.q - a.q);
 
     for (const { lang } of preferred) {
+      if (lang.startsWith("pt")) return "pt";
       if (lang.startsWith("es")) return "es";
       if (lang.startsWith("en")) return "en";
     }

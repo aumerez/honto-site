@@ -9,11 +9,13 @@ type SwitcherCopy = {
   languageLabel: string;
   languageOptionEn: string;
   languageOptionEs: string;
+  languageOptionPt: string;
 };
 
 const FLAGS: Record<Locale, string> = {
   en: "🇺🇸",
   es: "🇪🇸",
+  pt: "🇧🇷",
 };
 
 function swapLocaleInPath(pathname: string, nextLocale: Locale): string {
@@ -60,6 +62,7 @@ export default function LanguageSwitcher() {
   const options: Array<{ value: Locale; label: string }> = [
     { value: "en", label: copy.languageOptionEn },
     { value: "es", label: copy.languageOptionEs },
+    { value: "pt", label: copy.languageOptionPt },
   ];
 
   function choose(next: Locale) {
