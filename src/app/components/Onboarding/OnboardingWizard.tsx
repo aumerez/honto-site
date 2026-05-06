@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { useLocale } from "@/context/LocaleContext";
 import {
   EMPTY_ANSWERS,
@@ -134,10 +134,18 @@ export default function OnboardingWizard() {
     INITIAL_STATE
   );
   const [submitted, setSubmitted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     dispatch({ type: "hydrate", persisted: loadFromStorage() });
   }, []);
+
+  function scrollToTop() {
+    containerRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
 
   useEffect(() => {
     if (!hydrated) return;
@@ -163,6 +171,7 @@ export default function OnboardingWizard() {
     } catch {
       // ignore
     }
+    scrollToTop();
   }
 
   function submitAndShowResults() {
@@ -173,6 +182,7 @@ export default function OnboardingWizard() {
         JSON.stringify(answers)
       );
     }
+    scrollToTop();
   }
 
   function bookFollowUp() {
@@ -184,7 +194,7 @@ export default function OnboardingWizard() {
 
   if (submitted) {
     return (
-      <div className="ob-wizard">
+      <div ref={containerRef} className="ob-wizard">
         <Results
           answers={answers}
           copy={copy.results}
@@ -206,7 +216,7 @@ export default function OnboardingWizard() {
     .replace("{total}", String(STEP_COUNT));
 
   return (
-    <div className="ob-wizard ob-print-hide">
+    <div ref={containerRef} className="ob-wizard ob-print-hide">
       <div className="ob-progress">
         <span className="ob-progress-label">{stepLabel}</span>
         <progress
@@ -226,6 +236,7 @@ export default function OnboardingWizard() {
             submitAndShowResults();
           } else {
             dispatch({ type: "setStep", step: step + 1 });
+            scrollToTop();
           }
         }}
       >
@@ -269,9 +280,10 @@ export default function OnboardingWizard() {
           <button
             type="button"
             className="btn"
-            onClick={() =>
-              dispatch({ type: "setStep", step: Math.max(1, step - 1) })
-            }
+            onClick={() => {
+              dispatch({ type: "setStep", step: Math.max(1, step - 1) });
+              scrollToTop();
+            }}
             disabled={step === 1}
           >
             {copy.back}
