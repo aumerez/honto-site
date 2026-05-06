@@ -717,6 +717,7 @@
       "startOver": "Start over",
       "emailInvalid": "Please enter a valid email address.",
       "phoneInvalid": "Phone must be 7–15 digits, numbers only.",
+      "requiredField": "This field is required.",
       "step1": {
         "title": "Company profile",
         "description": "Who you are and how to reach you.",

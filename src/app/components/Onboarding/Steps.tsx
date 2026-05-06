@@ -54,6 +54,7 @@ export type Step1Copy = {
   emailInvalid: string;
   phone: string;
   phoneInvalid: string;
+  requiredField: string;
   industry: string;
   industryOptions: Record<string, string>;
   companySize: string;
@@ -70,15 +71,31 @@ export function Step1({
   values,
   update,
   copy,
+  submitAttempted,
 }: {
   values: Step1Company;
   update: (patch: Partial<Step1Company>) => void;
   copy: Step1Copy;
+  submitAttempted: boolean;
 }) {
-  const emailError =
-    values.email && !EMAIL_RE.test(values.email) ? copy.emailInvalid : "";
+  const requiredEmpty = (v: string) =>
+    submitAttempted && !v.trim() ? copy.requiredField : "";
+
+  const emailError = values.email
+    ? !EMAIL_RE.test(values.email)
+      ? copy.emailInvalid
+      : ""
+    : requiredEmpty(values.email);
+
   const phoneError =
     values.phone && !PHONE_RE.test(values.phone) ? copy.phoneInvalid : "";
+
+  const companyNameError = requiredEmpty(values.companyName);
+  const contactNameError = requiredEmpty(values.contactName);
+  const industryError =
+    submitAttempted && !values.industry ? copy.requiredField : "";
+  const companySizeError =
+    submitAttempted && !values.companySize ? copy.requiredField : "";
 
   return (
     <div className="ob-step">
@@ -93,6 +110,7 @@ export function Step1({
         required
         maxLength={FIELD_LIMITS.shortText}
         autoComplete="organization"
+        error={companyNameError || undefined}
       />
 
       <TextField
@@ -103,6 +121,7 @@ export function Step1({
         required
         maxLength={FIELD_LIMITS.shortText}
         autoComplete="name"
+        error={contactNameError || undefined}
       />
 
       <TextField
@@ -137,6 +156,7 @@ export function Step1({
         options={mapOptions(INDUSTRIES, copy.industryOptions)}
         onChange={(v) => update({ industry: v as Step1Company["industry"] })}
         required
+        error={industryError || undefined}
       />
 
       <SelectField
@@ -148,6 +168,7 @@ export function Step1({
           update({ companySize: v as Step1Company["companySize"] })
         }
         required
+        error={companySizeError || undefined}
       />
 
       <ComboboxField

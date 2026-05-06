@@ -34,6 +34,7 @@ type WizardCopy = {
   startOver: string;
   emailInvalid: string;
   phoneInvalid: string;
+  requiredField: string;
   step1: Step1Copy;
   step2: Step2Copy;
   step3: Step3Copy;
@@ -134,6 +135,7 @@ export default function OnboardingWizard() {
     INITIAL_STATE
   );
   const [submitted, setSubmitted] = useState(false);
+  const [submitAttempted, setSubmitAttempted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -229,13 +231,16 @@ export default function OnboardingWizard() {
 
       <form
         className="ob-form"
+        noValidate
         onSubmit={(e) => {
           e.preventDefault();
+          setSubmitAttempted(true);
           if (!canAdvance) return;
           if (isLast) {
             submitAndShowResults();
           } else {
             dispatch({ type: "setStep", step: step + 1 });
+            setSubmitAttempted(false);
             scrollToTop();
           }
         }}
@@ -244,10 +249,12 @@ export default function OnboardingWizard() {
           <Step1
             values={answers.step1}
             update={(p) => update("step1", p)}
+            submitAttempted={submitAttempted}
             copy={{
               ...copy.step1,
               emailInvalid: copy.emailInvalid,
               phoneInvalid: copy.phoneInvalid,
+              requiredField: copy.requiredField,
             }}
           />
         )}
@@ -292,7 +299,7 @@ export default function OnboardingWizard() {
           >
             {copy.back}
           </button>
-          <button type="submit" className="btn primary" disabled={!canAdvance}>
+          <button type="submit" className="btn primary">
             {isLast ? copy.submit : copy.next}
           </button>
         </div>

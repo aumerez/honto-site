@@ -34,10 +34,18 @@ describe("OnboardingWizard", () => {
     expect(screen.getByLabelText(/work email/i)).toBeTruthy();
   });
 
-  it("disables the next button until step 1 required fields are filled", () => {
+  it("blocks advancing and shows required errors when step 1 is empty", () => {
     renderWizard();
     const nextButton = screen.getByRole("button", { name: /^next$/i });
-    expect(nextButton.hasAttribute("disabled")).toBe(true);
+    fireEvent.click(nextButton);
+    // Still on step 1
+    expect(
+      screen.getByRole("heading", { level: 2, name: /company profile/i })
+    ).toBeTruthy();
+    // Required errors are visible
+    expect(
+      screen.getAllByText(/this field is required/i).length
+    ).toBeGreaterThan(0);
   });
 
   it("advances to step 2 after step 1 is filled with valid values", () => {
@@ -60,7 +68,6 @@ describe("OnboardingWizard", () => {
     });
 
     const nextButton = screen.getByRole("button", { name: /^next$/i });
-    expect(nextButton.hasAttribute("disabled")).toBe(false);
     fireEvent.click(nextButton);
 
     expect(
@@ -88,7 +95,15 @@ describe("OnboardingWizard", () => {
     });
 
     const nextButton = screen.getByRole("button", { name: /^next$/i });
-    expect(nextButton.hasAttribute("disabled")).toBe(true);
+    fireEvent.click(nextButton);
+
+    // Email format error is shown; we did not advance
+    expect(
+      screen.getByRole("heading", { level: 2, name: /company profile/i })
+    ).toBeTruthy();
+    expect(
+      screen.getByText(/please enter a valid email address/i)
+    ).toBeTruthy();
   });
 
   it("restores answers and step from localStorage", () => {

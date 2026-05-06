@@ -1506,7 +1506,6 @@ html.light .ob-combobox::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  font-family: var(--sans);
 }
 
 .ob-radio-group,
@@ -1514,7 +1513,6 @@ html.light .ob-combobox::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-family: var(--sans);
 }
 
 .ob-radio,
@@ -1522,7 +1520,6 @@ html.light .ob-combobox::-webkit-calendar-picker-indicator {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-family: var(--sans);
   font-size: 15px;
   font-weight: 400;
   line-height: 1.4;
@@ -1533,7 +1530,6 @@ html.light .ob-combobox::-webkit-calendar-picker-indicator {
 
 .ob-radio span,
 .ob-check span {
-  font-family: var(--sans);
   font-size: 15px;
   font-weight: 400;
   line-height: 1.4;
@@ -1544,13 +1540,34 @@ html.light .ob-combobox::-webkit-calendar-picker-indicator {
 .ob-check input {
   margin-top: 3px;
   accent-color: var(--accent);
+}
+
+/* Force every text-bearing element inside the wizard onto the page sans,
+   then re-apply intentional font tokens on title/label classes below.
+   Some browsers (Safari, Firefox) do not propagate font-family through
+   <fieldset>/<legend>, so we set it on every descendant explicitly. */
+.ob-wizard,
+.ob-wizard * {
   font-family: var(--sans);
 }
 
-.ob-step,
-.ob-step-desc,
-.ob-form {
-  font-family: var(--sans);
+.ob-wizard .ob-step-title,
+.ob-wizard .ob-score-num {
+  font-family: var(--serif, var(--font-serif));
+}
+
+.ob-wizard .ob-field-label,
+.ob-wizard .ob-progress-label,
+.ob-wizard .ob-field-error,
+.ob-wizard .ob-score-of,
+.ob-wizard .ob-band,
+.ob-wizard .ob-results-h3,
+.ob-wizard .ob-dim-value,
+.ob-wizard .ob-size-tag,
+.ob-wizard .ob-narr-sub,
+.ob-wizard .ob-print-date,
+.ob-wizard .ob-link-btn {
+  font-family: var(--mono);
 }
 
 .ob-actions {

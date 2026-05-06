@@ -244,6 +244,7 @@ type SelectFieldProps = {
   onChange: (value: string) => void;
   required?: boolean;
   placeholder?: string;
+  error?: string;
 };
 
 export function SelectField({
@@ -254,7 +255,9 @@ export function SelectField({
   onChange,
   required,
   placeholder,
+  error,
 }: SelectFieldProps) {
+  const errorId = error ? `${name}-error` : undefined;
   return (
     <label className="ob-field">
       <span className="ob-field-label">
@@ -265,7 +268,10 @@ export function SelectField({
         name={name}
         value={value}
         required={required}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={errorId}
         onChange={(e) => onChange(e.target.value)}
+        className={error ? "ob-input-error" : undefined}
       >
         <option value="" disabled>
           {placeholder ?? "—"}
@@ -276,6 +282,11 @@ export function SelectField({
           </option>
         ))}
       </select>
+      {error ? (
+        <span id={errorId} className="ob-field-error" role="alert">
+          {error}
+        </span>
+      ) : null}
     </label>
   );
 }
