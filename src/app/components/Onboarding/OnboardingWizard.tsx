@@ -244,7 +244,11 @@ export default function OnboardingWizard() {
           <Step1
             values={answers.step1}
             update={(p) => update("step1", p)}
-            copy={copy.step1}
+            copy={{
+              ...copy.step1,
+              emailInvalid: copy.emailInvalid,
+              phoneInvalid: copy.phoneInvalid,
+            }}
           />
         )}
         {step === 2 && (

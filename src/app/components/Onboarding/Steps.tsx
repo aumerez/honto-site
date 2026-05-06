@@ -2,12 +2,14 @@
 
 import {
   CheckboxGroup,
+  ComboboxField,
   RadioGroup,
   SelectField,
   TextAreaField,
   TextField,
   type Option,
 } from "./Fields";
+import { COUNTRIES } from "./countries";
 import {
   AI_USE_LEVELS,
   BUDGET_RANGES,
@@ -49,7 +51,9 @@ export type Step1Copy = {
   companyName: string;
   contactName: string;
   email: string;
+  emailInvalid: string;
   phone: string;
+  phoneInvalid: string;
   industry: string;
   industryOptions: Record<string, string>;
   companySize: string;
@@ -58,6 +62,9 @@ export type Step1Copy = {
   role: string;
   roleOptions: Record<string, string>;
 };
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^\d{7,15}$/;
 
 export function Step1({
   values,
@@ -68,6 +75,11 @@ export function Step1({
   update: (patch: Partial<Step1Company>) => void;
   copy: Step1Copy;
 }) {
+  const emailError =
+    values.email && !EMAIL_RE.test(values.email) ? copy.emailInvalid : "";
+  const phoneError =
+    values.phone && !PHONE_RE.test(values.phone) ? copy.phoneInvalid : "";
+
   return (
     <div className="ob-step">
       <h2 className="ob-step-title">{copy.title}</h2>
@@ -102,6 +114,7 @@ export function Step1({
         required
         maxLength={FIELD_LIMITS.email}
         autoComplete="email"
+        error={emailError || undefined}
       />
 
       <TextField
@@ -114,6 +127,7 @@ export function Step1({
         onChange={(v) => update({ phone: v })}
         maxLength={FIELD_LIMITS.phone}
         autoComplete="tel"
+        error={phoneError || undefined}
       />
 
       <SelectField
@@ -136,10 +150,11 @@ export function Step1({
         required
       />
 
-      <TextField
+      <ComboboxField
         label={copy.country}
         name="country"
         value={values.country}
+        options={COUNTRIES}
         onChange={(v) => update({ country: v })}
         maxLength={FIELD_LIMITS.shortText}
         autoComplete="country-name"

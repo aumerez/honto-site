@@ -13,6 +13,7 @@ type TextFieldProps = {
   inputMode?: "text" | "email" | "tel" | "numeric";
   maxLength?: number;
   autoComplete?: string;
+  error?: string;
 };
 
 export function TextField({
@@ -26,7 +27,9 @@ export function TextField({
   inputMode,
   maxLength,
   autoComplete,
+  error,
 }: TextFieldProps) {
+  const errorId = error ? `${name}-error` : undefined;
   return (
     <label className="ob-field">
       <span className="ob-field-label">
@@ -42,8 +45,67 @@ export function TextField({
         inputMode={inputMode}
         maxLength={maxLength}
         autoComplete={autoComplete}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={errorId}
         onChange={(e) => onChange(e.target.value)}
+        className={error ? "ob-input-error" : undefined}
       />
+      {error ? (
+        <span id={errorId} className="ob-field-error" role="alert">
+          {error}
+        </span>
+      ) : null}
+    </label>
+  );
+}
+
+type ComboboxFieldProps = {
+  label: string;
+  name: string;
+  value: string;
+  options: readonly string[];
+  onChange: (value: string) => void;
+  required?: boolean;
+  maxLength?: number;
+  autoComplete?: string;
+  placeholder?: string;
+};
+
+export function ComboboxField({
+  label,
+  name,
+  value,
+  options,
+  onChange,
+  required,
+  maxLength,
+  autoComplete,
+  placeholder,
+}: ComboboxFieldProps) {
+  const listId = `${name}-list`;
+  return (
+    <label className="ob-field">
+      <span className="ob-field-label">
+        {label}
+        {required ? <span aria-hidden="true"> *</span> : null}
+      </span>
+      <input
+        name={name}
+        type="text"
+        value={value}
+        required={required}
+        list={listId}
+        maxLength={maxLength}
+        autoComplete={autoComplete}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        className="ob-combobox"
+      />
+      <datalist id={listId}>
+        {options.map((opt) => (
+          <option key={opt} value={opt} />
+        ))}
+      </datalist>
     </label>
   );
 }
