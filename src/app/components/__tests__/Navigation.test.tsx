@@ -16,23 +16,25 @@ describe("Navigation", () => {
 
   it("renders anchor links to each section", () => {
     renderWithLocale(<Navigation />);
-    expect(screen.getByText("Problems").getAttribute("href")).toBe("#problems");
-    expect(screen.getByText("Method").getAttribute("href")).toBe("#process");
+    expect(screen.getByText("Problems").getAttribute("href")).toBe(
+      "/en#problems"
+    );
+    expect(screen.getByText("Method").getAttribute("href")).toBe("/en#process");
     expect(screen.getByText("Capabilities").getAttribute("href")).toBe(
-      "#capabilities"
+      "/en#capabilities"
     );
     expect(screen.getByText("honto.ops").getAttribute("href")).toBe(
-      "#honto-ops"
+      "/en#honto-ops"
     );
     expect(screen.getByText("Principles").getAttribute("href")).toBe(
-      "#principles"
+      "/en#principles"
     );
   });
 
   it("renders the contact CTA", () => {
     renderWithLocale(<Navigation />);
     const contact = screen.getByRole("link", { name: /contact/i });
-    expect(contact.getAttribute("href")).toBe("#contact");
+    expect(contact.getAttribute("href")).toBe("/en#contact");
   });
 
   it("renders the AI Readiness CTA pointing to the locale onboarding route", () => {
