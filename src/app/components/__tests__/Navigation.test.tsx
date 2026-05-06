@@ -35,6 +35,18 @@ describe("Navigation", () => {
     expect(contact.getAttribute("href")).toBe("#contact");
   });
 
+  it("renders the AI Readiness CTA pointing to the locale onboarding route", () => {
+    renderWithLocale(<Navigation />);
+    const cta = screen.getByRole("link", { name: /ai readiness/i });
+    expect(cta.getAttribute("href")).toBe("/en/onboarding");
+  });
+
+  it("points the AI Readiness CTA at the Spanish onboarding route in es", () => {
+    renderWithLocale(<Navigation />, { locale: "es" });
+    const cta = screen.getByRole("link", { name: /madurez en ia/i });
+    expect(cta.getAttribute("href")).toBe("/es/onboarding");
+  });
+
   it("has an aria-label on the nav element", () => {
     renderWithLocale(<Navigation />);
     expect(

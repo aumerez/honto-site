@@ -447,6 +447,7 @@
       "capabilities": "Capacidades",
       "hontoOps": "honto.ops",
       "principles": "Principios",
+      "aiReadiness": "Madurez en IA",
       "contact": "Contacto →",
       "languageLabel": "Cambiar idioma",
       "languageOptionEn": "Inglés",
@@ -715,5 +716,11 @@
       "languages": "EN · ES",
       "linkedin": "LinkedIn"
     }
+  },
+  "onboarding": {
+    "eyebrow": "Evaluación de Madurez en IA",
+    "title": "Mide la madurez de tu organización para la IA",
+    "subtitle": "Un cuestionario corto sobre sistemas, datos y procesos. Al final recibes tu puntuación de madurez y un estimado de implementación.",
+    "comingSoon": "Cuestionario en preparación"
   }
 }

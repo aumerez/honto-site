@@ -447,6 +447,7 @@
       "capabilities": "Capabilities",
       "hontoOps": "honto.ops",
       "principles": "Principles",
+      "aiReadiness": "AI Readiness",
       "contact": "Contact →",
       "languageLabel": "Change language",
       "languageOptionEn": "English",
@@ -703,5 +704,11 @@
       "languages": "EN · ES",
       "linkedin": "LinkedIn"
     }
+  },
+  "onboarding": {
+    "eyebrow": "AI Readiness Assessment",
+    "title": "Measure your organization's readiness for AI",
+    "subtitle": "A short questionnaire on systems, data, and processes. Receive your maturity score and an implementation estimate at the end.",
+    "comingSoon": "Wizard coming soon"
   }
 }

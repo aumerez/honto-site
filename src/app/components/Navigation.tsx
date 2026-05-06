@@ -12,12 +12,13 @@ type NavCopy = {
   capabilities: string;
   hontoOps: string;
   principles: string;
+  aiReadiness: string;
   contact: string;
 };
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   const nav = (t.landing as { nav: NavCopy }).nav;
 
   useEffect(() => {
@@ -44,6 +45,9 @@ export default function Navigation() {
       </div>
       <div className="nav-cta">
         <LanguageSwitcher />
+        <a href={`/${locale}/onboarding`} className="pill">
+          {nav.aiReadiness}
+        </a>
         <a href="#contact" className="pill solid">
           {nav.contact}
         </a>

@@ -142,13 +142,13 @@ Pure functions in `scoring.ts`. Each input maps to a small integer; weighted sum
 
 Five dimensions, weighted:
 
-| Dimension      | Weight | Inputs                                                                            |
-| -------------- | ------ | --------------------------------------------------------------------------------- |
-| Systems        | 20     | CRM/ERP/warehouse modernity, identity provider presence, integrated vs siloed     |
-| Data Readiness | 25     | Data location, volume awareness, process documentation, integration state        |
-| AI Usage       | 25     | Current AI use, prior project outcomes, LLM familiarity                          |
-| Governance     | 15     | Written policy, privacy constraints awareness                                     |
-| Talent         | 15     | AI/ML headcount tier                                                             |
+| Dimension      | Weight | Inputs                                                                        |
+| -------------- | ------ | ----------------------------------------------------------------------------- |
+| Systems        | 20     | CRM/ERP/warehouse modernity, identity provider presence, integrated vs siloed |
+| Data Readiness | 25     | Data location, volume awareness, process documentation, integration state     |
+| AI Usage       | 25     | Current AI use, prior project outcomes, LLM familiarity                       |
+| Governance     | 15     | Written policy, privacy constraints awareness                                 |
+| Talent         | 15     | AI/ML headcount tier                                                          |
 
 Bands: 0–25 Foundational, 26–50 Emerging, 51–75 Operational, 76–100 Advanced.
 
