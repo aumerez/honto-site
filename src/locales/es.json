@@ -447,6 +447,7 @@
       "capabilities": "Capacidades",
       "hontoOps": "honto.ops",
       "principles": "Principios",
+      "aiReadiness": "Madurez en IA",
       "contact": "Contacto →",
       "languageLabel": "Cambiar idioma",
       "languageOptionEn": "Inglés",
@@ -715,6 +716,302 @@
       "location": "Palo Alto, CA",
       "languages": "EN · ES · PT",
       "linkedin": "LinkedIn"
+    }
+  },
+  "onboarding": {
+    "eyebrow": "Evaluación de Madurez en IA",
+    "title": "Mide la madurez de tu organización para la IA",
+    "subtitle": "Un cuestionario corto sobre sistemas, datos y procesos. Al final recibes tu puntuación de madurez y un estimado de implementación.",
+    "wizard": {
+      "stepLabel": "Paso {n} de {total}",
+      "back": "Atrás",
+      "next": "Siguiente",
+      "submit": "Ver tus resultados",
+      "startOver": "Empezar de nuevo",
+      "emailInvalid": "Ingresa un correo electrónico válido.",
+      "phoneInvalid": "El teléfono debe tener entre 7 y 15 dígitos, solo números.",
+      "requiredField": "Este campo es obligatorio.",
+      "step1": {
+        "title": "Perfil de la empresa",
+        "description": "Quién eres y cómo contactarte.",
+        "companyName": "Nombre de la empresa",
+        "contactName": "Nombre de contacto",
+        "email": "Correo corporativo",
+        "phone": "Teléfono (opcional, solo dígitos)",
+        "industry": "Industria",
+        "industryOptions": {
+          "fintech": "Servicios financieros",
+          "healthcare": "Salud",
+          "retail": "Retail / eCommerce",
+          "manufacturing": "Manufactura",
+          "logistics": "Logística",
+          "tech": "Tecnología / SaaS",
+          "publicSector": "Sector público",
+          "other": "Otra"
+        },
+        "companySize": "Tamaño de la empresa",
+        "companySizeOptions": {
+          "1-10": "1–10",
+          "11-50": "11–50",
+          "51-200": "51–200",
+          "201-1000": "201–1.000",
+          "1000+": "1.000+"
+        },
+        "country": "País / región",
+        "role": "Tu rol",
+        "roleOptions": {
+          "founderExec": "Fundador / Ejecutivo",
+          "engineeringLead": "Líder de Ingeniería",
+          "opsProduct": "Operaciones / Producto",
+          "other": "Otro"
+        }
+      },
+      "step2": {
+        "title": "Sistemas actuales",
+        "description": "Selecciona lo que usas hoy. Esto nos ayuda a estimar el alcance de la integración.",
+        "crm": "CRM",
+        "erp": "ERP / Finanzas",
+        "warehouse": "Data warehouse / lago de datos",
+        "comms": "Comunicaciones",
+        "ticketing": "Tickets / soporte",
+        "identity": "Identidad / SSO",
+        "productivity": "Productividad / documentos",
+        "customApps": "Aplicaciones internas a medida",
+        "customAppsOptions": {
+          "no": "Ninguna",
+          "1-3": "1–3",
+          "4-10": "4–10",
+          "11+": "11 o más"
+        },
+        "systemOptions": {
+          "crm": {
+            "salesforce": "Salesforce",
+            "hubspot": "HubSpot",
+            "pipedrive": "Pipedrive",
+            "zoho": "Zoho",
+            "dynamics": "Microsoft Dynamics",
+            "none": "Ninguno",
+            "other": "Otro"
+          },
+          "erp": {
+            "sap": "SAP",
+            "netsuite": "Oracle NetSuite",
+            "dynamics": "Microsoft Dynamics",
+            "quickbooks": "QuickBooks",
+            "xero": "Xero",
+            "none": "Ninguno",
+            "other": "Otro"
+          },
+          "warehouse": {
+            "snowflake": "Snowflake",
+            "bigquery": "BigQuery",
+            "redshift": "Redshift",
+            "databricks": "Databricks",
+            "postgres": "Solo Postgres",
+            "none": "Ninguno",
+            "other": "Otro"
+          },
+          "comms": {
+            "slack": "Slack",
+            "teams": "Microsoft Teams",
+            "googleWorkspace": "Google Workspace",
+            "emailOnly": "Solo correo",
+            "other": "Otro"
+          },
+          "ticketing": {
+            "zendesk": "Zendesk",
+            "intercom": "Intercom",
+            "freshdesk": "Freshdesk",
+            "jira": "Jira Service Management",
+            "none": "Ninguno",
+            "other": "Otro"
+          },
+          "identity": {
+            "okta": "Okta",
+            "entra": "Azure AD / Entra",
+            "googleWorkspace": "Google Workspace",
+            "auth0": "Auth0",
+            "none": "Ninguno",
+            "other": "Otro"
+          },
+          "productivity": {
+            "notion": "Notion",
+            "confluence": "Confluence",
+            "sharepoint": "SharePoint",
+            "googleDrive": "Google Drive",
+            "other": "Otro"
+          }
+        }
+      },
+      "step3": {
+        "title": "Datos y procesos",
+        "description": "Cómo está organizada tu información hoy.",
+        "dataLocation": "¿Dónde vive la mayor parte de los datos operativos?",
+        "dataLocationOptions": {
+          "warehouse": "Warehouse / lago centralizado",
+          "saas": "Distribuidos en herramientas SaaS",
+          "spreadsheets": "Hojas de cálculo y archivos",
+          "dontKnow": "No lo sé"
+        },
+        "dataVolume": "Volumen estimado de datos por mes",
+        "dataVolumeOptions": {
+          "<1gb": "Menos de 1 GB",
+          "1-100gb": "1–100 GB",
+          "100gb-1tb": "100 GB – 1 TB",
+          "1tb+": "1 TB o más",
+          "dontKnow": "No lo sé"
+        },
+        "documented": "¿Los procesos clave están documentados?",
+        "documentedOptions": {
+          "yes": "Sí, totalmente",
+          "partial": "Parcialmente",
+          "no": "No",
+          "dontKnow": "No lo sé"
+        },
+        "integrated": "¿Los sistemas están integrados hoy?",
+        "integratedOptions": {
+          "yes": "Sí, en su mayoría",
+          "some": "Algunos",
+          "no": "No, mayormente manual",
+          "dontKnow": "No lo sé"
+        },
+        "manualWorkflows": "Principales tareas manuales que te gustaría automatizar",
+        "manualWorkflowsHelp": "opcional, hasta 500 caracteres"
+      },
+      "step4": {
+        "title": "Madurez en IA",
+        "description": "Dónde está tu organización en su recorrido de IA.",
+        "currentUse": "Uso actual de IA en la organización",
+        "currentUseOptions": {
+          "none": "Ninguno",
+          "individual": "Experimentación individual",
+          "pilots": "Pilotos en producción",
+          "production": "Múltiples sistemas en producción"
+        },
+        "priorProjects": "¿Has ejecutado proyectos de IA antes?",
+        "priorProjectsOptions": {
+          "never": "Nunca",
+          "incomplete": "Empezamos, no terminamos",
+          "mixed": "Lanzamos, con resultados mixtos",
+          "production": "Lanzados, en producción"
+        },
+        "talent": "Talento de IA / ML en el equipo",
+        "talentOptions": {
+          "none": "Ninguno",
+          "one": "1 persona",
+          "small": "Equipo pequeño (2–5)",
+          "dedicated": "Equipo dedicado (6+)"
+        },
+        "governance": "Gobernanza y política de IA",
+        "governanceOptions": {
+          "none": "Ninguna",
+          "informal": "Lineamientos informales",
+          "written": "Política escrita",
+          "formal": "Programa formal con revisiones"
+        },
+        "privacy": "Restricciones de privacidad de datos (selecciona las que apliquen)",
+        "privacyOptions": {
+          "gdpr": "GDPR",
+          "hipaa": "HIPAA",
+          "soc2": "SOC 2",
+          "pci": "PCI",
+          "internal": "Datos solo internos",
+          "none": "Ninguna"
+        },
+        "llmFamiliarity": "Familiaridad con LLMs / agentes",
+        "llmFamiliarityOptions": {
+          "low": "Baja",
+          "medium": "Media",
+          "high": "Alta"
+        }
+      },
+      "step5": {
+        "title": "Objetivos y restricciones",
+        "description": "Qué quieres lograr y en qué ventana de tiempo.",
+        "outcomes": "¿Qué resultados buscas? (selecciona los que apliquen)",
+        "outcomesOptions": {
+          "cost": "Reducir costos operativos",
+          "speed": "Acelerar un proceso",
+          "cx": "Mejorar la experiencia del cliente",
+          "newCapability": "Habilitar una nueva capacidad de producto",
+          "compliance": "Cumplimiento / reducción de riesgo",
+          "other": "Otro"
+        },
+        "priorities": "Top 1–3 iniciativas prioritarias (opcional)",
+        "startDate": "Fecha de inicio deseada",
+        "startDateOptions": {
+          "asap": "Lo antes posible",
+          "1-3mo": "1–3 meses",
+          "3-6mo": "3–6 meses",
+          "6+mo": "6+ meses",
+          "exploring": "Solo explorando"
+        },
+        "budget": "Rango de presupuesto",
+        "budgetOptions": {
+          "undefined": "Aún no definido",
+          "<25k": "Menos de US$25k",
+          "25-100k": "US$25k – US$100k",
+          "100-500k": "US$100k – US$500k",
+          "500k+": "US$500k+"
+        },
+        "decisionTimeline": "Plazo de decisión",
+        "decisionTimelineOptions": {
+          "weeks": "Semanas",
+          "1-2mo": "1–2 meses",
+          "3+mo": "3+ meses",
+          "unclear": "Indefinido"
+        },
+        "notes": "¿Algo más que debamos saber? (opcional)"
+      },
+      "results": {
+        "eyebrow": "Tu Puntuación de Madurez en IA",
+        "scoreOf": "/ 100",
+        "bandLabels": {
+          "foundational": "Inicial",
+          "emerging": "Emergente",
+          "operational": "Operacional",
+          "advanced": "Avanzada"
+        },
+        "dimensionsHeading": "Desglose de la puntuación",
+        "dimensionLabels": {
+          "systems": "Sistemas",
+          "dataReadiness": "Preparación de datos",
+          "aiUsage": "Uso de IA",
+          "governance": "Gobernanza",
+          "talent": "Talento"
+        },
+        "sizingHeading": "Implementación estimada",
+        "sizeLabels": {
+          "S": "Compromiso pequeño",
+          "M": "Compromiso mediano",
+          "L": "Compromiso grande",
+          "XL": "Compromiso extra grande"
+        },
+        "weeksRange": "{min}–{max} semanas",
+        "weeksOpen": "{min}+ semanas",
+        "narrativeHeading": "Lo que destaca",
+        "strengthsHeading": "Fortalezas",
+        "gapsHeading": "Brechas a atender",
+        "strengthLabels": {
+          "modernSystems": "Una pila moderna en CRM, ERP, warehouse e identidad da una base sólida de integración.",
+          "dataReady": "Tus datos están centralizados, documentados e integrados — la mitad del trabajo de IA ya está hecha.",
+          "aiActive": "Ya estás corriendo IA en producción con resultados reales; ampliaríamos, no partiríamos de cero.",
+          "governanceMature": "Una gobernanza escrita y postura de privacidad clara aceleran las revisiones de cumplimiento.",
+          "talentInPlace": "Un equipo de IA/ML interno permite traspaso limpio de la operación."
+        },
+        "gapLabels": {
+          "legacySystems": "Un parque de sistemas pequeño o heredado implica más trabajo de integración para conectar la IA con la operación.",
+          "dataFragmented": "Datos repartidos entre hojas de cálculo y SaaS son el mayor freno — esperar una etapa fundacional de datos.",
+          "aiNascent": "Aún no hay IA en producción — empezaríamos con un piloto acotado de alto impacto antes de escalar.",
+          "noGovernance": "Sin gobernanza escrita, hay que prever tiempo extra en política, ciclos de revisión y trazas de auditoría.",
+          "noTalent": "Sin talento de IA interno, planeamos capacitación de traspaso y soporte de mayor plazo."
+        },
+        "noNotablePoints": "—",
+        "downloadScore": "Descargar tu puntuación",
+        "bookFollowUp": "Agendar un seguimiento",
+        "generatedOn": "Generado el",
+        "printDateLocale": "es-ES"
+      }
     }
   }
 }

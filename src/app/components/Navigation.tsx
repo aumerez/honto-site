@@ -12,12 +12,13 @@ type NavCopy = {
   capabilities: string;
   hontoOps: string;
   principles: string;
+  aiReadiness: string;
   contact: string;
 };
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   const nav = (t.landing as { nav: NavCopy }).nav;
 
   useEffect(() => {
@@ -32,19 +33,22 @@ export default function Navigation() {
       role="navigation"
       aria-label={nav.ariaLabel}
     >
-      <a href="#top" className="logo" aria-label="honto.">
+      <a href={`/${locale}`} className="logo" aria-label="honto.">
         <Logo size={24} label="honto." />
       </a>
       <div className="nav-links">
-        <a href="#problems">{nav.problems}</a>
-        <a href="#process">{nav.method}</a>
-        <a href="#capabilities">{nav.capabilities}</a>
-        <a href="#honto-ops">{nav.hontoOps}</a>
-        <a href="#principles">{nav.principles}</a>
+        <a href={`/${locale}#problems`}>{nav.problems}</a>
+        <a href={`/${locale}#process`}>{nav.method}</a>
+        <a href={`/${locale}#capabilities`}>{nav.capabilities}</a>
+        <a href={`/${locale}#honto-ops`}>{nav.hontoOps}</a>
+        <a href={`/${locale}#principles`}>{nav.principles}</a>
       </div>
       <div className="nav-cta">
         <LanguageSwitcher />
-        <a href="#contact" className="pill solid">
+        <a href={`/${locale}/onboarding`} className="pill">
+          {nav.aiReadiness}
+        </a>
+        <a href={`/${locale}#contact`} className="pill solid">
           {nav.contact}
         </a>
       </div>
