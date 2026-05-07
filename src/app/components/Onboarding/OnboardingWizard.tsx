@@ -178,13 +178,24 @@ export default function OnboardingWizard() {
 
   function submitAndShowResults() {
     setSubmitted(true);
-    if (typeof window !== "undefined") {
-      console.log(
-        "[onboarding] submitted (PR 2 — no API yet):",
-        JSON.stringify(answers)
-      );
-    }
     scrollToTop();
+    void fetch("/api/onboarding", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ answers }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          console.error(
+            "[onboarding] submission failed:",
+            res.status,
+            res.statusText
+          );
+        }
+      })
+      .catch((err) => {
+        console.error("[onboarding] submission failed:", err);
+      });
   }
 
   function bookFollowUp() {
