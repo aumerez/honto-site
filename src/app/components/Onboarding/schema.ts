@@ -48,7 +48,16 @@ export const SYSTEM_OPTIONS: Record<SystemCategory, readonly string[]> = {
     "none",
     "other",
   ],
-  erp: ["sap", "netsuite", "dynamics", "quickbooks", "xero", "none", "other"],
+  erp: [
+    "sap",
+    "netsuite",
+    "dynamics",
+    "quickbooks",
+    "xero",
+    "contpaqi",
+    "none",
+    "other",
+  ],
   warehouse: [
     "snowflake",
     "bigquery",
