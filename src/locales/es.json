@@ -799,6 +799,7 @@
             "dynamics": "Microsoft Dynamics",
             "quickbooks": "QuickBooks",
             "xero": "Xero",
+            "contpaqi": "Contpaqi",
             "none": "Ninguno",
             "other": "Otro"
           },

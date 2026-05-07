@@ -63,6 +63,7 @@ const MODERN_ERP = new Set([
   "dynamics",
   "quickbooks",
   "xero",
+  "contpaqi",
 ]);
 const MODERN_WAREHOUSE = new Set([
   "snowflake",
