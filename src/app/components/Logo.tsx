@@ -5,7 +5,7 @@ type LogoProps = {
 };
 
 export default function Logo({
-  size = 36,
+  size = 30,
   className = "",
   label = "honto.",
 }: LogoProps) {

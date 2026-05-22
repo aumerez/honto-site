@@ -35,7 +35,7 @@ export default function Navigation() {
     >
       <div className="nav-inner">
         <a href={`/${locale}`} className="logo" aria-label="honto.">
-          <Logo size={36} label="honto." />
+          <Logo size={30} label="honto." />
         </a>
         <div className="nav-links">
           <a href={`/${locale}#problems`}>{nav.problems}</a>
