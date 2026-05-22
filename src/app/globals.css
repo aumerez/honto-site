@@ -185,11 +185,10 @@ button {
 
 .brand-logo__nucleus {
   display: inline-block;
-  width: 0.8em;
-  height: 0.8em;
-  margin-left: 0.04em;
+  width: 0.44em;
+  height: 0.44em;
+  margin-left: 0.07em;
   flex: none;
-  transform: translateY(0.14em);
   overflow: visible;
 }
 
