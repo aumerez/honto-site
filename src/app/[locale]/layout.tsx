@@ -114,7 +114,7 @@ export default async function LocaleLayout({
       lang={locale}
       className={`${instrumentSerif.variable} ${jetbrainsMono.variable} ${inter.variable} ${manrope.variable}`}
     >
-      <body>
+      <body suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}

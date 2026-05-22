@@ -5,7 +5,7 @@ type LogoProps = {
 };
 
 export default function Logo({
-  size = 24,
+  size = 30,
   className = "",
   label = "honto.",
 }: LogoProps) {
@@ -25,24 +25,21 @@ export default function Logo({
   );
 }
 
+// Geometry per brand-manual reference markup (wordmark : nucleus = 320 : 140 ≈ 1em : 0.44em).
 function Nucleus() {
   return (
     <svg
       className="brand-logo__nucleus"
-      viewBox="0 0 36 44"
+      viewBox="0 0 100 100"
       aria-hidden="true"
       focusable="false"
     >
-      <circle className="satellite" cx="4.8" cy="39.7" r="2.0" opacity="0.55" />
-      <circle className="satellite" cx="24.4" cy="38" r="2.5" opacity="0.70" />
-      <circle
-        className="satellite"
-        cx="16.5"
-        cy="20.3"
-        r="3.0"
-        opacity="0.90"
-      />
-      <circle className="core" cx="14" cy="32" r="7.5" />
+      <g className="brand-logo__nucleus-orbit">
+        <circle className="satellite" cx="50" cy="8" r="6" opacity="0.9" />
+        <circle className="satellite" cx="90" cy="68" r="5" opacity="0.7" />
+        <circle className="satellite" cx="14" cy="74" r="4" opacity="0.55" />
+      </g>
+      <circle className="core" cx="50" cy="50" r="28" />
     </svg>
   );
 }
