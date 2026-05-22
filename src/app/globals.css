@@ -135,10 +135,7 @@ button {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  padding: 20px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 20px 0;
   background: color-mix(in srgb, var(--bg) 70%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
@@ -147,6 +144,16 @@ button {
 
 .nav.scrolled {
   border-bottom-color: var(--rule);
+}
+
+.nav-inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
 }
 
 .nav .logo {
@@ -179,16 +186,37 @@ button {
 
 .brand-logo__nucleus {
   display: inline-block;
-  width: auto;
-  height: 0.95em;
+  width: 0.9em;
+  height: 0.9em;
+  margin-left: 0.06em;
   flex: none;
-  transform: translateY(0.12em);
+  transform: translateY(0.18em);
   overflow: visible;
 }
 
 .brand-logo__nucleus .core,
 .brand-logo__nucleus .satellite {
   fill: var(--brand-gold);
+}
+
+.brand-logo__nucleus-orbit {
+  transform-origin: 50px 50px;
+  animation: hontoSpin 20s linear infinite;
+}
+
+@keyframes hontoSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-logo__nucleus-orbit {
+    animation: none;
+  }
 }
 
 .nav-links {

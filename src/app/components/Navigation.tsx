@@ -33,24 +33,26 @@ export default function Navigation() {
       role="navigation"
       aria-label={nav.ariaLabel}
     >
-      <a href={`/${locale}`} className="logo" aria-label="honto.">
-        <Logo size={24} label="honto." />
-      </a>
-      <div className="nav-links">
-        <a href={`/${locale}#problems`}>{nav.problems}</a>
-        <a href={`/${locale}#process`}>{nav.method}</a>
-        <a href={`/${locale}#capabilities`}>{nav.capabilities}</a>
-        <a href={`/${locale}#honto-ops`}>{nav.hontoOps}</a>
-        <a href={`/${locale}#principles`}>{nav.principles}</a>
-      </div>
-      <div className="nav-cta">
-        <LanguageSwitcher />
-        <a href={`/${locale}/onboarding`} className="pill">
-          {nav.aiReadiness}
+      <div className="nav-inner">
+        <a href={`/${locale}`} className="logo" aria-label="honto.">
+          <Logo size={36} label="honto." />
         </a>
-        <a href={`/${locale}#contact`} className="pill solid">
-          {nav.contact}
-        </a>
+        <div className="nav-links">
+          <a href={`/${locale}#problems`}>{nav.problems}</a>
+          <a href={`/${locale}#process`}>{nav.method}</a>
+          <a href={`/${locale}#capabilities`}>{nav.capabilities}</a>
+          <a href={`/${locale}#honto-ops`}>{nav.hontoOps}</a>
+          <a href={`/${locale}#principles`}>{nav.principles}</a>
+        </div>
+        <div className="nav-cta">
+          <LanguageSwitcher />
+          <a href={`/${locale}/onboarding`} className="pill">
+            {nav.aiReadiness}
+          </a>
+          <a href={`/${locale}#contact`} className="pill solid">
+            {nav.contact}
+          </a>
+        </div>
       </div>
     </nav>
   );
