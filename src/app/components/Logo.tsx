@@ -42,21 +42,21 @@ function Nucleus() {
           className="satellite"
           cx="58.73"
           cy="8.92"
-          r="3.5"
+          r="6"
           opacity="0.9"
         />
         <circle
           className="satellite"
           cx="86.37"
           cy="71.0"
-          r="2.75"
+          r="5"
           opacity="0.7"
         />
         <circle
           className="satellite"
           cx="17.83"
           cy="77.0"
-          r="2.0"
+          r="4"
           opacity="0.55"
         />
       </g>
