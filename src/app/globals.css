@@ -168,7 +168,6 @@ button {
 .brand-logo {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.12em;
   line-height: 1;
   color: var(--fg);
   font-family: var(--brand);
@@ -186,11 +185,11 @@ button {
 
 .brand-logo__nucleus {
   display: inline-block;
-  width: 0.9em;
-  height: 0.9em;
-  margin-left: 0.06em;
+  width: 0.8em;
+  height: 0.8em;
+  margin-left: 0.04em;
   flex: none;
-  transform: translateY(0.18em);
+  transform: translateY(0.14em);
   overflow: visible;
 }
 

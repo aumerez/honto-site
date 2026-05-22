@@ -37,7 +37,12 @@ export default function DemoLayout({
       lang="es"
       className={`dark ${spaceGrotesk.variable} ${outfit.variable}`}
     >
-      <body className="bg-bg text-text-primary antialiased">{children}</body>
+      <body
+        suppressHydrationWarning
+        className="bg-bg text-text-primary antialiased"
+      >
+        {children}
+      </body>
     </html>
   );
 }
