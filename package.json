@@ -24,6 +24,8 @@
     "verify": "npm run lint && npm run format:check && npm run typecheck && npm test && npm run check:dead-code && npm run check:docs && npm run check:todos && npm run build"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
+    "@aws-sdk/s3-request-presigner": "^3.1053.0",
     "@tailwindcss/postcss": "^4.2.2",
     "next": "^16.2.0",
     "postcss": "^8.5.8",

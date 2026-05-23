@@ -24,6 +24,9 @@ const EXCLUDED_PATHS = [
   ".git",
   ".github",
   ".brv",
+  // Scratch/working area (also in .prettierignore): holds external specs and
+  // notes that don't follow the governed docs/ frontmatter policy.
+  ".project",
 ];
 
 const EXEMPT_FILES = ["README.md", "CLAUDE.md"];

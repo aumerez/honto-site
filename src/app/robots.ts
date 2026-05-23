@@ -30,7 +30,7 @@ const ALLOWED_BOTS = [
   "YouBot",
 ];
 
-const DISALLOWED_PATHS = ["/api/", "/_next/"];
+const DISALLOWED_PATHS = ["/api/", "/_next/", "/app-download"];
 
 export default function robots(): MetadataRoute.Robots {
   return {
