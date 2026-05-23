@@ -25,18 +25,8 @@ export default async function AppDownloadPage() {
 
       <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-xl flex-col items-center justify-center px-5 py-16 md:px-8">
         <div className="mb-10 text-center">
-          <div className="mb-5 flex items-center justify-center gap-4">
-            <span
-              className="h-px w-8"
-              style={{ background: "#f59e0b" }}
-              aria-hidden="true"
-            />
-            <Logo size={32} label="honto.ops" suffix="ops" />
-            <span
-              className="h-px w-8"
-              style={{ background: "#f59e0b" }}
-              aria-hidden="true"
-            />
+          <div className="mb-5 flex items-center justify-center">
+            <Logo size={56} label="honto.ops" suffix="ops" />
           </div>
           <h1 className="font-heading text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl">
             {session ? "Download the desktop app" : "Sign in to download"}
