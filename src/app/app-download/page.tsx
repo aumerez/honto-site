@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { validateSessionAgainstBackend } from "@/lib/auth/session";
+import Logo from "@/app/components/Logo";
 import LoginPanel from "./LoginPanel";
 import DownloadPanel from "./DownloadPanel";
 
@@ -24,18 +25,13 @@ export default async function AppDownloadPage() {
 
       <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-xl flex-col items-center justify-center px-5 py-16 md:px-8">
         <div className="mb-10 text-center">
-          <div className="mb-5 flex items-center justify-center gap-3">
+          <div className="mb-5 flex items-center justify-center gap-4">
             <span
               className="h-px w-8"
               style={{ background: "#f59e0b" }}
               aria-hidden="true"
             />
-            <span
-              className="font-mono text-xs font-medium uppercase tracking-[0.2em]"
-              style={{ color: "#f59e0b" }}
-            >
-              honto.ops
-            </span>
+            <Logo size={32} label="honto.ops" suffix="ops" />
             <span
               className="h-px w-8"
               style={{ background: "#f59e0b" }}

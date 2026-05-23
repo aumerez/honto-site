@@ -192,6 +192,14 @@ button {
   overflow: visible;
 }
 
+/* Wordmark suffix after the nucleus ("ops"); mirrors the nucleus left gap so
+   "honto●ops" reads symmetrically with the nucleus as the dot. */
+.brand-logo__suffix {
+  display: inline-block;
+  font: inherit;
+  margin-left: 0.14em;
+}
+
 .brand-logo__nucleus .core,
 .brand-logo__nucleus .satellite {
   fill: var(--brand-gold);
