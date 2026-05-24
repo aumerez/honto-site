@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLocale } from "@/context/LocaleContext";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -13,6 +14,7 @@ type NavCopy = {
   hontoOps: string;
   principles: string;
   aiReadiness: string;
+  getApp: string;
   contact: string;
 };
 
@@ -46,6 +48,12 @@ export default function Navigation() {
         </div>
         <div className="nav-cta">
           <LanguageSwitcher />
+          {/* /app-download is a non-localized top-level route (proxy skip-list),
+              so it is linked without a locale prefix. prefetch is disabled
+              because the page is force-dynamic and hits the backend /auth/me. */}
+          <Link href="/app-download" prefetch={false} className="pill">
+            {nav.getApp}
+          </Link>
           <a href={`/${locale}/onboarding`} className="pill">
             {nav.aiReadiness}
           </a>
