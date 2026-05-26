@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { validateSessionAgainstBackend } from "@/lib/auth/session";
+import { resolveRelease } from "@/lib/downloads/manifest";
 import Logo from "@/app/components/Logo";
 import LoginPanel from "./LoginPanel";
 import DownloadPanel from "./DownloadPanel";
@@ -10,6 +11,9 @@ export default async function AppDownloadPage() {
   const requestHeaders = await headers();
   const request = new Request("http://internal/", { headers: requestHeaders });
   const session = await validateSessionAgainstBackend(request);
+
+  // Resolve the current version label from the manifest for signed-in users.
+  const release = session ? await resolveRelease("win") : null;
 
   return (
     <div className="noise-overlay relative min-h-[100dvh] overflow-hidden">
@@ -40,7 +44,10 @@ export default async function AppDownloadPage() {
 
         <div className="w-full rounded-2xl border border-border bg-bg-card p-6 md:p-8">
           {session ? (
-            <DownloadPanel email={session.user.email} />
+            <DownloadPanel
+              email={session.user.email}
+              version={release?.version ?? null}
+            />
           ) : (
             <LoginPanel />
           )}

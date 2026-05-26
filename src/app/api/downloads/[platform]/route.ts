@@ -6,12 +6,12 @@
  *   2. Per-user + per-IP rate limit  → 429 (§4.5).
  *   3. Session validation (Mode A)   → 302 to /app-download if anonymous.
  *   4. Platform allow-list           → 400 on unknown (§4.8).
- *   5. R2 env presence check         → 503 if not configured.
- *   6. Presigned URL                 → 302 with 5-min TTL (§4.6).
+ *   5. Resolve installer from manifest → 503 if unavailable.
+ *   6. Presigned (private) or public manifest URL → 302 (§4.6).
  *   7. Audit log (fire-and-forget)   → outcome recorded.
  *
  * The 302 carries Referrer-Policy: strict-origin-when-cross-origin (§4.10)
- * to prevent the presigned URL from leaking into Referer.
+ * to prevent the download URL from leaking into Referer.
  */
 
 import { NextResponse } from "next/server";
@@ -19,7 +19,8 @@ import { accessTokenCookie, refreshTokenCookie } from "@/lib/auth/cookies";
 import { isAllowedOrigin } from "@/lib/auth/origin";
 import { validateSessionAgainstBackend } from "@/lib/auth/session";
 import { logDownload, type Outcome } from "@/lib/audit/log";
-import { isPlatform, LATEST_VERSION } from "@/lib/downloads/platforms";
+import { isPlatform } from "@/lib/downloads/platforms";
+import { resolveRelease } from "@/lib/downloads/manifest";
 import { presignDownloadUrl } from "@/lib/downloads/r2";
 import { clientIp, makeRateLimiter } from "@/lib/ratelimit";
 
@@ -64,7 +65,9 @@ function emitAudit(
 
 export async function GET(request: Request, { params }: RouteParams) {
   const { platform } = await params;
-  const version = LATEST_VERSION;
+  // Version is unknown until we resolve the manifest (after auth + allow-list);
+  // early rejections audit with a placeholder.
+  const version = "unknown";
 
   if (!isAllowedOrigin(request)) {
     emitAudit(request, "anon", platform, version, "rejected:forbidden_origin");
@@ -112,39 +115,37 @@ export async function GET(request: Request, { params }: RouteParams) {
     return new NextResponse("Bad platform", { status: 400 });
   }
 
-  let presigned;
-  try {
-    presigned = await presignDownloadUrl(platform, version);
-  } catch {
-    presigned = null;
-  }
-
-  if (!presigned) {
-    // Distinguish "no config at all" from "presign threw" only at the audit
-    // layer; both yield the same opaque 503 publicly to avoid leaking
-    // which env var was missing.
-    const configured =
-      !!process.env.R2_PUBLIC_BASE_URL || !!process.env.R2_ACCESS_KEY_ID;
+  const release = await resolveRelease(platform);
+  if (!release) {
     emitAudit(
       request,
       session.user.id,
       platform,
       version,
-      configured
-        ? "rejected:presign_failed"
-        : "rejected:downloads_not_configured"
+      "rejected:release_unavailable"
     );
     return new NextResponse("Downloads are not available right now.", {
       status: 503,
     });
   }
 
-  emitAudit(request, session.user.id, platform, version, "granted");
+  // Prefer a presigned private-bucket URL when configured; otherwise serve the
+  // public URL from the manifest. A presign error degrades to the public URL
+  // (the installer is public today) rather than failing the download.
+  let downloadUrl = release.url;
+  try {
+    const presigned = await presignDownloadUrl(release.filename);
+    if (presigned) downloadUrl = presigned;
+  } catch {
+    // keep the public manifest URL
+  }
+
+  emitAudit(request, session.user.id, platform, release.version, "granted");
 
   const response = new NextResponse(null, {
     status: 302,
     headers: {
-      Location: presigned.url,
+      Location: downloadUrl,
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Cache-Control": "no-store",
     },

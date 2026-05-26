@@ -26,42 +26,15 @@ describe("presignDownloadUrl", () => {
     vi.unstubAllEnvs();
   });
 
-  it("returns null when nothing is configured", async () => {
-    expect(await presignDownloadUrl("mac", "0.1.0")).toBeNull();
-  });
+  const DMG = "honto.ops-0.1.0-beta.1-arm64.dmg";
 
-  describe("public-bucket mode (R2_PUBLIC_BASE_URL)", () => {
-    it("returns the direct URL without calling the SDK", async () => {
-      vi.stubEnv("R2_PUBLIC_BASE_URL", "https://pub-xyz.r2.dev");
-      const result = await presignDownloadUrl("mac", "0.1.0");
-      expect(result).toEqual({
-        url: "https://pub-xyz.r2.dev/desktop/beta/honto.ops-0.1.0-arm64.dmg",
-        filename: "honto.ops-0.1.0-arm64.dmg",
-      });
-      expect(getSignedUrlMock).not.toHaveBeenCalled();
-    });
-
-    it("strips trailing slash on the base URL", async () => {
-      vi.stubEnv("R2_PUBLIC_BASE_URL", "https://pub-xyz.r2.dev///");
-      const result = await presignDownloadUrl("win", "1.2.3");
-      expect(result?.url).toBe(
-        "https://pub-xyz.r2.dev/desktop/beta/honto.ops Setup 1.2.3.exe"
-      );
-    });
-
-    it("takes precedence over private-mode credentials", async () => {
-      vi.stubEnv("R2_PUBLIC_BASE_URL", "https://pub.example/");
-      vi.stubEnv("R2_ACCOUNT_ID", "acct");
-      vi.stubEnv("R2_ACCESS_KEY_ID", "key");
-      vi.stubEnv("R2_SECRET_ACCESS_KEY", "secret");
-      const result = await presignDownloadUrl("linux", "0.1.0");
-      expect(result?.url.startsWith("https://pub.example/")).toBe(true);
-      expect(getSignedUrlMock).not.toHaveBeenCalled();
-    });
+  it("returns null when no private credentials are configured", async () => {
+    expect(await presignDownloadUrl(DMG)).toBeNull();
+    expect(getSignedUrlMock).not.toHaveBeenCalled();
   });
 
   describe("private-bucket mode (presigning)", () => {
-    it("calls getSignedUrl with a 5-minute TTL", async () => {
+    it("calls getSignedUrl with a 5-minute TTL and the prefixed key", async () => {
       vi.stubEnv("R2_ACCOUNT_ID", "acct");
       vi.stubEnv("R2_ACCESS_KEY_ID", "key");
       vi.stubEnv("R2_SECRET_ACCESS_KEY", "secret");
@@ -71,19 +44,24 @@ describe("presignDownloadUrl", () => {
         "https://downloads.honto.ai/signed-blob"
       );
 
-      const result = await presignDownloadUrl("mac", "0.1.0");
+      const url = await presignDownloadUrl(DMG);
 
-      expect(result?.url).toBe("https://downloads.honto.ai/signed-blob");
+      expect(url).toBe("https://downloads.honto.ai/signed-blob");
       expect(getSignedUrlMock).toHaveBeenCalledTimes(1);
-      const ttl = getSignedUrlMock.mock.calls[0]![2] as { expiresIn: number };
-      expect(ttl.expiresIn).toBe(300);
+      const command = getSignedUrlMock.mock.calls[0]![1] as {
+        input: { Key: string; Bucket: string };
+      };
+      expect(command.input.Key).toBe(`desktop/beta/${DMG}`);
+      expect(command.input.Bucket).toBe("honto-installers");
+      const opts = getSignedUrlMock.mock.calls[0]![2] as { expiresIn: number };
+      expect(opts.expiresIn).toBe(300);
     });
 
     it("returns null when credentials are incomplete", async () => {
       vi.stubEnv("R2_ACCOUNT_ID", "acct");
       vi.stubEnv("R2_ACCESS_KEY_ID", "");
       vi.stubEnv("R2_SECRET_ACCESS_KEY", "secret");
-      expect(await presignDownloadUrl("mac", "0.1.0")).toBeNull();
+      expect(await presignDownloadUrl(DMG)).toBeNull();
     });
   });
 });

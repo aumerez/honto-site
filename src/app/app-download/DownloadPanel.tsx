@@ -5,9 +5,10 @@ import { useState } from "react";
 
 interface Props {
   email: string;
+  version: string | null;
 }
 
-export default function DownloadPanel({ email }: Props) {
+export default function DownloadPanel({ email, version }: Props) {
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
 
@@ -31,7 +32,16 @@ export default function DownloadPanel({ email }: Props) {
       </p>
 
       <p className="text-center text-sm leading-relaxed text-text-secondary">
-        Select your operating system to start downloading the latest installer.
+        Select your operating system to start downloading the latest installer
+        {version ? (
+          <>
+            {" "}
+            <span className="whitespace-nowrap font-semibold text-text-primary">
+              v{version}
+            </span>
+          </>
+        ) : null}
+        .
       </p>
 
       <div className="grid gap-3">

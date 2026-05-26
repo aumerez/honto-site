@@ -11,7 +11,7 @@
 
 export type Outcome =
   | "granted"
-  | `rejected:${"unauthenticated" | "forbidden_origin" | "invalid_platform" | "rate_limited" | "presign_failed" | "downloads_not_configured"}`;
+  | `rejected:${"unauthenticated" | "forbidden_origin" | "invalid_platform" | "rate_limited" | "release_unavailable"}`;
 
 interface DownloadAuditEvent {
   user: string;

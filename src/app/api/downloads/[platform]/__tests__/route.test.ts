@@ -1,9 +1,14 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
 const presignMock = vi.hoisted(() => vi.fn());
+const resolveReleaseMock = vi.hoisted(() => vi.fn());
 
 vi.mock("@/lib/downloads/r2", () => ({
   presignDownloadUrl: presignMock,
+}));
+
+vi.mock("@/lib/downloads/manifest", () => ({
+  resolveRelease: resolveReleaseMock,
 }));
 
 import { GET, __resetDownloadRateLimitForTest } from "../route";
@@ -32,6 +37,9 @@ function params(platform: string) {
 
 const validUser = { id: "u1", email: "demo@example.com", tenant_id: 1 };
 
+const FILENAME = "honto.ops-0.1.0-beta.1-arm64.dmg";
+const PUBLIC_URL = `https://pub-d082782d774141a9a040e770bdba5f2d.r2.dev/desktop/beta/${FILENAME}`;
+
 function mockMeOk(token: string) {
   return new Response(JSON.stringify(validUser), { status: 200 });
 }
@@ -51,9 +59,13 @@ describe("/api/downloads/[platform] GET", () => {
     __resetInFlightForTest();
     vi.restoreAllMocks();
     presignMock.mockReset();
-    presignMock.mockResolvedValue({
-      url: "https://downloads.honto.ai/desktop/v0.1.0/honto.ops-0.1.0-arm64.dmg?signed=1",
-      filename: "honto.ops-0.1.0-arm64.dmg",
+    // Default: no private bucket configured → fall back to the public URL.
+    presignMock.mockResolvedValue(null);
+    resolveReleaseMock.mockReset();
+    resolveReleaseMock.mockResolvedValue({
+      version: "0.1.0-beta.1",
+      filename: FILENAME,
+      url: PUBLIC_URL,
     });
   });
 
@@ -102,19 +114,32 @@ describe("/api/downloads/[platform] GET", () => {
     expect(res.status).toBe(400);
   });
 
-  it("happy path: valid cookie + matching Origin → 302 to presigned URL", async () => {
+  it("happy path: valid cookie + matching Origin → 302 to public manifest URL", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(mockMeOk("acc"));
     const res = await GET(
       makeRequest("mac", { cookie: "honto_access_token=acc" }),
       params("mac")
     );
     expect(res.status).toBe(302);
-    expect(res.headers.get("location")).toContain("downloads.honto.ai");
+    expect(res.headers.get("location")).toBe(PUBLIC_URL);
     expect(res.headers.get("referrer-policy")).toBe(
       "strict-origin-when-cross-origin"
     );
     expect(res.headers.get("cache-control")).toBe("no-store");
-    expect(presignMock).toHaveBeenCalledWith("mac", "0.1.0");
+    expect(presignMock).toHaveBeenCalledWith(FILENAME);
+  });
+
+  it("prefers a presigned private-bucket URL when configured", async () => {
+    presignMock.mockResolvedValue("https://downloads.honto.ai/signed?x=1");
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockMeOk("acc"));
+    const res = await GET(
+      makeRequest("mac", { cookie: "honto_access_token=acc" }),
+      params("mac")
+    );
+    expect(res.status).toBe(302);
+    expect(res.headers.get("location")).toBe(
+      "https://downloads.honto.ai/signed?x=1"
+    );
   });
 
   it("refreshes silently on expired access token and rotates cookies", async () => {
@@ -165,9 +190,8 @@ describe("/api/downloads/[platform] GET", () => {
     expect(res.headers.get("location")).toBe("https://honto.ai/app-download");
   });
 
-  it("returns 503 when R2 env vars are missing", async () => {
-    vi.stubEnv("R2_ACCESS_KEY_ID", "");
-    presignMock.mockResolvedValue(null);
+  it("returns 503 when the manifest cannot be resolved", async () => {
+    resolveReleaseMock.mockResolvedValue(null);
     vi.spyOn(globalThis, "fetch").mockResolvedValue(mockMeOk("acc"));
     const res = await GET(
       makeRequest("mac", { cookie: "honto_access_token=acc" }),
@@ -176,14 +200,15 @@ describe("/api/downloads/[platform] GET", () => {
     expect(res.status).toBe(503);
   });
 
-  it("returns 503 when presigner throws", async () => {
+  it("falls back to the public URL when presigning throws", async () => {
     presignMock.mockRejectedValue(new Error("aws-down"));
     vi.spyOn(globalThis, "fetch").mockResolvedValue(mockMeOk("acc"));
     const res = await GET(
       makeRequest("mac", { cookie: "honto_access_token=acc" }),
       params("mac")
     );
-    expect(res.status).toBe(503);
+    expect(res.status).toBe(302);
+    expect(res.headers.get("location")).toBe(PUBLIC_URL);
   });
 
   it("per-IP rate-limit triggers at 60 requests/hour", async () => {
@@ -227,10 +252,11 @@ describe("/api/downloads/[platform] GET", () => {
     const body = JSON.parse(auditCall![1]!.body as string);
     expect(body.outcome).toBe("granted");
     expect(body.platform).toBe("mac");
+    expect(body.version).toBe("0.1.0-beta.1"); // resolved from the manifest
     expect(body.user).toBe("u1");
     expect(body.ip).toBe("203.0.113.50");
     expect(JSON.stringify(body)).not.toContain("acc"); // no token leak
-    expect(JSON.stringify(body)).not.toContain("downloads.honto.ai"); // no URL leak
+    expect(JSON.stringify(body)).not.toContain("r2.dev"); // no download URL leak
   });
 
   it("does not leak presigned URL into response body", async () => {
