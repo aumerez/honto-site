@@ -6,8 +6,8 @@
  *   2. Per-user + per-IP rate limit  → 429 (§4.5).
  *   3. Session validation (Mode A)   → 302 to /app-download if anonymous.
  *   4. Platform allow-list           → 400 on unknown (§4.8).
- *   5. Resolve installer from manifest → 503 if unavailable.
- *   6. Presigned (private) or public manifest URL → 302 (§4.6).
+ *   5. Resolve installer from manifest (private bucket) → 503 if unavailable.
+ *   6. Presigned private-bucket URL  → 302 (§4.6); 503 if it can't be minted.
  *   7. Audit log (fire-and-forget)   → outcome recorded.
  *
  * The 302 carries Referrer-Policy: strict-origin-when-cross-origin (§4.10)
@@ -115,29 +115,29 @@ export async function GET(request: Request, { params }: RouteParams) {
     return new NextResponse("Bad platform", { status: 400 });
   }
 
+  // Resolve the current installer from the manifest, then mint a presigned URL
+  // for it. Both come from the private bucket via the R2 credentials; there is
+  // no public fallback, so either step failing is an opaque 503.
   const release = await resolveRelease(platform);
-  if (!release) {
+  let downloadUrl: string | null = null;
+  if (release) {
+    try {
+      downloadUrl = await presignDownloadUrl(release.filename);
+    } catch {
+      downloadUrl = null;
+    }
+  }
+  if (!release || !downloadUrl) {
     emitAudit(
       request,
       session.user.id,
       platform,
-      version,
+      release?.version ?? version,
       "rejected:release_unavailable"
     );
     return new NextResponse("Downloads are not available right now.", {
       status: 503,
     });
-  }
-
-  // Prefer a presigned private-bucket URL when configured; otherwise serve the
-  // public URL from the manifest. A presign error degrades to the public URL
-  // (the installer is public today) rather than failing the download.
-  let downloadUrl = release.url;
-  try {
-    const presigned = await presignDownloadUrl(release.filename);
-    if (presigned) downloadUrl = presigned;
-  } catch {
-    // keep the public manifest URL
   }
 
   emitAudit(request, session.user.id, platform, release.version, "granted");

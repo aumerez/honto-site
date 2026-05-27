@@ -1,14 +1,17 @@
 /**
- * Optional private-bucket presigning for the installer download.
+ * Private-bucket access for the gated installer download.
  *
- * Today the installer is served from the public auto-update bucket and its URL
- * comes straight from the release manifest (src/lib/downloads/manifest.ts), so
- * this returns null and the route falls back to that public URL.
+ * Everything is read from the bucket named in R2_BUCKET using the R2
+ * credentials (R2_ACCOUNT_ID + R2_ACCESS_KEY_ID + R2_SECRET_ACCESS_KEY):
  *
- * If a dedicated private `honto-installers` bucket is provisioned (spec §2,
- * §4.6), set R2_ACCOUNT_ID + R2_ACCESS_KEY_ID + R2_SECRET_ACCESS_KEY and this
- * mints a 5-minute presigned URL for the same manifest-resolved filename,
- * upgrading the gate from soft to a real boundary — no caller change needed.
+ *   - getObjectText()      reads the release manifest (so we can resolve the
+ *                          current version + installer filename, see
+ *                          src/lib/downloads/manifest.ts).
+ *   - presignDownloadUrl() mints a 5-minute presigned URL for that installer.
+ *
+ * The bucket can therefore stay fully private — no object is served over a
+ * public URL. When the credentials are absent both helpers return null and the
+ * route reports the download as unavailable (503).
  */
 
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
@@ -29,11 +32,8 @@ function readConfig(): R2Config | null {
   const accountId = process.env.R2_ACCOUNT_ID;
   const accessKeyId = process.env.R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
-  // honto-updates is the existing public auto-update bucket where the beta
-  // installers currently live; switch to honto-installers once the dedicated
-  // private bucket is provisioned.
-  const bucket = process.env.R2_BUCKET ?? "honto-updates";
-  if (!accountId || !accessKeyId || !secretAccessKey) return null;
+  const bucket = process.env.R2_BUCKET;
+  if (!accountId || !accessKeyId || !secretAccessKey || !bucket) return null;
   return {
     accountId,
     accessKeyId,
@@ -62,9 +62,30 @@ function makeClient(config: R2Config): S3Client {
 }
 
 /**
+ * Read a UTF-8 object (the release manifest) from the private bucket.
+ * Returns null when the credentials are missing or the object can't be read
+ * (network, 404, access error); callers translate that into "unavailable".
+ */
+export async function getObjectText(key: string): Promise<string | null> {
+  const config = readConfig();
+  if (!config) return null;
+
+  const client = makeClient(config);
+  try {
+    const res = await client.send(
+      new GetObjectCommand({ Bucket: config.bucket, Key: key })
+    );
+    if (!res.Body) return null;
+    return await res.Body.transformToString();
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Presign a 5-minute download URL for a manifest-resolved installer filename.
- * Returns null when no private-bucket credentials are configured, signalling
- * the caller to fall back to the public manifest URL.
+ * Returns null when no credentials are configured; the caller then reports the
+ * download as unavailable (there is no public fallback — the bucket is private).
  */
 export async function presignDownloadUrl(
   filename: string

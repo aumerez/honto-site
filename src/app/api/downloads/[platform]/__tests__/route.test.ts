@@ -38,7 +38,7 @@ function params(platform: string) {
 const validUser = { id: "u1", email: "demo@example.com", tenant_id: 1 };
 
 const FILENAME = "honto.ops-0.1.0-beta.1-arm64.dmg";
-const PUBLIC_URL = `https://pub-d082782d774141a9a040e770bdba5f2d.r2.dev/desktop/beta/${FILENAME}`;
+const PRESIGNED_URL = "https://downloads.honto.ai/signed?x=1";
 
 function mockMeOk(token: string) {
   return new Response(JSON.stringify(validUser), { status: 200 });
@@ -59,13 +59,11 @@ describe("/api/downloads/[platform] GET", () => {
     __resetInFlightForTest();
     vi.restoreAllMocks();
     presignMock.mockReset();
-    // Default: no private bucket configured → fall back to the public URL.
-    presignMock.mockResolvedValue(null);
+    presignMock.mockResolvedValue(PRESIGNED_URL);
     resolveReleaseMock.mockReset();
     resolveReleaseMock.mockResolvedValue({
       version: "0.1.0-beta.1",
       filename: FILENAME,
-      url: PUBLIC_URL,
     });
   });
 
@@ -114,32 +112,19 @@ describe("/api/downloads/[platform] GET", () => {
     expect(res.status).toBe(400);
   });
 
-  it("happy path: valid cookie + matching Origin → 302 to public manifest URL", async () => {
+  it("happy path: valid cookie + matching Origin → 302 to presigned URL", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(mockMeOk("acc"));
     const res = await GET(
       makeRequest("mac", { cookie: "honto_access_token=acc" }),
       params("mac")
     );
     expect(res.status).toBe(302);
-    expect(res.headers.get("location")).toBe(PUBLIC_URL);
+    expect(res.headers.get("location")).toBe(PRESIGNED_URL);
     expect(res.headers.get("referrer-policy")).toBe(
       "strict-origin-when-cross-origin"
     );
     expect(res.headers.get("cache-control")).toBe("no-store");
     expect(presignMock).toHaveBeenCalledWith(FILENAME);
-  });
-
-  it("prefers a presigned private-bucket URL when configured", async () => {
-    presignMock.mockResolvedValue("https://downloads.honto.ai/signed?x=1");
-    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockMeOk("acc"));
-    const res = await GET(
-      makeRequest("mac", { cookie: "honto_access_token=acc" }),
-      params("mac")
-    );
-    expect(res.status).toBe(302);
-    expect(res.headers.get("location")).toBe(
-      "https://downloads.honto.ai/signed?x=1"
-    );
   });
 
   it("refreshes silently on expired access token and rotates cookies", async () => {
@@ -200,15 +185,24 @@ describe("/api/downloads/[platform] GET", () => {
     expect(res.status).toBe(503);
   });
 
-  it("falls back to the public URL when presigning throws", async () => {
+  it("returns 503 when no presigned URL can be minted (no creds)", async () => {
+    presignMock.mockResolvedValue(null);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(mockMeOk("acc"));
+    const res = await GET(
+      makeRequest("mac", { cookie: "honto_access_token=acc" }),
+      params("mac")
+    );
+    expect(res.status).toBe(503);
+  });
+
+  it("returns 503 when presigning throws", async () => {
     presignMock.mockRejectedValue(new Error("aws-down"));
     vi.spyOn(globalThis, "fetch").mockResolvedValue(mockMeOk("acc"));
     const res = await GET(
       makeRequest("mac", { cookie: "honto_access_token=acc" }),
       params("mac")
     );
-    expect(res.status).toBe(302);
-    expect(res.headers.get("location")).toBe(PUBLIC_URL);
+    expect(res.status).toBe(503);
   });
 
   it("per-IP rate-limit triggers at 60 requests/hour", async () => {
@@ -256,10 +250,10 @@ describe("/api/downloads/[platform] GET", () => {
     expect(body.user).toBe("u1");
     expect(body.ip).toBe("203.0.113.50");
     expect(JSON.stringify(body)).not.toContain("acc"); // no token leak
-    expect(JSON.stringify(body)).not.toContain("r2.dev"); // no download URL leak
+    expect(JSON.stringify(body)).not.toContain("downloads.honto.ai"); // no URL leak
   });
 
-  it("does not leak presigned URL into response body", async () => {
+  it("does not leak the download URL into the response body", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(mockMeOk("acc"));
     const res = await GET(
       makeRequest("mac", { cookie: "honto_access_token=acc" }),

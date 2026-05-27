@@ -2,33 +2,27 @@
  * Resolve the current installer for a platform from the desktop release
  * manifest, instead of hardcoding versioned filenames.
  *
- * The honto.ops desktop app publishes installers to a public Cloudflare R2
- * bucket alongside electron-builder update manifests. The installer filenames
- * are versioned (they change every release), but the manifest filenames are
- * fixed — so we read the manifest to discover the current version + asset.
+ * The honto.ops desktop app publishes installers to the R2 bucket alongside
+ * electron-builder update manifests. The installer filenames are versioned
+ * (they change every release), but the manifest filenames are fixed — so we
+ * read the manifest to discover the current version + asset:
  *
- *   <base>/<channel>/<channel>-mac.yml    → macOS  (.dmg)
- *   <base>/<channel>/<channel>.yml        → Windows (.exe)
- *   <base>/<channel>/<channel>-linux.yml  → Linux  (.AppImage)
+ *   <prefix>/<channel>-mac.yml    → macOS  (.dmg)
+ *   <prefix>/<channel>.yml        → Windows (.exe)
+ *   <prefix>/<channel>-linux.yml  → Linux  (.AppImage)
  *
- * Fetched server-side only: the r2.dev public URLs do not send permissive
- * CORS headers, so a browser fetch() from the site origin would fail. Callers
- * are route handlers / server components, so this is never bundled client-side.
+ * Both the manifest and the installer it names live in the private bucket
+ * (R2_BUCKET); we read them with the R2 credentials via src/lib/downloads/r2.ts.
+ * Server-side only — never bundled client-side.
  */
 
 import yaml from "js-yaml";
-import type { Platform } from "@/lib/downloads/platforms";
+import { bucketKeyFor, type Platform } from "@/lib/downloads/platforms";
+import { getObjectText } from "@/lib/downloads/r2";
 
-// Public bucket + channel. These are public (not secret) and bumped in code
-// the same way the bucket layout is — no env vars. Switch CHANNEL to "latest"
-// once production releases are cut to it (it is not populated yet).
-const MANIFEST_BASE =
-  "https://pub-d082782d774141a9a040e770bdba5f2d.r2.dev/desktop";
+// Release channel; bumped in code the same way the bucket layout is — no env
+// vars. Switch to "latest" once production releases are cut to it.
 const CHANNEL = "beta";
-
-// Manifests change every release; cache for minutes, not days, or we serve a
-// stale version/URL. Next dedupes + revalidates on this window.
-const MANIFEST_TTL_SECONDS = 300;
 
 /** Suffix on the channel manifest name, per platform. Windows has none. */
 const MANIFEST_SUFFIX: Record<Platform, string> = {
@@ -49,8 +43,6 @@ interface ResolvedRelease {
   version: string;
   /** Versioned installer filename, e.g. "honto.ops-0.1.0-beta.1-arm64.dmg". */
   filename: string;
-  /** Absolute, percent-encoded public download URL. */
-  url: string;
 }
 
 interface ManifestFile {
@@ -62,26 +54,20 @@ interface Manifest {
 }
 
 /**
- * Fetch + parse the manifest for one platform and resolve the download.
- * Returns null on any failure (network, 404, malformed YAML, missing asset);
- * callers translate that into an opaque 503 / "unavailable" state.
+ * Read + parse the manifest for one platform and resolve the installer
+ * version + filename. Returns null on any failure (missing credentials,
+ * network, 404, malformed YAML, missing asset); callers translate that into
+ * an opaque 503 / "unavailable" state.
  */
 export async function resolveRelease(
   platform: Platform
 ): Promise<ResolvedRelease | null> {
-  const channelDir = `${MANIFEST_BASE}/${CHANNEL}/`;
-  const manifestUrl = `${channelDir}${CHANNEL}${MANIFEST_SUFFIX[platform]}.yml`;
+  const manifestKey = bucketKeyFor(
+    `${CHANNEL}${MANIFEST_SUFFIX[platform]}.yml`
+  );
 
-  let text: string;
-  try {
-    const res = await fetch(manifestUrl, {
-      next: { revalidate: MANIFEST_TTL_SECONDS },
-    });
-    if (!res.ok) return null;
-    text = await res.text();
-  } catch {
-    return null;
-  }
+  const text = await getObjectText(manifestKey);
+  if (text === null) return null;
 
   let doc: Manifest;
   try {
@@ -99,18 +85,9 @@ export async function resolveRelease(
   );
   if (!file || typeof file.url !== "string") return null;
 
-  // Build the absolute URL against the channel dir. `new URL` percent-encodes
-  // spaces in the Windows filename ("honto.ops Setup …exe" → %20).
-  let url: string;
-  try {
-    url = new URL(file.url, channelDir).href;
-  } catch {
-    return null;
-  }
+  // Defense in depth: the filename becomes an object key (bucketKeyFor), so a
+  // tampered manifest must not be able to escape the prefix via path segments.
+  if (file.url.includes("/") || file.url.includes("\\")) return null;
 
-  // Defense in depth: a tampered manifest must not be able to redirect the
-  // download to a foreign origin — the resolved URL has to stay under base.
-  if (!url.startsWith(`${MANIFEST_BASE}/`)) return null;
-
-  return { version: doc.version, filename: file.url, url };
+  return { version: doc.version, filename: file.url };
 }

@@ -1,21 +1,20 @@
-import { describe, it, expect, afterEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+
+const getObjectTextMock = vi.hoisted(() => vi.fn());
+
+vi.mock("@/lib/downloads/r2", () => ({
+  getObjectText: getObjectTextMock,
+}));
+
 import { resolveRelease } from "@/lib/downloads/manifest";
 
-const BASE = "https://pub-d082782d774141a9a040e770bdba5f2d.r2.dev/desktop/beta";
-
-function mockFetch(body: string, status = 200) {
-  return vi
-    .spyOn(globalThis, "fetch")
-    .mockResolvedValue(new Response(body, { status }));
-}
-
-afterEach(() => {
-  vi.restoreAllMocks();
+beforeEach(() => {
+  getObjectTextMock.mockReset();
 });
 
 describe("resolveRelease", () => {
-  it("reads <channel>-mac.yml and picks the .dmg, not the updater .zip", async () => {
-    const spy = mockFetch(
+  it("reads desktop/beta/beta-mac.yml and picks the .dmg, not the updater .zip", async () => {
+    getObjectTextMock.mockResolvedValue(
       [
         "version: 0.1.0-beta.1",
         "files:",
@@ -32,16 +31,15 @@ describe("resolveRelease", () => {
 
     const release = await resolveRelease("mac");
 
-    expect(spy).toHaveBeenCalledWith(`${BASE}/beta-mac.yml`, expect.anything());
+    expect(getObjectTextMock).toHaveBeenCalledWith("desktop/beta/beta-mac.yml");
     expect(release).toEqual({
       version: "0.1.0-beta.1",
       filename: "honto.ops-0.1.0-beta.1-arm64.dmg",
-      url: `${BASE}/honto.ops-0.1.0-beta.1-arm64.dmg`,
     });
   });
 
-  it("reads <channel>.yml for Windows and percent-encodes the spaced filename", async () => {
-    const spy = mockFetch(
+  it("reads desktop/beta/beta.yml for Windows and keeps the spaced filename", async () => {
+    getObjectTextMock.mockResolvedValue(
       [
         "version: 0.1.0-beta.1",
         "files:",
@@ -53,13 +51,12 @@ describe("resolveRelease", () => {
 
     const release = await resolveRelease("win");
 
-    expect(spy).toHaveBeenCalledWith(`${BASE}/beta.yml`, expect.anything());
+    expect(getObjectTextMock).toHaveBeenCalledWith("desktop/beta/beta.yml");
     expect(release?.filename).toBe("honto.ops Setup 0.1.0-beta.1.exe");
-    expect(release?.url).toBe(`${BASE}/honto.ops%20Setup%200.1.0-beta.1.exe`);
   });
 
-  it("reads <channel>-linux.yml and picks the .AppImage over the .deb", async () => {
-    const spy = mockFetch(
+  it("reads desktop/beta/beta-linux.yml and picks the .AppImage over the .deb", async () => {
+    getObjectTextMock.mockResolvedValue(
       [
         "version: 0.1.0-beta.1",
         "files:",
@@ -72,35 +69,29 @@ describe("resolveRelease", () => {
 
     const release = await resolveRelease("linux");
 
-    expect(spy).toHaveBeenCalledWith(
-      `${BASE}/beta-linux.yml`,
-      expect.anything()
+    expect(getObjectTextMock).toHaveBeenCalledWith(
+      "desktop/beta/beta-linux.yml"
     );
     expect(release?.filename).toBe("honto.ops-0.1.0-beta.1.AppImage");
   });
 
-  it("returns null on a non-200 manifest response", async () => {
-    mockFetch("not found", 404);
-    expect(await resolveRelease("mac")).toBeNull();
-  });
-
-  it("returns null on a network error", async () => {
-    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("offline"));
+  it("returns null when the manifest object cannot be read", async () => {
+    getObjectTextMock.mockResolvedValue(null);
     expect(await resolveRelease("mac")).toBeNull();
   });
 
   it("returns null on malformed YAML", async () => {
-    mockFetch("version: [unterminated");
+    getObjectTextMock.mockResolvedValue("version: [unterminated");
     expect(await resolveRelease("mac")).toBeNull();
   });
 
   it("returns null when version or files are missing", async () => {
-    mockFetch("files:\n  - url: honto.ops-0.1.0.dmg");
+    getObjectTextMock.mockResolvedValue("files:\n  - url: honto.ops-0.1.0.dmg");
     expect(await resolveRelease("mac")).toBeNull();
   });
 
   it("returns null when no asset matches the platform extension", async () => {
-    mockFetch(
+    getObjectTextMock.mockResolvedValue(
       [
         "version: 0.1.0-beta.1",
         "files:",
@@ -111,12 +102,12 @@ describe("resolveRelease", () => {
     expect(await resolveRelease("mac")).toBeNull();
   });
 
-  it("rejects a manifest that points the asset at a foreign origin", async () => {
-    mockFetch(
+  it("rejects a filename containing a path separator (key traversal)", async () => {
+    getObjectTextMock.mockResolvedValue(
       [
         "version: 0.1.0-beta.1",
         "files:",
-        "  - url: https://evil.example/malware.dmg",
+        "  - url: ../../secrets/evil.dmg",
         "    sha512: aaa",
       ].join("\n")
     );

@@ -4,9 +4,8 @@
  * The versioned filename is no longer hardcoded here — it is resolved per
  * request from the release manifest (see src/lib/downloads/manifest.ts), so
  * filenames change with each release without a code bump. KEY_PREFIX is the
- * path inside the (optional) private bucket used for presigning; switch it to
- * `desktop/v<version>` if the honto-installers private bucket comes online
- * (spec §7).
+ * path inside the private R2 bucket (R2_BUCKET) holding both the manifests and
+ * the installers they name; bump it if the bucket layout changes.
  */
 
 export const PLATFORMS = ["mac", "win", "linux"] as const;
