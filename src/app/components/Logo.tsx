@@ -2,12 +2,15 @@ type LogoProps = {
   size?: number;
   className?: string;
   label?: string;
+  /** Optional wordmark text after the nucleus, e.g. "ops" → "honto●ops". */
+  suffix?: string;
 };
 
 export default function Logo({
   size = 30,
   className = "",
   label = "honto.",
+  suffix,
 }: LogoProps) {
   const cls = ["brand-logo", className].filter(Boolean).join(" ");
   return (
@@ -21,6 +24,11 @@ export default function Logo({
         honto
       </span>
       <Nucleus />
+      {suffix ? (
+        <span className="brand-logo__suffix" aria-hidden="true">
+          {suffix}
+        </span>
+      ) : null}
     </span>
   );
 }
