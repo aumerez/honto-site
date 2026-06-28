@@ -447,6 +447,7 @@
       "capabilities": "Capacidades",
       "hontoOps": "honto.ops",
       "principles": "Princípios",
+      "aiReadiness": "Maturidade em IA",
       "contact": "Contato →",
       "languageLabel": "Mudar idioma",
       "languageOptionEn": "Inglês",
@@ -707,6 +708,76 @@
       "location": "Palo Alto, CA",
       "languages": "EN · ES · PT",
       "linkedin": "LinkedIn"
+    }
+  },
+  "opportunityMap": {
+    "eyebrow": "Mapa de Maturidade em IA",
+    "tag": "[01] / Diagnóstico",
+    "title": "Descubra onde a IA gera vantagem na sua empresa",
+    "subtitle": "Um diagnóstico empresarial de sistemas de IA. A Honto identifica onde a IA pode criar vantagem nos seus processos, equipes, sistemas e execução — e mostra os primeiros passos a dar.",
+    "meta": {
+      "timeLabel": "Tempo estimado",
+      "time": "~5–8 minutos",
+      "privacyLabel": "Privacidade garantida",
+      "privacy": "Não solicitamos senhas, chaves de API, documentos privados, chats privados ou credenciais."
+    },
+    "cta": "Iniciar o mapa",
+    "flowHeading": "O diagnóstico",
+    "flowIntro": "Seis seções focadas. Seu mapa é construído conforme você avança.",
+    "progress": { "label": "Progresso" },
+    "status": { "pending": "Pendente" },
+    "board": {
+      "title": "Mapa de sistemas",
+      "subtitle": "Seu diagnóstico é montado aqui conforme você responde.",
+      "empty": "Aguardando dados"
+    },
+    "sections": {
+      "businessContext": {
+        "code": "B.01",
+        "title": "Contexto do negócio",
+        "summary": "Formato da empresa, setor e estágio."
+      },
+      "businessGoals": {
+        "code": "B.02",
+        "title": "Objetivos do negócio",
+        "summary": "Os resultados que mais importam agora."
+      },
+      "processDrag": {
+        "code": "P.01",
+        "title": "Atrito de processos",
+        "summary": "Onde o trabalho manual e os repasses atrasam a execução."
+      },
+      "expertLeverage": {
+        "code": "E.01",
+        "title": "Vantagem da equipe",
+        "summary": "Onde sua equipe é forte — por função."
+      },
+      "systemLandscape": {
+        "code": "S.01",
+        "title": "Panorama de sistemas",
+        "summary": "Ferramentas e sistemas em uso. Seção opcional."
+      },
+      "report": {
+        "code": "R.01",
+        "title": "Relatório de maturidade",
+        "summary": "Seu sinal de oportunidade e primeiros passos."
+      }
+    },
+    "controls": {
+      "start": "Iniciar o mapa",
+      "back": "Voltar",
+      "next": "Continuar",
+      "skip": "Pular esta seção",
+      "startOver": "Recomeçar"
+    },
+    "placeholders": {
+      "section": "Esta seção está em construção — a navegação e o progresso já funcionam.",
+      "teaserTitle": "Sinal preliminar",
+      "teaserBody": "Seu sinal de oportunidade preliminar aparecerá aqui.",
+      "gateTitle": "Desbloqueie seu relatório de maturidade",
+      "gateBody": "Compartilhe seus dados para gerar seu mapa completo.",
+      "reportTitle": "Seu mapa de maturidade",
+      "reportBody": "Seu relatório completo aparecerá aqui."
     }
   }
 }

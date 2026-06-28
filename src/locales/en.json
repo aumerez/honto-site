@@ -1002,5 +1002,75 @@
         "printDateLocale": "en-US"
       }
     }
+  },
+  "opportunityMap": {
+    "eyebrow": "AI Readiness Map",
+    "tag": "[01] / Diagnostic",
+    "title": "Find where AI creates leverage across your company",
+    "subtitle": "An enterprise AI systems diagnostic. Honto maps where AI can create leverage across your processes, teams, systems, and execution — then shows you the first moves to make.",
+    "meta": {
+      "timeLabel": "Time to complete",
+      "time": "~5–8 minutes",
+      "privacyLabel": "Privacy-safe",
+      "privacy": "No passwords, API keys, private documents, private chats, or credentials are requested."
+    },
+    "cta": "Start the map",
+    "flowHeading": "The diagnostic",
+    "flowIntro": "Six focused sections. Your map builds as you go.",
+    "progress": { "label": "Progress" },
+    "status": { "pending": "Pending" },
+    "board": {
+      "title": "System map",
+      "subtitle": "Your diagnostic assembles here as you answer.",
+      "empty": "Awaiting input"
+    },
+    "sections": {
+      "businessContext": {
+        "code": "B.01",
+        "title": "Business context",
+        "summary": "Company shape, industry, and stage."
+      },
+      "businessGoals": {
+        "code": "B.02",
+        "title": "Business goals",
+        "summary": "The outcomes that matter most right now."
+      },
+      "processDrag": {
+        "code": "P.01",
+        "title": "Process drag",
+        "summary": "Where manual work and handoffs slow execution."
+      },
+      "expertLeverage": {
+        "code": "E.01",
+        "title": "Expert leverage",
+        "summary": "Where your team is strong — by function."
+      },
+      "systemLandscape": {
+        "code": "S.01",
+        "title": "System landscape",
+        "summary": "Tools and systems in play. Optional section."
+      },
+      "report": {
+        "code": "R.01",
+        "title": "Readiness report",
+        "summary": "Your opportunity signal and first moves."
+      }
+    },
+    "controls": {
+      "start": "Start the map",
+      "back": "Back",
+      "next": "Continue",
+      "skip": "Skip this section",
+      "startOver": "Start over"
+    },
+    "placeholders": {
+      "section": "This section is being built — navigation and progress are live.",
+      "teaserTitle": "Preliminary signal",
+      "teaserBody": "Your preliminary opportunity signal will appear here.",
+      "gateTitle": "Unlock your readiness report",
+      "gateBody": "Share your details to generate your full map.",
+      "reportTitle": "Your readiness map",
+      "reportBody": "Your full readiness report will appear here."
+    }
   }
 }

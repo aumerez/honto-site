@@ -46,7 +46,7 @@ export default function Navigation() {
         </div>
         <div className="nav-cta">
           <LanguageSwitcher />
-          <a href={`/${locale}/onboarding`} className="pill">
+          <a href={`/${locale}/opportunity-map`} className="pill">
             {nav.aiReadiness}
           </a>
           <a href={`/${locale}#contact`} className="pill solid">

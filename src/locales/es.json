@@ -1014,5 +1014,75 @@
         "printDateLocale": "es-ES"
       }
     }
+  },
+  "opportunityMap": {
+    "eyebrow": "Mapa de Madurez en IA",
+    "tag": "[01] / Diagnóstico",
+    "title": "Descubre dónde la IA genera ventaja en tu empresa",
+    "subtitle": "Un diagnóstico empresarial de sistemas de IA. Honto identifica dónde la IA puede crear ventaja en tus procesos, equipos, sistemas y ejecución — y te muestra los primeros pasos a dar.",
+    "meta": {
+      "timeLabel": "Tiempo estimado",
+      "time": "~5–8 minutos",
+      "privacyLabel": "Privacidad garantizada",
+      "privacy": "No se solicitan contraseñas, claves de API, documentos privados, chats privados ni credenciales."
+    },
+    "cta": "Iniciar el mapa",
+    "flowHeading": "El diagnóstico",
+    "flowIntro": "Seis secciones enfocadas. Tu mapa se construye a medida que avanzas.",
+    "progress": { "label": "Progreso" },
+    "status": { "pending": "Pendiente" },
+    "board": {
+      "title": "Mapa de sistemas",
+      "subtitle": "Tu diagnóstico se arma aquí a medida que respondes.",
+      "empty": "A la espera de datos"
+    },
+    "sections": {
+      "businessContext": {
+        "code": "B.01",
+        "title": "Contexto del negocio",
+        "summary": "Forma de la empresa, industria y etapa."
+      },
+      "businessGoals": {
+        "code": "B.02",
+        "title": "Objetivos del negocio",
+        "summary": "Los resultados que más importan ahora."
+      },
+      "processDrag": {
+        "code": "P.01",
+        "title": "Fricción de procesos",
+        "summary": "Dónde el trabajo manual y los traspasos frenan la ejecución."
+      },
+      "expertLeverage": {
+        "code": "E.01",
+        "title": "Ventaja del equipo",
+        "summary": "Dónde tu equipo es fuerte — por función."
+      },
+      "systemLandscape": {
+        "code": "S.01",
+        "title": "Panorama de sistemas",
+        "summary": "Herramientas y sistemas en uso. Sección opcional."
+      },
+      "report": {
+        "code": "R.01",
+        "title": "Informe de madurez",
+        "summary": "Tu señal de oportunidad y primeros pasos."
+      }
+    },
+    "controls": {
+      "start": "Iniciar el mapa",
+      "back": "Atrás",
+      "next": "Continuar",
+      "skip": "Omitir esta sección",
+      "startOver": "Empezar de nuevo"
+    },
+    "placeholders": {
+      "section": "Esta sección está en construcción — la navegación y el progreso ya funcionan.",
+      "teaserTitle": "Señal preliminar",
+      "teaserBody": "Aquí aparecerá tu señal de oportunidad preliminar.",
+      "gateTitle": "Desbloquea tu informe de madurez",
+      "gateBody": "Comparte tus datos para generar tu mapa completo.",
+      "reportTitle": "Tu mapa de madurez",
+      "reportBody": "Aquí aparecerá tu informe completo."
+    }
   }
 }

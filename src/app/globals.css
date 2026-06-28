@@ -1871,3 +1871,409 @@ html.light .ob-combobox::-webkit-calendar-picker-indicator {
     display: none !important;
   }
 }
+
+/* ─── AI Readiness Map (Opportunity Map) ─── */
+
+.om-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 140px 32px 120px;
+}
+
+.om-hero {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 56px;
+  margin-bottom: 56px;
+}
+
+.om-hero-tag {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.om-hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin: 12px 0 0;
+}
+
+.om-hero-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 6vw, 68px);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  max-width: 16ch;
+  margin: 20px 0 0;
+}
+
+.om-hero-subtitle {
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--fg-dim);
+  max-width: 58ch;
+  margin: 24px 0 0;
+}
+
+.om-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin: 40px 0 0;
+  padding: 0;
+}
+
+.om-meta-item {
+  margin: 0;
+  max-width: 44ch;
+}
+
+.om-meta-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+.om-meta-value {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg-dim);
+  margin: 6px 0 0;
+}
+
+.om-hero-actions {
+  margin-top: 36px;
+}
+
+.om-flow-head {
+  margin-bottom: 28px;
+}
+
+.om-flow-title {
+  font-family: var(--serif);
+  font-size: 30px;
+  color: var(--fg);
+  margin: 0;
+}
+
+.om-flow-intro {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--fg-dim);
+  margin: 8px 0 0;
+}
+
+.om-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 40px;
+  align-items: start;
+}
+
+.om-main {
+  min-width: 0;
+}
+
+.om-progress {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+
+.om-progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.om-progress-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+.om-progress-count {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--fg-dim);
+}
+
+.om-progress-rail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+.om-progress-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.om-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  display: inline-block;
+}
+
+.om-progress-step.is-next .om-step-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.om-step-code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--fg-mute);
+}
+
+.om-section-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.om-section-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--bg);
+  padding: 20px 22px;
+  transition: border-color 0.2s;
+}
+
+.om-section-card:hover {
+  border-color: var(--fg-mute);
+}
+
+.om-card-code {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.om-card-body {
+  min-width: 0;
+}
+
+.om-card-title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--fg);
+  margin: 0;
+}
+
+.om-card-summary {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg-dim);
+  margin: 4px 0 0;
+}
+
+.om-card-status {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.om-board {
+  position: sticky;
+  top: 96px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  padding: 22px;
+}
+
+.om-board-head {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+}
+
+.om-board-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.om-board-sub {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--fg-mute);
+  margin: 8px 0 0;
+}
+
+.om-board-nodes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.om-board-node {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 10px;
+  align-items: center;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+
+.om-node-code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--fg-mute);
+}
+
+.om-node-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--fg-dim);
+}
+
+.om-node-state {
+  grid-column: 1 / -1;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+@media (max-width: 880px) {
+  .om-page {
+    padding: 120px 20px 80px;
+  }
+  .om-layout {
+    grid-template-columns: 1fr;
+  }
+  .om-board {
+    position: static;
+  }
+  .om-hero-meta {
+    gap: 24px;
+  }
+}
+
+/* ─── AI Readiness Map — flow stage, controls, progress meter ─── */
+
+.om-progress-meter {
+  height: 4px;
+  background: var(--rule);
+  border-radius: 999px;
+  margin: 12px 0 0;
+  overflow: hidden;
+}
+
+.om-progress-meter-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.om-progress-step.is-done .om-step-dot {
+  background: var(--fg-dim);
+  border-color: var(--fg-dim);
+}
+
+.om-progress-step.is-current .om-step-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.om-stage {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  padding: 28px;
+}
+
+.om-stage-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.om-stage-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--fg);
+  margin: 8px 0 0;
+}
+
+.om-stage-body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg-dim);
+  max-width: 56ch;
+  margin: 12px 0 0;
+}
+
+.om-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+button.om-board-node {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+button.om-board-node:disabled {
+  cursor: default;
+}
+
+.om-board-node.is-current {
+  border-color: var(--accent);
+}
+
+.om-board-node.is-done .om-node-state {
+  color: var(--accent);
+}
