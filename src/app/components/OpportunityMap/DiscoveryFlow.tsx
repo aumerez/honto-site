@@ -1,13 +1,27 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/context/LocaleContext";
 import OpportunityHero from "./OpportunityHero";
 import SectionProgress from "./SectionProgress";
 import OpportunityBoard from "./OpportunityBoard";
+import BusinessSection from "./BusinessSection";
+import ProcessSection from "./ProcessSection";
+import TeamSection from "./TeamSection";
+import TechStackSection from "./TechStackSection";
+import ContactGate from "./ContactGate";
+import InsightTeaser from "./InsightTeaser";
 import { useOpportunityMapFlow } from "./useOpportunityMapFlow";
+import { generateReport } from "./report";
 import { nextState, prevState, type FlowState } from "./state";
-import type { QuestionSection } from "./schema";
+import {
+  EMPTY_TECH_STACK,
+  QUESTION_SECTIONS,
+  validateContact,
+  type ContactInfo,
+  type QuestionSection,
+} from "./schema";
+import { findMissingRequired, type AnswerValue } from "./questions";
 import type { OmBoardNode, OmCopy, OmSectionKey } from "./types";
 
 type Milestone = { key: OmSectionKey; state: FlowState };
@@ -30,6 +44,22 @@ const STATE_TO_SECTION: Partial<Record<FlowState, OmSectionKey>> = {
   READINESS_REPORT: "report",
 };
 
+const SECTION_KEY: Record<
+  QuestionSection,
+  "company" | "business" | "process" | "team" | "techStack" | "contact"
+> = {
+  BUSINESS_CONTEXT: "company",
+  BUSINESS_GOALS: "business",
+  PROCESS_DRAG: "process",
+  EXPERT_LEVERAGE: "team",
+  SYSTEM_LANDSCAPE: "techStack",
+  CONTACT_GATE: "contact",
+};
+
+function isQuestionSection(s: FlowState): s is QuestionSection {
+  return (QUESTION_SECTIONS as readonly string[]).includes(s);
+}
+
 function nodeStatus(
   m: Milestone,
   flowState: FlowState,
@@ -40,18 +70,15 @@ function nodeStatus(
   return completion[m.state as QuestionSection] ? "done" : "pending";
 }
 
-/**
- * Stateful orchestrator for the AI Readiness Map. Phase 1 wires the full state
- * machine, progress, persistence, resume, start-over, and the skip-tech path.
- * Section bodies are placeholders until the UI flow prompt fills them in.
- */
 export default function DiscoveryFlow() {
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   const copy = t.opportunityMap as OmCopy;
   const flow = useOpportunityMapFlow();
+  const [attempted, setAttempted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setAttempted(false);
     if (flow.flowState !== "LANDING") {
       containerRef.current?.scrollIntoView({
         behavior: "smooth",
@@ -63,10 +90,20 @@ export default function DiscoveryFlow() {
   if (flow.flowState === "LANDING") {
     return (
       <div className="om-page" ref={containerRef}>
-        <OpportunityHero copy={copy} onStart={flow.start} />
+        <OpportunityHero
+          copy={copy}
+          hasSavedProgress={flow.hasSavedProgress}
+          onStart={flow.start}
+          onResume={flow.resume}
+          onStartOver={flow.startOver}
+        />
       </div>
     );
   }
+
+  const slice = currentSlice(flow.flowState);
+  const errors = currentErrors();
+  const stage = stageContent(flow.flowState, copy);
 
   const nodes: OmBoardNode[] = MILESTONES.map((m) => ({
     key: m.key,
@@ -74,18 +111,6 @@ export default function DiscoveryFlow() {
     title: copy.sections[m.key].title,
     status: nodeStatus(m, flow.flowState, flow.completion),
   }));
-
-  const onSelect = (key: string) => {
-    const m = MILESTONES.find((x) => x.key === key);
-    if (m) flow.goTo(m.state);
-  };
-
-  const stage = stageContent(flow.flowState, copy);
-  const showBack = prevState(flow.flowState, flow.techSkipped) !== null;
-  const showNext = nextState(flow.flowState, flow.techSkipped) !== null;
-  const showSkip = flow.flowState === "SYSTEM_LANDSCAPE";
-  const showStartOver =
-    flow.flowState === "READINESS_REPORT" || flow.flowState === "SALES_CTA";
 
   return (
     <div className="om-page" ref={containerRef}>
@@ -103,34 +128,9 @@ export default function DiscoveryFlow() {
             <h2 id="om-stage-h" className="om-stage-title">
               {stage.title}
             </h2>
-            <p className="om-stage-body">{stage.body}</p>
 
-            <div className="om-actions">
-              {showBack ? (
-                <button type="button" className="btn" onClick={flow.back}>
-                  {copy.controls.back}
-                </button>
-              ) : null}
-              {showSkip ? (
-                <button type="button" className="btn" onClick={flow.skipTech}>
-                  {copy.controls.skip}
-                </button>
-              ) : null}
-              {showNext ? (
-                <button
-                  type="button"
-                  className="btn primary"
-                  onClick={flow.next}
-                >
-                  {copy.controls.next}
-                </button>
-              ) : null}
-              {showStartOver ? (
-                <button type="button" className="btn" onClick={flow.startOver}>
-                  {copy.controls.startOver}
-                </button>
-              ) : null}
-            </div>
+            {renderBody()}
+            {renderControls()}
           </section>
         </div>
 
@@ -139,40 +139,245 @@ export default function DiscoveryFlow() {
           subtitle={copy.board.subtitle}
           emptyLabel={copy.board.empty}
           nodes={nodes}
-          onSelect={onSelect}
+          onSelect={(key) => {
+            const m = MILESTONES.find((x) => x.key === key);
+            if (m) flow.goTo(m.state);
+          }}
         />
       </div>
     </div>
   );
+
+  function onChange(id: string, value: AnswerValue) {
+    if (!isQuestionSection(flow.flowState)) return;
+    flow.patch(SECTION_KEY[flow.flowState], { [id]: value });
+  }
+
+  function renderBody() {
+    const fs = flow.flowState;
+    if (fs === "BUSINESS_CONTEXT" || fs === "BUSINESS_GOALS") {
+      return (
+        <BusinessSection
+          section={fs}
+          values={slice}
+          errors={errors}
+          onChange={onChange}
+        />
+      );
+    }
+    if (fs === "PROCESS_DRAG") {
+      return (
+        <ProcessSection values={slice} errors={errors} onChange={onChange} />
+      );
+    }
+    if (fs === "EXPERT_LEVERAGE") {
+      return <TeamSection values={slice} errors={errors} onChange={onChange} />;
+    }
+    if (fs === "SYSTEM_LANDSCAPE") {
+      return (
+        <TechStackSection
+          values={slice}
+          errors={errors}
+          onChange={onChange}
+          note={copy.techNote}
+        />
+      );
+    }
+    if (fs === "TEASER_RESULT") {
+      return (
+        <InsightTeaser
+          answers={flow.answers}
+          bands={copy.signalBands}
+          signalLine={copy.teaser.signalLine}
+          leverageLead={copy.teaser.leverageLead}
+          prioritize={copy.teaser.prioritize}
+        />
+      );
+    }
+    if (fs === "CONTACT_GATE") {
+      return (
+        <ContactGate
+          values={slice}
+          errors={errors}
+          onChange={onChange}
+          privacy={[copy.privacy.line1, copy.privacy.line2, copy.privacy.line3]}
+        />
+      );
+    }
+    if (fs === "READINESS_REPORT") return renderReportShell();
+    return renderSalesCta();
+  }
+
+  function renderReportShell() {
+    const report = generateReport(flow.answers);
+    return (
+      <div className="om-report-shell">
+        <p className="om-stage-body">{copy.report.intro}</p>
+        <dl className="om-report-stats">
+          <div>
+            <dt className="om-meta-label">{copy.report.signalLabel}</dt>
+            <dd className="om-meta-value">
+              {copy.signalBands[report.signal.band]}
+            </dd>
+          </div>
+          <div>
+            <dt className="om-meta-label">{copy.report.phaseLabel}</dt>
+            <dd className="om-meta-value">
+              {report.complexity.estimatedFirstPhase}
+            </dd>
+          </div>
+        </dl>
+        <h3 className="om-report-h3">{copy.report.firstMovesLabel}</h3>
+        <ol className="om-report-moves">
+          {report.firstMoves.map((move) => (
+            <li key={move}>{move}</li>
+          ))}
+        </ol>
+      </div>
+    );
+  }
+
+  function renderSalesCta() {
+    return (
+      <div className="om-sales">
+        <p className="om-stage-body">{copy.sales.body}</p>
+        <a className="btn primary" href={`/${locale}#contact`}>
+          {copy.sales.cta}
+        </a>
+      </div>
+    );
+  }
+
+  function renderControls() {
+    const fs = flow.flowState;
+    const hasBack = prevState(fs, flow.techSkipped) !== null;
+    const showSkip = fs === "SYSTEM_LANDSCAPE";
+    const showAdvance = nextState(fs, flow.techSkipped) !== null;
+    const showStartOver = fs === "READINESS_REPORT" || fs === "SALES_CTA";
+    const advanceLabel =
+      fs === "CONTACT_GATE"
+        ? copy.controls.seeReport
+        : fs === "READINESS_REPORT"
+          ? copy.controls.talkToHonto
+          : copy.controls.next;
+
+    return (
+      <div className="om-actions">
+        {hasBack ? (
+          <button type="button" className="btn" onClick={flow.back}>
+            {copy.controls.back}
+          </button>
+        ) : null}
+        {showSkip ? (
+          <button type="button" className="btn" onClick={flow.skipTech}>
+            {copy.controls.skip}
+          </button>
+        ) : null}
+        {showAdvance ? (
+          <button type="button" className="btn primary" onClick={handleAdvance}>
+            {advanceLabel}
+          </button>
+        ) : null}
+        {showStartOver ? (
+          <button type="button" className="btn" onClick={flow.startOver}>
+            {copy.controls.startOver}
+          </button>
+        ) : null}
+      </div>
+    );
+  }
+
+  function handleAdvance() {
+    const fs = flow.flowState;
+    if (fs === "CONTACT_GATE") {
+      if (!validateContact(flow.answers.contact).ok) {
+        setAttempted(true);
+        return;
+      }
+      flow.next();
+      return;
+    }
+    if (isQuestionSection(fs)) {
+      const missing = findMissingRequired(fs, currentSlice(fs));
+      if (missing.length > 0) {
+        setAttempted(true);
+        return;
+      }
+    }
+    flow.next();
+  }
+
+  function currentSlice(fs: FlowState): Record<string, AnswerValue> {
+    switch (fs) {
+      case "BUSINESS_CONTEXT":
+        return flow.answers.company as unknown as Record<string, AnswerValue>;
+      case "BUSINESS_GOALS":
+        return flow.answers.business as unknown as Record<string, AnswerValue>;
+      case "PROCESS_DRAG":
+        return flow.answers.process as unknown as Record<string, AnswerValue>;
+      case "EXPERT_LEVERAGE":
+        return flow.answers.team as unknown as Record<string, AnswerValue>;
+      case "SYSTEM_LANDSCAPE":
+        return (flow.answers.techStack ??
+          EMPTY_TECH_STACK) as unknown as Record<string, AnswerValue>;
+      case "CONTACT_GATE":
+        return flow.answers.contact as unknown as Record<string, AnswerValue>;
+      default:
+        return {};
+    }
+  }
+
+  function currentErrors(): Record<string, string> {
+    if (!attempted) return {};
+    const fs = flow.flowState;
+    if (fs === "CONTACT_GATE") {
+      const { errors: e } = validateContact(flow.answers.contact);
+      return mapContactErrors(e);
+    }
+    if (isQuestionSection(fs)) {
+      return Object.fromEntries(
+        findMissingRequired(fs, currentSlice(fs)).map((id) => [
+          id,
+          copy.validation.required,
+        ])
+      );
+    }
+    return {};
+  }
+
+  function mapContactErrors(
+    raw: Record<string, string>
+  ): Record<string, string> {
+    const out: Record<string, string> = {};
+    for (const [field, code] of Object.entries(raw)) {
+      if (code === "required") out[field] = copy.validation.required;
+      else if (field === "email") out[field] = copy.validation.invalidEmail;
+      else if (field === ("companyLinkedin" satisfies keyof ContactInfo))
+        out[field] = copy.validation.invalidUrl;
+      else if (field === "phone") out[field] = copy.validation.invalidPhone;
+      else out[field] = copy.validation.required;
+    }
+    return out;
+  }
 }
 
 function stageContent(
   flowState: FlowState,
   copy: OmCopy
-): { eyebrow: string; title: string; body: string } {
+): { eyebrow: string; title: string } {
   const sectionKey = STATE_TO_SECTION[flowState];
   if (sectionKey && flowState !== "READINESS_REPORT") {
     const s = copy.sections[sectionKey];
-    return { eyebrow: s.code, title: s.title, body: copy.placeholders.section };
+    return { eyebrow: s.code, title: s.title };
   }
   if (flowState === "TEASER_RESULT") {
-    return {
-      eyebrow: "",
-      title: copy.placeholders.teaserTitle,
-      body: copy.placeholders.teaserBody,
-    };
+    return { eyebrow: "", title: copy.teaser.title };
   }
   if (flowState === "CONTACT_GATE") {
-    return {
-      eyebrow: "",
-      title: copy.placeholders.gateTitle,
-      body: copy.placeholders.gateBody,
-    };
+    return { eyebrow: "", title: copy.gate.title };
   }
-  // READINESS_REPORT and SALES_CTA
-  return {
-    eyebrow: "",
-    title: copy.placeholders.reportTitle,
-    body: copy.placeholders.reportBody,
-  };
+  if (flowState === "READINESS_REPORT") {
+    return { eyebrow: "", title: copy.report.title };
+  }
+  return { eyebrow: "", title: copy.sales.title };
 }

@@ -1,9 +1,9 @@
 /**
- * Honto AI Readiness Map (internal: Opportunity Map) — shared copy types.
- *
- * Phase 1 foundation: types for the static page shell only. Scoring, questions,
- * persistence, and the live flow are added in later prompts.
+ * Honto AI Readiness Map (internal: Opportunity Map) — shared copy types for
+ * the page shell and flow chrome.
  */
+
+import type { SignalBand } from "./schema";
 
 export type OmSectionCopy = {
   code: string;
@@ -47,16 +47,34 @@ export type OmCopy = {
     next: string;
     skip: string;
     startOver: string;
+    resume: string;
+    seeReport: string;
+    talkToHonto: string;
   };
-  placeholders: {
-    section: string;
-    teaserTitle: string;
-    teaserBody: string;
-    gateTitle: string;
-    gateBody: string;
-    reportTitle: string;
-    reportBody: string;
+  signalBands: Record<SignalBand, string>;
+  teaser: {
+    title: string;
+    signalLine: string;
+    leverageLead: string;
+    prioritize: string;
   };
+  gate: { title: string };
+  privacy: { line1: string; line2: string; line3: string };
+  techNote: string;
+  validation: {
+    required: string;
+    invalidEmail: string;
+    invalidUrl: string;
+    invalidPhone: string;
+  };
+  report: {
+    title: string;
+    intro: string;
+    signalLabel: string;
+    phaseLabel: string;
+    firstMovesLabel: string;
+  };
+  sales: { title: string; body: string; cta: string };
 };
 
 /** A milestone shown in the progress rail and the system map board. */

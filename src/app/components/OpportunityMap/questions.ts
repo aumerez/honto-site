@@ -1,10 +1,10 @@
 /**
  * Honto AI Readiness Map — V1 question definitions (data-driven).
  *
- * Source copy is inline English; i18n migration to the locale dictionaries
- * happens in the Analytics & i18n prompt. Every question carries a stable `id`
- * (reused as the future i18n key), section, type, required flag, and options
- * where applicable. All wording is privacy-safe — see `privacy.ts`.
+ * Source copy is authored inline as English; localized strings live in the
+ * locale dictionaries. Every question carries a stable `id` (reused as the
+ * locale key), section, type, required flag, and options where applicable.
+ * All wording is privacy-safe — see `privacy.ts`.
  */
 
 import {
@@ -536,14 +536,6 @@ export const QUESTIONS: Question[] = [
     label: "Your role",
     required: true,
     options: toOptions(ROLES, ROLE_LABELS),
-  },
-  {
-    id: "company",
-    section: "CONTACT_GATE",
-    type: "text",
-    label: "Company",
-    required: true,
-    maxLength: FIELD_LIMITS.shortText,
   },
   {
     id: "phone",

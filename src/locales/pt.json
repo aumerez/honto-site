@@ -768,16 +768,49 @@
       "back": "Voltar",
       "next": "Continuar",
       "skip": "Pular esta seção",
-      "startOver": "Recomeçar"
+      "startOver": "Recomeçar",
+      "resume": "Retomar diagnóstico",
+      "seeReport": "Ver meu mapa de maturidade",
+      "talkToHonto": "Revisar com a Honto"
     },
-    "placeholders": {
-      "section": "Esta seção está em construção — a navegação e o progresso já funcionam.",
-      "teaserTitle": "Sinal preliminar",
-      "teaserBody": "Seu sinal de oportunidade preliminar aparecerá aqui.",
-      "gateTitle": "Desbloqueie seu relatório de maturidade",
-      "gateBody": "Compartilhe seus dados para gerar seu mapa completo.",
-      "reportTitle": "Seu mapa de maturidade",
-      "reportBody": "Seu relatório completo aparecerá aqui."
+    "signalBands": {
+      "low": "baixa",
+      "moderate": "moderada",
+      "strong": "forte",
+      "veryHigh": "muito alta"
+    },
+    "teaser": {
+      "title": "Seu sinal direcional",
+      "signalLine": "O mapa indica uma oportunidade direcional {band} para alavancar a IA.",
+      "leverageLead": "Maior sinal de vantagem:",
+      "prioritize": "Seu relatório completo priorizará os fluxos de trabalho, papéis e sistemas onde a Honto pode reduzir o trabalho manual."
+    },
+    "gate": {
+      "title": "Desbloqueie seu mapa de maturidade"
+    },
+    "privacy": {
+      "line1": "Não pedimos senhas, chaves de API, documentos privados, chats privados ou credenciais.",
+      "line2": "Use apenas informações públicas da empresa.",
+      "line3": "O inventário técnico é direcional e não se conecta aos seus sistemas."
+    },
+    "techNote": "Inventário direcional — não se conecta aos seus sistemas.",
+    "validation": {
+      "required": "Este campo é obrigatório.",
+      "invalidEmail": "Insira um e-mail válido.",
+      "invalidUrl": "Insira uma URL válida (https://…).",
+      "invalidPhone": "Apenas dígitos (7–15)."
+    },
+    "report": {
+      "title": "Seu mapa de maturidade em IA",
+      "intro": "Uma leitura direcional baseada nas suas respostas. Sua revisão com a Honto a transforma em um plano orçado.",
+      "signalLabel": "Sinal de oportunidade de IA",
+      "phaseLabel": "Primeira fase estimada",
+      "firstMovesLabel": "Primeiros passos"
+    },
+    "sales": {
+      "title": "Revise seu mapa com a Honto",
+      "body": "Percorra seu mapa de maturidade com nossa equipe e saia com uma primeira fase concreta.",
+      "cta": "Agende uma revisão com a Honto"
     }
   }
 }

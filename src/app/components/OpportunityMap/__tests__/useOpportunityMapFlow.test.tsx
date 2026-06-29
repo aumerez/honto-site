@@ -50,9 +50,11 @@ describe("useOpportunityMapFlow", () => {
     );
     expect(result.current.completion.BUSINESS_CONTEXT).toBe(true);
     expect(result.current.completedSections).toBe(1);
+    // Company name carries onto the contact record (never re-asked).
+    expect(result.current.answers.contact.company).toBe("Acme");
   });
 
-  it("resumes a persisted session after remount", () => {
+  it("offers resume after remount and resumes to the saved state", () => {
     const first = renderHook(() => useOpportunityMapFlow());
     act(() => first.result.current.start());
     act(() => first.result.current.next());
@@ -60,6 +62,10 @@ describe("useOpportunityMapFlow", () => {
     first.unmount();
 
     const second = renderHook(() => useOpportunityMapFlow());
+    // Lands on LANDING with a resume option, rather than auto-jumping.
+    expect(second.result.current.flowState).toBe("LANDING");
+    expect(second.result.current.hasSavedProgress).toBe(true);
+    act(() => second.result.current.resume());
     expect(second.result.current.flowState).toBe("BUSINESS_GOALS");
   });
 
@@ -73,10 +79,7 @@ describe("useOpportunityMapFlow", () => {
     expect(result.current.flowState).toBe("LANDING");
     expect(result.current.completedSections).toBe(0);
     expect(result.current.answers.company.companyName).toBe("");
-    // Persistence is reset to a fresh session (not stale progress).
-    const persisted = JSON.parse(
-      window.localStorage.getItem(STORAGE_KEY) ?? "{}"
-    );
-    expect(persisted.state).toBe("LANDING");
+    // Saved progress is cleared.
+    expect(window.localStorage.getItem(STORAGE_KEY)).toBeNull();
   });
 });

@@ -9,10 +9,16 @@ import type { OmCopy } from "./types";
  */
 export default function OpportunityHero({
   copy,
+  hasSavedProgress,
   onStart,
+  onResume,
+  onStartOver,
 }: {
   copy: OmCopy;
+  hasSavedProgress: boolean;
   onStart: () => void;
+  onResume: () => void;
+  onStartOver: () => void;
 }) {
   return (
     <header className="om-hero">
@@ -33,9 +39,20 @@ export default function OpportunityHero({
       </dl>
 
       <div className="om-hero-actions">
-        <button type="button" className="btn primary" onClick={onStart}>
-          {copy.cta}
-        </button>
+        {hasSavedProgress ? (
+          <>
+            <button type="button" className="btn primary" onClick={onResume}>
+              {copy.controls.resume}
+            </button>
+            <button type="button" className="btn" onClick={onStartOver}>
+              {copy.controls.startOver}
+            </button>
+          </>
+        ) : (
+          <button type="button" className="btn primary" onClick={onStart}>
+            {copy.cta}
+          </button>
+        )}
       </div>
     </header>
   );

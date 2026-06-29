@@ -14,12 +14,19 @@ import {
 } from "./state";
 import { clearFlow, freshAnswers, loadFlow, saveFlow } from "./storage";
 
-type Snapshot = { flowState: FlowState; answers: OpportunityMapSubmission };
-type State = Snapshot & { hydrated: boolean };
+type State = {
+  flowState: FlowState;
+  answers: OpportunityMapSubmission;
+  /** Saved progress to offer on the landing screen (null = none). */
+  resumeState: FlowState | null;
+  hydrated: boolean;
+};
 
 type Action =
-  | { type: "hydrate"; snapshot: Snapshot | null }
+  | { type: "hydrate"; state: FlowState; answers: OpportunityMapSubmission }
+  | { type: "hydrateEmpty" }
   | { type: "start" }
+  | { type: "resume" }
   | { type: "next" }
   | { type: "back" }
   | { type: "goTo"; to: FlowState }
@@ -28,20 +35,36 @@ type Action =
   | { type: "reset" };
 
 function initial(): State {
-  return { flowState: "LANDING", answers: freshAnswers(), hydrated: false };
+  return {
+    flowState: "LANDING",
+    answers: freshAnswers(),
+    resumeState: null,
+    hydrated: false,
+  };
 }
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "hydrate":
-      return action.snapshot
-        ? { ...action.snapshot, hydrated: true }
-        : { ...state, hydrated: true };
+      return {
+        flowState: "LANDING",
+        answers: action.answers,
+        resumeState: action.state !== "LANDING" ? action.state : null,
+        hydrated: true,
+      };
 
-    case "start": {
-      if (state.flowState !== "LANDING") return state;
-      const to = nextState("LANDING", state.answers.techSkipped);
-      return to ? { ...state, flowState: to } : state;
+    case "hydrateEmpty":
+      return { ...state, hydrated: true };
+
+    case "start":
+    case "resume": {
+      const to =
+        action.type === "resume" && state.resumeState
+          ? state.resumeState
+          : nextState("LANDING", state.answers.techSkipped);
+      return to
+        ? { ...state, flowState: to, resumeState: null }
+        : { ...state, resumeState: null };
     }
 
     case "next": {
@@ -84,18 +107,33 @@ function reducer(state: State, action: Action): State {
           },
         };
       }
-      const section = state.answers[action.key];
-      return {
-        ...state,
-        answers: {
-          ...state.answers,
-          [action.key]: { ...section, ...action.patch },
-        },
-      };
+      const merged = { ...state.answers[action.key], ...action.patch };
+      const next = {
+        ...state.answers,
+        [action.key]: merged,
+      } as OpportunityMapSubmission;
+      // Carry the company name from business context onto the contact record so
+      // it is never asked for twice.
+      const answers =
+        action.key === "company"
+          ? {
+              ...next,
+              contact: {
+                ...next.contact,
+                company: (merged as { companyName?: string }).companyName ?? "",
+              },
+            }
+          : next;
+      return { ...state, answers };
     }
 
     case "reset":
-      return { flowState: "LANDING", answers: freshAnswers(), hydrated: true };
+      return {
+        flowState: "LANDING",
+        answers: freshAnswers(),
+        resumeState: null,
+        hydrated: true,
+      };
 
     default:
       return state;
@@ -105,20 +143,25 @@ function reducer(state: State, action: Action): State {
 export function useOpportunityMapFlow() {
   const [state, dispatch] = useReducer(reducer, undefined, initial);
 
-  // Hydrate from a prior session (or start fresh) after mount.
+  // Load any prior session after mount, surfacing it as a resume option.
   useEffect(() => {
     const loaded = loadFlow();
-    dispatch({
-      type: "hydrate",
-      snapshot: loaded
-        ? { flowState: loaded.state, answers: loaded.answers }
-        : null,
-    });
+    if (loaded) {
+      dispatch({
+        type: "hydrate",
+        state: loaded.state,
+        answers: loaded.answers,
+      });
+    } else {
+      dispatch({ type: "hydrateEmpty" });
+    }
   }, []);
 
-  // Persist after every change, once hydrated.
+  // Persist after each change. Don't overwrite saved progress while parked on
+  // the landing screen (the saved session is the resume target).
   useEffect(() => {
     if (!state.hydrated) return;
+    if (state.flowState === "LANDING") return;
     saveFlow(state.flowState, state.answers);
   }, [state.flowState, state.answers, state.hydrated]);
 
@@ -127,10 +170,12 @@ export function useOpportunityMapFlow() {
     flowState: state.flowState,
     answers: state.answers,
     techSkipped: state.answers.techSkipped,
+    hasSavedProgress: state.resumeState !== null,
     progress: progressFor(state.flowState, state.answers.techSkipped),
     completion: sectionCompletion(state.answers),
     completedSections: completedCount(state.answers),
     start: () => dispatch({ type: "start" }),
+    resume: () => dispatch({ type: "resume" }),
     next: () => dispatch({ type: "next" }),
     back: () => dispatch({ type: "back" }),
     goTo: (to: FlowState) => dispatch({ type: "goTo", to }),

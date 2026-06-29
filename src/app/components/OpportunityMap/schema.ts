@@ -10,8 +10,8 @@
  * `privacy.ts`. This module is the dependency root — it imports neither, so the
  * three files form a clean acyclic graph (questions → schema, privacy → schema).
  *
- * Question/option copy currently lives inline (source English). i18n migration
- * to the locale dictionaries happens in the Analytics & i18n prompt.
+ * Question/option copy is authored inline as source English; localized strings
+ * live in the locale dictionaries.
  */
 
 /* ── Flow sections (the full 10-state journey) ───────────────────────── */
@@ -391,42 +391,70 @@ export type OpportunityMapSubmission = {
   contact: ContactInfo;
 };
 
-/* ── Result contracts (implemented in the scoring & report prompts) ───── */
+/* ── Result contracts (implemented in scoring.ts / insights.ts / report.ts) ── */
 
 export type SignalBand = "low" | "moderate" | "strong" | "veryHigh";
 export type ComplexityBand = "simple" | "structured" | "advanced";
+export type Confidence = "estimated" | "approximate";
+export type ImpactLevel = "low" | "medium" | "high";
 
-export type ScoreResult = {
+/** A single, traceable contributor to a score. */
+export type ScoreFactor = { key: string; label: string; points: number };
+
+export type SignalResult = {
   /** AI Opportunity Signal, 0–100 — higher = more leverage for Honto. */
-  signal: number;
-  signalBand: SignalBand;
-  complexity: ComplexityBand;
-  /** "approximate" when the tech section was skipped. */
-  complexityConfidence: "estimated" | "approximate";
-  factors: string[];
+  score: number;
+  band: SignalBand;
+  explanation: string;
+  factors: ScoreFactor[];
 };
 
-export type OpportunityInsight = {
+export type ComplexityResult = {
+  band: ComplexityBand;
+  estimatedFirstPhase: string;
+  /** "approximate" when the tech section was skipped. */
+  confidence: Confidence;
+  reasons: ScoreFactor[];
+};
+
+export type ScoreResult = {
+  signal: SignalResult;
+  complexity: ComplexityResult;
+};
+
+/** A generated insight with a suggested Honto action. */
+export type InsightItem = {
   key: string;
-  pillar: QuestionSection;
-  impact: "low" | "medium" | "high";
+  label: string;
+  impact: ImpactLevel;
+  action: string;
+};
+
+export type SystemReadiness = {
+  summary: string;
+  confidence: Confidence;
+  items: InsightItem[];
 };
 
 export type OpportunityInsights = {
-  items: OpportunityInsight[];
+  businessLeverage: InsightItem[];
+  processDrag: InsightItem[];
+  expertLeverage: InsightItem[];
+  systemReadiness: SystemReadiness;
 };
 
-export type ReportCardModel = {
-  code: string;
-  titleKey: string;
-  impact: "low" | "medium" | "high" | "info";
-  actionKey: string;
-};
+export type ThirtyDayWeek = { week: number; focus: string; detail: string };
 
 export type OpportunityReport = {
-  cards: ReportCardModel[];
+  signal: SignalResult;
+  complexity: ComplexityResult;
+  insights: OpportunityInsights;
+  /** Exactly three, ordered by impact. */
   firstMoves: string[];
-  thirtyDayPlan: string[];
+  thirtyDayPlan: ThirtyDayWeek[];
+  salesAngle: string;
+  demoScenario: string;
+  techSkipped: boolean;
 };
 
 /* ── Empty defaults ──────────────────────────────────────────────────── */

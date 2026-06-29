@@ -19,9 +19,6 @@ import {
   isValidUrl,
   validateContact,
   type ContactInfo,
-  type OpportunityInsights,
-  type OpportunityReport,
-  type ScoreResult,
   type Section,
 } from "../schema";
 
@@ -143,38 +140,8 @@ describe("OpportunityMap schema", () => {
     });
   });
 
-  describe("result type contracts", () => {
-    it("describes a well-formed ScoreResult / insights / report", () => {
-      const score: ScoreResult = {
-        signal: 62,
-        signalBand: "strong",
-        complexity: "structured",
-        complexityConfidence: "estimated",
-        factors: ["high manual work"],
-      };
-      const insights: OpportunityInsights = {
-        items: [
-          { key: "procAutomateManual", pillar: "PROCESS_DRAG", impact: "high" },
-        ],
-      };
-      const report: OpportunityReport = {
-        cards: [
-          {
-            code: "[02]",
-            titleKey: "signal",
-            impact: "high",
-            actionKey: "act",
-          },
-        ],
-        firstMoves: ["Automate reporting"],
-        thirtyDayPlan: ["Week 1: discovery"],
-      };
-      expect(score.signal).toBe(62);
-      expect(insights.items[0].pillar).toBe("PROCESS_DRAG");
-      expect(report.cards).toHaveLength(1);
-      // The submission model defaults to a skipped tech stack.
-      expect(EMPTY_SUBMISSION.techStack).toBeNull();
-      expect(EMPTY_SUBMISSION.techSkipped).toBe(false);
-    });
+  it("defaults the submission to a not-yet-visited tech stack", () => {
+    expect(EMPTY_SUBMISSION.techStack).toBeNull();
+    expect(EMPTY_SUBMISSION.techSkipped).toBe(false);
   });
 });

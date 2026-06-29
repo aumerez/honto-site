@@ -1061,16 +1061,49 @@
       "back": "Back",
       "next": "Continue",
       "skip": "Skip this section",
-      "startOver": "Start over"
+      "startOver": "Start over",
+      "resume": "Resume diagnostic",
+      "seeReport": "See my readiness map",
+      "talkToHonto": "Review with Honto"
     },
-    "placeholders": {
-      "section": "This section is being built — navigation and progress are live.",
-      "teaserTitle": "Preliminary signal",
-      "teaserBody": "Your preliminary opportunity signal will appear here.",
-      "gateTitle": "Unlock your readiness report",
-      "gateBody": "Share your details to generate your full map.",
-      "reportTitle": "Your readiness map",
-      "reportBody": "Your full readiness report will appear here."
+    "signalBands": {
+      "low": "low",
+      "moderate": "moderate",
+      "strong": "strong",
+      "veryHigh": "very high"
+    },
+    "teaser": {
+      "title": "Your directional signal",
+      "signalLine": "The map indicates a {band} directional opportunity for AI leverage.",
+      "leverageLead": "Strongest leverage signal:",
+      "prioritize": "Your full report will prioritize the workflows, roles, and systems where Honto can reduce manual drag."
+    },
+    "gate": {
+      "title": "Unlock your readiness map"
+    },
+    "privacy": {
+      "line1": "We do not ask for passwords, API keys, private documents, private chats, or credentials.",
+      "line2": "Use public company information only.",
+      "line3": "The technical inventory is directional and does not connect to your systems."
+    },
+    "techNote": "Directional inventory only — this does not connect to your systems.",
+    "validation": {
+      "required": "This field is required.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidUrl": "Enter a valid URL (https://…).",
+      "invalidPhone": "Enter digits only (7–15)."
+    },
+    "report": {
+      "title": "Your AI readiness map",
+      "intro": "A directional readout based on your answers. Your review with Honto turns this into a costed plan.",
+      "signalLabel": "AI opportunity signal",
+      "phaseLabel": "Estimated first phase",
+      "firstMovesLabel": "First moves"
+    },
+    "sales": {
+      "title": "Review your map with Honto",
+      "body": "Walk through your readiness map with our team and leave with a concrete first phase.",
+      "cta": "Book a review with Honto"
     }
   }
 }

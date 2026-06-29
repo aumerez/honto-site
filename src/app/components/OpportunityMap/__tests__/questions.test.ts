@@ -63,7 +63,7 @@ describe("OpportunityMap questions", () => {
     expect(requiredIds("PROCESS_DRAG")).toEqual(["manualWorkLevel"]);
     expect(requiredIds("EXPERT_LEVERAGE")).toEqual(["overloadedFunctions"]);
     expect(requiredIds("CONTACT_GATE")).toEqual(
-      ["company", "consent", "contactName", "email", "role"].sort()
+      ["consent", "contactName", "email", "role"].sort()
     );
   });
 
