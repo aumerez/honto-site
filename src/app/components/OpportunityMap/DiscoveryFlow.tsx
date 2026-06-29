@@ -19,6 +19,7 @@ import {
   QUESTION_SECTIONS,
   validateContact,
   type ContactInfo,
+  type OpportunityMapSubmission,
   type QuestionSection,
 } from "./schema";
 import { findMissingRequired, type AnswerValue } from "./questions";
@@ -68,6 +69,18 @@ function nodeStatus(
   if (m.state === flowState) return "current";
   if (m.key === "report") return flowState === "SALES_CTA" ? "done" : "pending";
   return completion[m.state as QuestionSection] ? "done" : "pending";
+}
+
+/**
+ * Best-effort lead notification. The report is shown locally regardless of
+ * delivery, so failures are swallowed and never block the user.
+ */
+function submitLead(answers: OpportunityMapSubmission) {
+  void fetch("/api/opportunity-map", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ submission: answers }),
+  }).catch(() => {});
 }
 
 export default function DiscoveryFlow() {
@@ -272,6 +285,7 @@ export default function DiscoveryFlow() {
         setAttempted(true);
         return;
       }
+      submitLead(flow.answers);
       flow.next();
       return;
     }
