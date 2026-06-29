@@ -48,6 +48,13 @@ describe("report generation", () => {
     );
   });
 
+  it("builds an executive summary", () => {
+    const r = generateReport(richSubmission());
+    expect(r.executive.summary.length).toBeGreaterThan(0);
+    expect(r.executive.strongest.length).toBeGreaterThan(0);
+    expect(r.executive.constraint.length).toBeGreaterThan(0);
+  });
+
   it("returns exactly three first moves", () => {
     expect(generateReport(richSubmission()).firstMoves).toHaveLength(3);
   });

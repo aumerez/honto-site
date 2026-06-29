@@ -11,8 +11,8 @@ import TeamSection from "./TeamSection";
 import TechStackSection from "./TechStackSection";
 import ContactGate from "./ContactGate";
 import InsightTeaser from "./InsightTeaser";
+import OpportunityReport from "./OpportunityReport";
 import { useOpportunityMapFlow } from "./useOpportunityMapFlow";
-import { generateReport } from "./report";
 import { nextState, prevState, type FlowState } from "./state";
 import {
   EMPTY_TECH_STACK,
@@ -204,37 +204,16 @@ export default function DiscoveryFlow() {
         />
       );
     }
-    if (fs === "READINESS_REPORT") return renderReportShell();
+    if (fs === "READINESS_REPORT") {
+      return (
+        <OpportunityReport
+          answers={flow.answers}
+          copy={copy}
+          onReview={flow.next}
+        />
+      );
+    }
     return renderSalesCta();
-  }
-
-  function renderReportShell() {
-    const report = generateReport(flow.answers);
-    return (
-      <div className="om-report-shell">
-        <p className="om-stage-body">{copy.report.intro}</p>
-        <dl className="om-report-stats">
-          <div>
-            <dt className="om-meta-label">{copy.report.signalLabel}</dt>
-            <dd className="om-meta-value">
-              {copy.signalBands[report.signal.band]}
-            </dd>
-          </div>
-          <div>
-            <dt className="om-meta-label">{copy.report.phaseLabel}</dt>
-            <dd className="om-meta-value">
-              {report.complexity.estimatedFirstPhase}
-            </dd>
-          </div>
-        </dl>
-        <h3 className="om-report-h3">{copy.report.firstMovesLabel}</h3>
-        <ol className="om-report-moves">
-          {report.firstMoves.map((move) => (
-            <li key={move}>{move}</li>
-          ))}
-        </ol>
-      </div>
-    );
   }
 
   function renderSalesCta() {
@@ -252,14 +231,13 @@ export default function DiscoveryFlow() {
     const fs = flow.flowState;
     const hasBack = prevState(fs, flow.techSkipped) !== null;
     const showSkip = fs === "SYSTEM_LANDSCAPE";
-    const showAdvance = nextState(fs, flow.techSkipped) !== null;
+    // The report carries its own "Review with Honto" CTA (the [10] card), so no
+    // separate advance button there.
+    const showAdvance =
+      nextState(fs, flow.techSkipped) !== null && fs !== "READINESS_REPORT";
     const showStartOver = fs === "READINESS_REPORT" || fs === "SALES_CTA";
     const advanceLabel =
-      fs === "CONTACT_GATE"
-        ? copy.controls.seeReport
-        : fs === "READINESS_REPORT"
-          ? copy.controls.talkToHonto
-          : copy.controls.next;
+      fs === "CONTACT_GATE" ? copy.controls.seeReport : copy.controls.next;
 
     return (
       <div className="om-actions">

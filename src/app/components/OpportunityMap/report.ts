@@ -8,10 +8,14 @@
  */
 
 import type {
+  ComplexityResult,
+  ExecutiveSummary,
   ImpactLevel,
   InsightItem,
+  OpportunityInsights,
   OpportunityMapSubmission,
   OpportunityReport,
+  SignalResult,
   ThirtyDayWeek,
 } from "./schema";
 import { computeComplexity, computeSignal, signalBandLabel } from "./scoring";
@@ -114,6 +118,28 @@ function demoScenario(
   return `Show a working agent that takes over ${topDrag} for the ${area} team — the fastest visible win.`;
 }
 
+function executive(
+  s: OpportunityMapSubmission,
+  signal: SignalResult,
+  complexity: ComplexityResult,
+  insights: OpportunityInsights
+): ExecutiveSummary {
+  const company = s.company.companyName.trim() || "This organization";
+  const strongest =
+    insights.businessLeverage[0]?.label ??
+    insights.processDrag[0]?.label ??
+    insights.expertLeverage[0]?.label ??
+    "operational automation";
+  const constraint =
+    complexity.reasons[0]?.label ??
+    insights.systemReadiness.items[0]?.label ??
+    "limited integration today";
+  const summary = `${company} shows a ${signalBandLabel(
+    signal.band
+  ).toLowerCase()} for AI leverage. The clearest near-term win is ${strongest.toLowerCase()}; the main thing to work through is ${constraint.toLowerCase()}.`;
+  return { summary, strongest, constraint };
+}
+
 export function generateReport(s: OpportunityMapSubmission): OpportunityReport {
   const signal = computeSignal(s);
   const complexity = computeComplexity(s);
@@ -123,6 +149,7 @@ export function generateReport(s: OpportunityMapSubmission): OpportunityReport {
   const plan = thirtyDayPlan(s, moves, complexity.estimatedFirstPhase);
 
   return {
+    executive: executive(s, signal, complexity, insights),
     signal,
     complexity,
     insights,

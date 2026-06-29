@@ -445,7 +445,14 @@ export type OpportunityInsights = {
 
 export type ThirtyDayWeek = { week: number; focus: string; detail: string };
 
+export type ExecutiveSummary = {
+  summary: string;
+  strongest: string;
+  constraint: string;
+};
+
 export type OpportunityReport = {
+  executive: ExecutiveSummary;
   signal: SignalResult;
   complexity: ComplexityResult;
   insights: OpportunityInsights;

@@ -803,9 +803,44 @@
     "report": {
       "title": "Seu mapa de maturidade em IA",
       "intro": "Uma leitura direcional baseada nas suas respostas. Sua revisão com a Honto a transforma em um plano orçado.",
-      "signalLabel": "Sinal de oportunidade de IA",
-      "phaseLabel": "Primeira fase estimada",
-      "firstMovesLabel": "Primeiros passos"
+      "hontoAction": "Ação sugerida da Honto",
+      "driversLabel": "Fatores principais",
+      "scoreOf": "/ 100",
+      "scopeLabel": "Escopo inicial estimado",
+      "complexityLabel": "Complexidade de implementação",
+      "integrationLabel": "Prontidão de integração",
+      "dataLabel": "Prontidão de dados",
+      "skippedNote": "As recomendações de sistemas são direcionais — valide-as em uma revisão técnica.",
+      "emptyMap": "Nada notável surgiu aqui a partir das suas respostas.",
+      "weekLabel": "Semana {n}",
+      "executiveStrongest": "Maior vantagem",
+      "executiveConstraint": "Principal restrição",
+      "sequencingLabel": "Sequência sugerida",
+      "impact": {
+        "low": "Baixa",
+        "medium": "Moderada",
+        "high": "Alta",
+        "info": "Info"
+      },
+      "complexityBands": {
+        "simple": "Simples",
+        "structured": "Estruturada",
+        "advanced": "Avançada"
+      },
+      "cards": {
+        "executive": "Resumo executivo",
+        "signal": "Sinal de oportunidade de IA",
+        "business": "Mapa de vantagem de negócio",
+        "process": "Mapa de atrito de processos",
+        "expert": "Mapa de vantagem da equipe",
+        "system": "Prontidão de sistemas",
+        "path": "Caminho de implementação",
+        "moves": "Primeiros três passos",
+        "plan": "Plano operacional de 30 dias",
+        "review": "Revisar com a Honto"
+      },
+      "reviewBody": "Percorra seu mapa com nossa equipe e saia com uma primeira fase concreta.",
+      "reviewCta": "Revisar com a Honto"
     },
     "sales": {
       "title": "Revise seu mapa com a Honto",

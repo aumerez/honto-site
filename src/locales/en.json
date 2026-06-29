@@ -1096,9 +1096,44 @@
     "report": {
       "title": "Your AI readiness map",
       "intro": "A directional readout based on your answers. Your review with Honto turns this into a costed plan.",
-      "signalLabel": "AI opportunity signal",
-      "phaseLabel": "Estimated first phase",
-      "firstMovesLabel": "First moves"
+      "hontoAction": "Suggested Honto action",
+      "driversLabel": "Key drivers",
+      "scoreOf": "/ 100",
+      "scopeLabel": "Estimated initial scope",
+      "complexityLabel": "Implementation complexity",
+      "integrationLabel": "Integration readiness",
+      "dataLabel": "Data readiness",
+      "skippedNote": "System recommendations are directional — validate them in a technical review.",
+      "emptyMap": "Nothing notable surfaced here from your answers.",
+      "weekLabel": "Week {n}",
+      "executiveStrongest": "Strongest leverage",
+      "executiveConstraint": "Main constraint",
+      "sequencingLabel": "Suggested sequence",
+      "impact": {
+        "low": "Low",
+        "medium": "Moderate",
+        "high": "High",
+        "info": "Info"
+      },
+      "complexityBands": {
+        "simple": "Simple",
+        "structured": "Structured",
+        "advanced": "Advanced"
+      },
+      "cards": {
+        "executive": "Executive readout",
+        "signal": "AI opportunity signal",
+        "business": "Business leverage map",
+        "process": "Process drag map",
+        "expert": "Expert leverage map",
+        "system": "System readiness",
+        "path": "Implementation path",
+        "moves": "First three moves",
+        "plan": "30-day operating plan",
+        "review": "Review with Honto"
+      },
+      "reviewBody": "Walk through your map with our team and leave with a concrete first phase.",
+      "reviewCta": "Review with Honto"
     },
     "sales": {
       "title": "Review your map with Honto",

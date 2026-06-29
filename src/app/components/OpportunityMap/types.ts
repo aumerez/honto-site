@@ -3,7 +3,7 @@
  * the page shell and flow chrome.
  */
 
-import type { SignalBand } from "./schema";
+import type { ComplexityBand, SignalBand } from "./schema";
 
 export type OmSectionCopy = {
   code: string;
@@ -70,9 +70,35 @@ export type OmCopy = {
   report: {
     title: string;
     intro: string;
-    signalLabel: string;
-    phaseLabel: string;
-    firstMovesLabel: string;
+    hontoAction: string;
+    driversLabel: string;
+    scoreOf: string;
+    scopeLabel: string;
+    complexityLabel: string;
+    integrationLabel: string;
+    dataLabel: string;
+    skippedNote: string;
+    emptyMap: string;
+    weekLabel: string;
+    executiveStrongest: string;
+    executiveConstraint: string;
+    sequencingLabel: string;
+    impact: { low: string; medium: string; high: string; info: string };
+    complexityBands: Record<ComplexityBand, string>;
+    cards: {
+      executive: string;
+      signal: string;
+      business: string;
+      process: string;
+      expert: string;
+      system: string;
+      path: string;
+      moves: string;
+      plan: string;
+      review: string;
+    };
+    reviewBody: string;
+    reviewCta: string;
   };
   sales: { title: string; body: string; cta: string };
 };
