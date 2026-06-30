@@ -22,6 +22,15 @@ const BANNED_PHRASES = [
   "just connect everything",
 ];
 
+const BANNED_DATA_TERMS = [
+  "password",
+  "api key",
+  "private document",
+  "private chat",
+  "private repo",
+  "employee linkedin",
+];
+
 describe("Opportunity Map i18n", () => {
   it("defines opportunityMap copy in every supported locale", () => {
     for (const l of LOCALES) {
@@ -55,6 +64,23 @@ describe("Opportunity Map i18n", () => {
       const text = JSON.stringify(dicts[l].opportunityMap).toLowerCase();
       for (const phrase of BANNED_PHRASES) {
         expect(text).not.toContain(phrase);
+      }
+    }
+  });
+
+  it("never asks for banned/private data in public copy", () => {
+    // The privacy notices intentionally name these items in the negative
+    // ("we do not ask for…"), so they are excluded from the asking-copy scan.
+    for (const l of LOCALES) {
+      const om = { ...dicts[l].opportunityMap } as Record<string, unknown> & {
+        privacy?: unknown;
+        meta?: { privacy?: string };
+      };
+      delete om.privacy;
+      if (om.meta) om.meta = { ...om.meta, privacy: "" };
+      const asking = JSON.stringify(om).toLowerCase();
+      for (const term of BANNED_DATA_TERMS) {
+        expect(asking).not.toContain(term);
       }
     }
   });

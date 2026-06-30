@@ -172,6 +172,18 @@ describe("/api/opportunity-map POST", () => {
       }
     });
 
+    it("accepts the skip-tech path and notes the skipped stack", async () => {
+      const s = validSubmission();
+      s.techStack = null;
+      s.techSkipped = true;
+      const res = await POST(makeRequest({ submission: s }));
+      expect(res.status).toBe(200);
+      expect((await jsonBody(res)).delivery).toBe("sent");
+      const args = sendMock.mock.calls[0][0] as { text: string };
+      expect(args.text).toContain("Current stack: Skipped");
+      expect(args.text).toContain("Integration readiness: Not provided");
+    });
+
     it("stubs delivery in local dev when email is not configured", async () => {
       vi.stubEnv("RESEND_API_KEY", "");
       const res = await POST(makeRequest({ submission: validSubmission() }));

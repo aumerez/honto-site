@@ -80,6 +80,29 @@ describe("OpportunityMap storage (migration-safe)", () => {
     expect(raw).not.toContain("leak");
   });
 
+  it("loads an older-shaped saved session without crashing", () => {
+    window.localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        version: 1,
+        state: "PROCESS_DRAG",
+        answers: {
+          company: { companyName: "Acme", legacyField: 1 },
+          step1: { foo: "bar" },
+          process: { manualWorkLevel: "3" },
+        },
+      })
+    );
+    const loaded = loadFlow();
+    expect(loaded).not.toBeNull();
+    expect(loaded?.state).toBe("PROCESS_DRAG");
+    expect(loaded?.answers.company.companyName).toBe("Acme");
+    expect(loaded?.answers.process.manualWorkLevel).toBe("3");
+    const serialized = JSON.stringify(loaded);
+    expect(serialized).not.toContain("legacyField");
+    expect(serialized).not.toContain("step1");
+  });
+
   it("clears a stored session", () => {
     saveFlow("LANDING", EMPTY_SUBMISSION);
     clearFlow();
