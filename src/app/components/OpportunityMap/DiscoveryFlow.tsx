@@ -23,6 +23,11 @@ import {
   type QuestionSection,
 } from "./schema";
 import { findMissingRequired, type AnswerValue } from "./questions";
+import { computeComplexity, computeSignal } from "./scoring";
+import {
+  trackOpportunityMapEvent,
+  type OpportunityMapEvent,
+} from "./analytics";
 import type { OmBoardNode, OmCopy, OmSectionKey } from "./types";
 
 type Milestone = { key: OmSectionKey; state: FlowState };
@@ -92,12 +97,24 @@ export default function DiscoveryFlow() {
 
   useEffect(() => {
     setAttempted(false);
-    if (flow.flowState !== "LANDING") {
+    const fs = flow.flowState;
+    if (fs !== "LANDING") {
       containerRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
     }
+    const viewed: Partial<Record<typeof fs, OpportunityMapEvent>> = {
+      LANDING: "opportunity_map_page_viewed",
+      TEASER_RESULT: "teaser_result_viewed",
+      SYSTEM_LANDSCAPE: "tech_stack_started",
+      CONTACT_GATE: "contact_gate_viewed",
+      READINESS_REPORT: "report_generated",
+    };
+    const event = viewed[fs];
+    if (event) track(event);
+    // Fire view events only when the section changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flow.flowState]);
 
   if (flow.flowState === "LANDING") {
@@ -106,7 +123,10 @@ export default function DiscoveryFlow() {
         <OpportunityHero
           copy={copy}
           hasSavedProgress={flow.hasSavedProgress}
-          onStart={flow.start}
+          onStart={() => {
+            track("opportunity_map_start_clicked");
+            flow.start();
+          }}
           onResume={flow.resume}
           onStartOver={flow.startOver}
         />
@@ -166,6 +186,16 @@ export default function DiscoveryFlow() {
     flow.patch(SECTION_KEY[flow.flowState], { [id]: value });
   }
 
+  function track(event: OpportunityMapEvent) {
+    trackOpportunityMapEvent(event, {
+      section: flow.flowState,
+      locale,
+      techSkipped: flow.techSkipped,
+      scoreBand: computeSignal(flow.answers).band,
+      complexityBand: computeComplexity(flow.answers).band,
+    });
+  }
+
   function renderBody() {
     const fs = flow.flowState;
     if (fs === "BUSINESS_CONTEXT" || fs === "BUSINESS_GOALS") {
@@ -222,7 +252,10 @@ export default function DiscoveryFlow() {
         <OpportunityReport
           answers={flow.answers}
           copy={copy}
-          onReview={flow.next}
+          onReview={() => {
+            track("review_cta_clicked");
+            flow.next();
+          }}
         />
       );
     }
@@ -285,6 +318,7 @@ export default function DiscoveryFlow() {
         setAttempted(true);
         return;
       }
+      track("contact_submitted");
       submitLead(flow.answers);
       flow.next();
       return;
@@ -296,6 +330,14 @@ export default function DiscoveryFlow() {
         return;
       }
     }
+    const completed: Partial<Record<FlowState, OpportunityMapEvent>> = {
+      BUSINESS_GOALS: "business_section_completed",
+      PROCESS_DRAG: "process_section_completed",
+      EXPERT_LEVERAGE: "team_section_completed",
+      SYSTEM_LANDSCAPE: "tech_stack_completed",
+    };
+    const event = completed[fs];
+    if (event) track(event);
     flow.next();
   }
 
