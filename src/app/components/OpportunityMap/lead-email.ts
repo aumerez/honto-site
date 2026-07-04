@@ -32,7 +32,9 @@ function currentStack(submission: OpportunityMapSubmission): string {
     ...t.databases,
     ...t.customApps,
   ].filter((v) => v !== "none");
-  return all.length ? all.join(", ") : "—";
+  const parts = all.length ? [all.join(", ")] : [];
+  if (t.otherSystems.trim()) parts.push(`other: ${t.otherSystems.trim()}`);
+  return parts.length ? parts.join("; ") : "—";
 }
 
 function escapeHtml(value: string): string {

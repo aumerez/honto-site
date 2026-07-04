@@ -89,6 +89,19 @@ describe("DiscoveryFlow", () => {
     expect(stageHeading("Unlock your readiness map")).toBeTruthy();
   });
 
+  it("reveals the other-systems box when an Other option is chosen", () => {
+    seed("SYSTEM_LANDSCAPE");
+    renderWithLocale(<DiscoveryFlow />);
+    clickButton(/resume diagnostic/i);
+    expect(stageHeading("System landscape")).toBeTruthy();
+    expect(screen.queryByText("Other systems")).toBeNull();
+
+    const crmOther = document.querySelector('input[name="crm"][value="other"]');
+    expect(crmOther).not.toBeNull();
+    fireEvent.click(crmOther as Element);
+    expect(screen.getByText("Other systems")).toBeTruthy();
+  });
+
   it("gates the report until contact fields validate", () => {
     // Company name carries over from business context — never re-asked here.
     seed("CONTACT_GATE", {

@@ -130,6 +130,7 @@ function normalizeTech(raw: unknown): TechStackAnswers {
       SECURITY_REQUIREMENTS
     ),
     deploymentModel: asEnum(t.deploymentModel, DEPLOYMENT_MODELS),
+    otherSystems: trimmed(t.otherSystems, FIELD_LIMITS.otherSystems),
   };
 }
 

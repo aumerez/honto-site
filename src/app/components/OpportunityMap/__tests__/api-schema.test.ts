@@ -1,6 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { normalizeSubmission } from "../api-schema";
-import { EMPTY_SUBMISSION, type OpportunityMapSubmission } from "../schema";
+import {
+  EMPTY_SUBMISSION,
+  EMPTY_TECH_STACK,
+  type OpportunityMapSubmission,
+} from "../schema";
 
 const clone = <T>(x: T): T => JSON.parse(JSON.stringify(x)) as T;
 
@@ -102,5 +106,31 @@ describe("normalizeSubmission", () => {
     const r = normalizeSubmission(valid());
     expect(r.ok).toBe(true);
     if (r.ok) expect(r.submission.contact.company).toBe("Acme");
+  });
+
+  it("captures optional other-systems text", () => {
+    const s = valid();
+    s.techStack = {
+      ...EMPTY_TECH_STACK,
+      crm: ["other"],
+      otherSystems: "Custom CRM",
+    };
+    s.techSkipped = false;
+    const r = normalizeSubmission(s);
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.submission.techStack?.otherSystems).toBe("Custom CRM");
+  });
+
+  it("drops other-systems text over the 250 character limit", () => {
+    const s = valid();
+    s.techStack = {
+      ...EMPTY_TECH_STACK,
+      crm: ["other"],
+      otherSystems: "x".repeat(300),
+    };
+    s.techSkipped = false;
+    const r = normalizeSubmission(s);
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.submission.techStack?.otherSystems).toBe("");
   });
 });

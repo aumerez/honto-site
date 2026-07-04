@@ -367,6 +367,8 @@ export type TechStackAnswers = {
   dataReadiness: DataReadiness | "";
   securityRequirements: SecurityRequirement[];
   deploymentModel: DeploymentModel | "";
+  /** Free text to name systems chosen as "Other" (optional). */
+  otherSystems: string;
 };
 
 export type ContactInfo = {
@@ -513,6 +515,7 @@ export const EMPTY_TECH_STACK: TechStackAnswers = {
   dataReadiness: "",
   securityRequirements: [],
   deploymentModel: "",
+  otherSystems: "",
 };
 
 export const EMPTY_CONTACT: ContactInfo = {
@@ -541,6 +544,7 @@ export const FIELD_LIMITS = {
   email: 254,
   phone: 15,
   longText: 600,
+  otherSystems: 250,
 } as const;
 
 /* ── Validation helpers (typed; no question-data dependency) ─────────── */
