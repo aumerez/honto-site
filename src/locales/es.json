@@ -1014,5 +1014,143 @@
         "printDateLocale": "es-ES"
       }
     }
+  },
+  "opportunityMap": {
+    "eyebrow": "Mapa de Madurez en IA",
+    "tag": "[01] / Diagnóstico",
+    "title": "Descubre dónde la IA genera ventaja en tu empresa",
+    "subtitle": "Un diagnóstico empresarial de sistemas de IA. Honto identifica dónde la IA puede crear ventaja en tus procesos, equipos, sistemas y ejecución — y te muestra los primeros pasos a dar.",
+    "meta": {
+      "timeLabel": "Tiempo estimado",
+      "time": "~5–8 minutos",
+      "privacyLabel": "Privacidad garantizada",
+      "privacy": "No se solicitan contraseñas, claves de API, documentos privados, chats privados ni credenciales."
+    },
+    "cta": "Iniciar el mapa",
+    "flowHeading": "El diagnóstico",
+    "flowIntro": "Seis secciones enfocadas. Tu mapa se construye a medida que avanzas.",
+    "progress": { "label": "Progreso" },
+    "status": { "pending": "Pendiente" },
+    "board": {
+      "title": "Mapa de sistemas",
+      "subtitle": "Tu diagnóstico se arma aquí a medida que respondes.",
+      "empty": "A la espera de datos"
+    },
+    "sections": {
+      "businessContext": {
+        "code": "B.01",
+        "title": "Contexto del negocio",
+        "summary": "Forma de la empresa, industria y etapa."
+      },
+      "businessGoals": {
+        "code": "B.02",
+        "title": "Objetivos del negocio",
+        "summary": "Los resultados que más importan ahora."
+      },
+      "processDrag": {
+        "code": "P.01",
+        "title": "Fricción de procesos",
+        "summary": "Dónde el trabajo manual y los traspasos frenan la ejecución."
+      },
+      "expertLeverage": {
+        "code": "E.01",
+        "title": "Ventaja del equipo",
+        "summary": "Dónde tu equipo es fuerte — por función."
+      },
+      "systemLandscape": {
+        "code": "S.01",
+        "title": "Panorama de sistemas",
+        "summary": "Herramientas y sistemas en uso. Sección opcional."
+      },
+      "report": {
+        "code": "R.01",
+        "title": "Informe de madurez",
+        "summary": "Tu señal de oportunidad y primeros pasos."
+      }
+    },
+    "controls": {
+      "start": "Iniciar el mapa",
+      "back": "Atrás",
+      "next": "Continuar",
+      "skip": "Omitir esta sección",
+      "startOver": "Empezar de nuevo",
+      "resume": "Retomar diagnóstico",
+      "seeReport": "Ver mi mapa de madurez",
+      "talkToHonto": "Revisar con Honto"
+    },
+    "signalBands": {
+      "low": "baja",
+      "moderate": "moderada",
+      "strong": "fuerte",
+      "veryHigh": "muy alta"
+    },
+    "teaser": {
+      "title": "Tu señal direccional",
+      "signalLine": "El mapa indica una oportunidad direccional {band} para aprovechar la IA.",
+      "leverageLead": "Mayor señal de ventaja:",
+      "prioritize": "Tu informe completo priorizará los flujos de trabajo, roles y sistemas donde Honto puede reducir el trabajo manual."
+    },
+    "gate": {
+      "title": "Desbloquea tu mapa de madurez"
+    },
+    "privacy": {
+      "line1": "No pedimos contraseñas, claves de API, documentos privados, chats privados ni credenciales.",
+      "line2": "Usa solo información pública de la empresa.",
+      "line3": "El inventario técnico es direccional y no se conecta a tus sistemas."
+    },
+    "techNote": "Inventario direccional — no se conecta a tus sistemas.",
+    "validation": {
+      "required": "Este campo es obligatorio.",
+      "invalidEmail": "Introduce un correo válido.",
+      "invalidUrl": "Introduce una URL válida (https://…).",
+      "invalidPhone": "Solo dígitos (7–15)."
+    },
+    "report": {
+      "title": "Tu mapa de madurez en IA",
+      "intro": "Una lectura direccional basada en tus respuestas. Tu revisión con Honto la convierte en un plan presupuestado.",
+      "hontoAction": "Acción sugerida de Honto",
+      "driversLabel": "Factores clave",
+      "scoreOf": "/ 100",
+      "scopeLabel": "Alcance inicial estimado",
+      "complexityLabel": "Complejidad de implementación",
+      "integrationLabel": "Preparación de integración",
+      "dataLabel": "Preparación de datos",
+      "skippedNote": "Las recomendaciones de sistemas son direccionales — valídalas en una revisión técnica.",
+      "emptyMap": "No surgió nada destacable aquí a partir de tus respuestas.",
+      "weekLabel": "Semana {n}",
+      "executiveStrongest": "Mayor ventaja",
+      "executiveConstraint": "Principal restricción",
+      "sequencingLabel": "Secuencia sugerida",
+      "impact": {
+        "low": "Baja",
+        "medium": "Moderada",
+        "high": "Alta",
+        "info": "Info"
+      },
+      "complexityBands": {
+        "simple": "Simple",
+        "structured": "Estructurada",
+        "advanced": "Avanzada"
+      },
+      "cards": {
+        "executive": "Resumen ejecutivo",
+        "signal": "Señal de oportunidad de IA",
+        "business": "Mapa de ventaja de negocio",
+        "process": "Mapa de fricción de procesos",
+        "expert": "Mapa de ventaja del equipo",
+        "system": "Preparación de sistemas",
+        "path": "Ruta de implementación",
+        "moves": "Primeros tres pasos",
+        "plan": "Plan operativo de 30 días",
+        "review": "Revisar con Honto"
+      },
+      "reviewBody": "Recorre tu mapa con nuestro equipo y llévate una primera fase concreta.",
+      "reviewCta": "Revisar con Honto"
+    },
+    "sales": {
+      "title": "Revisa tu mapa con Honto",
+      "body": "Recorre tu mapa de madurez con nuestro equipo y llévate una primera fase concreta.",
+      "cta": "Agenda una revisión con Honto"
+    }
   }
 }

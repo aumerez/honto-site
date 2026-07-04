@@ -37,16 +37,16 @@ describe("Navigation", () => {
     expect(contact.getAttribute("href")).toBe("/en#contact");
   });
 
-  it("renders the AI Readiness CTA pointing to the locale onboarding route", () => {
+  it("renders the AI Readiness CTA pointing to the locale opportunity-map route", () => {
     renderWithLocale(<Navigation />);
     const cta = screen.getByRole("link", { name: /ai readiness/i });
-    expect(cta.getAttribute("href")).toBe("/en/onboarding");
+    expect(cta.getAttribute("href")).toBe("/en/opportunity-map");
   });
 
-  it("points the AI Readiness CTA at the Spanish onboarding route in es", () => {
+  it("points the AI Readiness CTA at the Spanish opportunity-map route in es", () => {
     renderWithLocale(<Navigation />, { locale: "es" });
     const cta = screen.getByRole("link", { name: /madurez en ia/i });
-    expect(cta.getAttribute("href")).toBe("/es/onboarding");
+    expect(cta.getAttribute("href")).toBe("/es/opportunity-map");
   });
 
   it("has an aria-label on the nav element", () => {

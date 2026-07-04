@@ -1002,5 +1002,143 @@
         "printDateLocale": "en-US"
       }
     }
+  },
+  "opportunityMap": {
+    "eyebrow": "AI Readiness Map",
+    "tag": "[01] / Diagnostic",
+    "title": "Find where AI creates leverage across your company",
+    "subtitle": "An enterprise AI systems diagnostic. Honto maps where AI can create leverage across your processes, teams, systems, and execution — then shows you the first moves to make.",
+    "meta": {
+      "timeLabel": "Time to complete",
+      "time": "~5–8 minutes",
+      "privacyLabel": "Privacy-safe",
+      "privacy": "No passwords, API keys, private documents, private chats, or credentials are requested."
+    },
+    "cta": "Start the map",
+    "flowHeading": "The diagnostic",
+    "flowIntro": "Six focused sections. Your map builds as you go.",
+    "progress": { "label": "Progress" },
+    "status": { "pending": "Pending" },
+    "board": {
+      "title": "System map",
+      "subtitle": "Your diagnostic assembles here as you answer.",
+      "empty": "Awaiting input"
+    },
+    "sections": {
+      "businessContext": {
+        "code": "B.01",
+        "title": "Business context",
+        "summary": "Company shape, industry, and stage."
+      },
+      "businessGoals": {
+        "code": "B.02",
+        "title": "Business goals",
+        "summary": "The outcomes that matter most right now."
+      },
+      "processDrag": {
+        "code": "P.01",
+        "title": "Process drag",
+        "summary": "Where manual work and handoffs slow execution."
+      },
+      "expertLeverage": {
+        "code": "E.01",
+        "title": "Expert leverage",
+        "summary": "Where your team is strong — by function."
+      },
+      "systemLandscape": {
+        "code": "S.01",
+        "title": "System landscape",
+        "summary": "Tools and systems in play. Optional section."
+      },
+      "report": {
+        "code": "R.01",
+        "title": "Readiness report",
+        "summary": "Your opportunity signal and first moves."
+      }
+    },
+    "controls": {
+      "start": "Start the map",
+      "back": "Back",
+      "next": "Continue",
+      "skip": "Skip this section",
+      "startOver": "Start over",
+      "resume": "Resume diagnostic",
+      "seeReport": "See my readiness map",
+      "talkToHonto": "Review with Honto"
+    },
+    "signalBands": {
+      "low": "low",
+      "moderate": "moderate",
+      "strong": "strong",
+      "veryHigh": "very high"
+    },
+    "teaser": {
+      "title": "Your directional signal",
+      "signalLine": "The map indicates a {band} directional opportunity for AI leverage.",
+      "leverageLead": "Strongest leverage signal:",
+      "prioritize": "Your full report will prioritize the workflows, roles, and systems where Honto can reduce manual drag."
+    },
+    "gate": {
+      "title": "Unlock your readiness map"
+    },
+    "privacy": {
+      "line1": "We do not ask for passwords, API keys, private documents, private chats, or credentials.",
+      "line2": "Use public company information only.",
+      "line3": "The technical inventory is directional and does not connect to your systems."
+    },
+    "techNote": "Directional inventory only — this does not connect to your systems.",
+    "validation": {
+      "required": "This field is required.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidUrl": "Enter a valid URL (https://…).",
+      "invalidPhone": "Enter digits only (7–15)."
+    },
+    "report": {
+      "title": "Your AI readiness map",
+      "intro": "A directional readout based on your answers. Your review with Honto turns this into a costed plan.",
+      "hontoAction": "Suggested Honto action",
+      "driversLabel": "Key drivers",
+      "scoreOf": "/ 100",
+      "scopeLabel": "Estimated initial scope",
+      "complexityLabel": "Implementation complexity",
+      "integrationLabel": "Integration readiness",
+      "dataLabel": "Data readiness",
+      "skippedNote": "System recommendations are directional — validate them in a technical review.",
+      "emptyMap": "Nothing notable surfaced here from your answers.",
+      "weekLabel": "Week {n}",
+      "executiveStrongest": "Strongest leverage",
+      "executiveConstraint": "Main constraint",
+      "sequencingLabel": "Suggested sequence",
+      "impact": {
+        "low": "Low",
+        "medium": "Moderate",
+        "high": "High",
+        "info": "Info"
+      },
+      "complexityBands": {
+        "simple": "Simple",
+        "structured": "Structured",
+        "advanced": "Advanced"
+      },
+      "cards": {
+        "executive": "Executive readout",
+        "signal": "AI opportunity signal",
+        "business": "Business leverage map",
+        "process": "Process drag map",
+        "expert": "Expert leverage map",
+        "system": "System readiness",
+        "path": "Implementation path",
+        "moves": "First three moves",
+        "plan": "30-day operating plan",
+        "review": "Review with Honto"
+      },
+      "reviewBody": "Walk through your map with our team and leave with a concrete first phase.",
+      "reviewCta": "Review with Honto"
+    },
+    "sales": {
+      "title": "Review your map with Honto",
+      "body": "Walk through your readiness map with our team and leave with a concrete first phase.",
+      "cta": "Book a review with Honto"
+    }
   }
 }
