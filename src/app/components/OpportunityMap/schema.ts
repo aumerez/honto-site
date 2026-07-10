@@ -352,6 +352,11 @@ export type TeamAnswers = {
   handoffIssues: HandoffFreq | "";
 };
 
+/** Free text to name systems chosen as "Other", per category (e.g. crmOther). */
+export type TechCategoryOther = {
+  [K in TechCategory as `${K}Other`]: string;
+};
+
 export type TechStackAnswers = {
   crm: string[];
   erp: string[];
@@ -367,9 +372,12 @@ export type TechStackAnswers = {
   dataReadiness: DataReadiness | "";
   securityRequirements: SecurityRequirement[];
   deploymentModel: DeploymentModel | "";
-  /** Free text to name systems chosen as "Other" (optional). */
-  otherSystems: string;
-};
+} & TechCategoryOther;
+
+/** The per-category "Other" text key for a category (e.g. "crm" → "crmOther"). */
+export function otherKeyFor(category: TechCategory): keyof TechCategoryOther {
+  return `${category}Other`;
+}
 
 export type ContactInfo = {
   contactName: string;
@@ -515,7 +523,9 @@ export const EMPTY_TECH_STACK: TechStackAnswers = {
   dataReadiness: "",
   securityRequirements: [],
   deploymentModel: "",
-  otherSystems: "",
+  ...(Object.fromEntries(
+    TECH_CATEGORIES.map((c) => [`${c}Other`, ""])
+  ) as TechCategoryOther),
 };
 
 export const EMPTY_CONTACT: ContactInfo = {
@@ -544,7 +554,7 @@ export const FIELD_LIMITS = {
   email: 254,
   phone: 15,
   longText: 600,
-  otherSystems: 250,
+  otherText: 250,
 } as const;
 
 /* ── Validation helpers (typed; no question-data dependency) ─────────── */

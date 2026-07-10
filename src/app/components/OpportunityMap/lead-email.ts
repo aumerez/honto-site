@@ -5,13 +5,18 @@
  * lead summary (subject + plain text + HTML). Deterministic; no I/O.
  */
 
-import type { OpportunityMapSubmission, OpportunityReport } from "./schema";
+import {
+  TECH_CATEGORIES,
+  otherKeyFor,
+  type OpportunityMapSubmission,
+  type OpportunityReport,
+} from "./schema";
 
 export type LeadEmail = {
   subject: string;
   text: string;
   html: string;
-  replyTo: string;
+  replyTo?: string;
 };
 
 function joinList(values: readonly string[]): string {
@@ -33,7 +38,10 @@ function currentStack(submission: OpportunityMapSubmission): string {
     ...t.customApps,
   ].filter((v) => v !== "none");
   const parts = all.length ? [all.join(", ")] : [];
-  if (t.otherSystems.trim()) parts.push(`other: ${t.otherSystems.trim()}`);
+  const others = TECH_CATEGORIES.map((c) => t[otherKeyFor(c)].trim()).filter(
+    (v) => v.length > 0
+  );
+  if (others.length) parts.push(`other: ${others.join(", ")}`);
   return parts.length ? parts.join("; ") : "—";
 }
 
@@ -86,18 +94,13 @@ function rows(
   ];
 }
 
-export function buildLeadEmail(
-  submission: OpportunityMapSubmission,
-  report: OpportunityReport
-): LeadEmail {
-  const subject = `New Honto AI Readiness Lead — ${submission.company.companyName} — Signal ${report.signal.score}/100`;
-
-  const dataRows = rows(submission, report);
-
+function render(
+  subject: string,
+  dataRows: Row[]
+): { text: string; html: string } {
   const text = dataRows
     .map(([label, value]) => `${label}: ${value}`)
     .join("\n");
-
   const htmlRows = dataRows
     .map(
       ([label, value]) =>
@@ -108,13 +111,44 @@ export function buildLeadEmail(
         )}</td></tr>`
     )
     .join("");
-
   const html = `
     <div style="font-family:ui-sans-serif,system-ui,sans-serif;line-height:1.5;color:#161513;max-width:680px">
       <h1 style="font-size:20px;margin:0 0 16px">${escapeHtml(subject)}</h1>
       <table style="border-collapse:collapse;width:100%;font-size:14px">${htmlRows}</table>
     </div>
   `.trim();
+  return { text, html };
+}
 
-  return { subject, text, html, replyTo: submission.contact.email };
+/** The full lead notification, sent once the contact gate is completed. */
+export function buildLeadEmail(
+  submission: OpportunityMapSubmission,
+  report: OpportunityReport
+): LeadEmail {
+  const subject = `New Honto AI Readiness Lead — ${submission.company.companyName} — Signal ${report.signal.score}/100`;
+  return {
+    subject,
+    ...render(subject, rows(submission, report)),
+    replyTo: submission.contact.email,
+  };
+}
+
+/** The early notification, sent once the business sections are completed. */
+export function buildBusinessEmail(
+  submission: OpportunityMapSubmission
+): LeadEmail {
+  const s = submission;
+  const subject = `New Honto AI Readiness — ${s.company.companyName} — business context`;
+  const dataRows: Row[] = [
+    ["Company", s.company.companyName],
+    ["Website", s.company.website || "—"],
+    ["Industry", s.company.industry || "—"],
+    ["Company size", s.company.companySize || "—"],
+    ["Stage", s.company.stage || "—"],
+    ["Main problem", s.company.mainPressure || "—"],
+    ["Business goals", joinList(s.business.priorityOutcomes)],
+    ["Most urgent area", s.business.urgentArea || "—"],
+    ["Timeframe", s.business.timeframe || "—"],
+  ];
+  return { subject, ...render(subject, dataRows) };
 }

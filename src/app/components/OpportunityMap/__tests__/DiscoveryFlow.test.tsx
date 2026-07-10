@@ -94,12 +94,12 @@ describe("DiscoveryFlow", () => {
     renderWithLocale(<DiscoveryFlow />);
     clickButton(/resume diagnostic/i);
     expect(stageHeading("System landscape")).toBeTruthy();
-    expect(screen.queryByText("Other systems")).toBeNull();
+    expect(screen.queryByText("Other — CRM")).toBeNull();
 
     const crmOther = document.querySelector('input[name="crm"][value="other"]');
     expect(crmOther).not.toBeNull();
     fireEvent.click(crmOther as Element);
-    expect(screen.getByText("Other systems")).toBeTruthy();
+    expect(screen.getByText("Other — CRM")).toBeTruthy();
   });
 
   it("gates the report until contact fields validate", () => {

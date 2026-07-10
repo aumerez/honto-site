@@ -80,11 +80,14 @@ function nodeStatus(
  * Best-effort lead notification. The report is shown locally regardless of
  * delivery, so failures are swallowed and never block the user.
  */
-function submitLead(answers: OpportunityMapSubmission) {
+function submitLead(
+  answers: OpportunityMapSubmission,
+  stage: "business" | "full"
+) {
   void fetch("/api/opportunity-map", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ submission: answers }),
+    body: JSON.stringify({ submission: answers, stage }),
   }).catch(() => {});
 }
 
@@ -93,6 +96,7 @@ export default function DiscoveryFlow() {
   const copy = t.opportunityMap as OmCopy;
   const flow = useOpportunityMapFlow();
   const [attempted, setAttempted] = useState(false);
+  const businessSentRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -319,7 +323,7 @@ export default function DiscoveryFlow() {
         return;
       }
       track("contact_submitted");
-      submitLead(flow.answers);
+      submitLead(flow.answers, "full");
       flow.next();
       return;
     }
@@ -338,6 +342,11 @@ export default function DiscoveryFlow() {
     };
     const event = completed[fs];
     if (event) track(event);
+    // Send the early business notification once, when the business part is done.
+    if (fs === "BUSINESS_GOALS" && !businessSentRef.current) {
+      businessSentRef.current = true;
+      submitLead(flow.answers, "business");
+    }
     flow.next();
   }
 
