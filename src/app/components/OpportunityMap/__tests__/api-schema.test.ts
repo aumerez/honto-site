@@ -113,12 +113,12 @@ describe("normalizeSubmission", () => {
     s.techStack = {
       ...EMPTY_TECH_STACK,
       crm: ["other"],
-      otherSystems: "Custom CRM",
+      crmOther: "Custom CRM",
     };
     s.techSkipped = false;
     const r = normalizeSubmission(s);
     expect(r.ok).toBe(true);
-    if (r.ok) expect(r.submission.techStack?.otherSystems).toBe("Custom CRM");
+    if (r.ok) expect(r.submission.techStack?.crmOther).toBe("Custom CRM");
   });
 
   it("drops other-systems text over the 250 character limit", () => {
@@ -126,11 +126,11 @@ describe("normalizeSubmission", () => {
     s.techStack = {
       ...EMPTY_TECH_STACK,
       crm: ["other"],
-      otherSystems: "x".repeat(300),
+      crmOther: "x".repeat(300),
     };
     s.techSkipped = false;
     const r = normalizeSubmission(s);
     expect(r.ok).toBe(true);
-    if (r.ok) expect(r.submission.techStack?.otherSystems).toBe("");
+    if (r.ok) expect(r.submission.techStack?.crmOther).toBe("");
   });
 });

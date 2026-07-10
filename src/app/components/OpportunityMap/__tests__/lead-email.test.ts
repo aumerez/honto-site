@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildLeadEmail } from "../lead-email";
+import { buildBusinessEmail, buildLeadEmail } from "../lead-email";
 import { generateReport } from "../report";
 import { EMPTY_SUBMISSION, type OpportunityMapSubmission } from "../schema";
 
@@ -96,5 +96,21 @@ describe("buildLeadEmail", () => {
     const { text } = buildLeadEmail(s, report);
     expect(text).toContain("Current stack: Skipped");
     expect(text).toContain("Integration readiness: Not provided");
+  });
+});
+
+describe("buildBusinessEmail", () => {
+  it("summarizes the business context with the early subject", () => {
+    const email = buildBusinessEmail(submission());
+    expect(email.subject).toBe(
+      "New Honto AI Readiness — Acme — business context"
+    );
+    expect(email.text).toContain("Company: Acme");
+    expect(email.text).toContain("Business goals: cost, speed");
+    expect(email.text).toContain("Most urgent area: operations");
+    // The early email carries no scoring/report content.
+    expect(email.text).not.toContain("AI opportunity signal");
+    expect(email.text).not.toContain("Top 3 first moves");
+    expect(email.replyTo).toBeUndefined();
   });
 });

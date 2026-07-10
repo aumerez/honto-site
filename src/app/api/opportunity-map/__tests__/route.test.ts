@@ -213,17 +213,34 @@ describe("/api/opportunity-map POST", () => {
       expect(JSON.stringify(body)).not.toContain("403");
       expect(JSON.stringify(body)).not.toMatch(/domain not verified/);
     });
+
+    it("accepts an early business-stage submission without contact details", async () => {
+      const s = validSubmission();
+      s.contact = { ...s.contact, contactName: "", email: "", consent: false };
+      s.process = { ...s.process, manualWorkLevel: "" };
+      s.team = { ...s.team, overloadedFunctions: [] };
+      const res = await POST(makeRequest({ submission: s, stage: "business" }));
+      expect(res.status).toBe(200);
+      expect((await jsonBody(res)).delivery).toBe("sent");
+      const args = sendMock.mock.calls[0][0] as { subject: string };
+      expect(args.subject).toBe(
+        "New Honto AI Readiness — Acme — business context"
+      );
+    });
   });
 
   describe("rate limiting", () => {
-    it("allows three requests then blocks the fourth", async () => {
+    it("allows the session's requests then blocks excess", async () => {
       const ip = "198.51.100.7";
-      const r1 = await POST(makeRequest({ submission: validSubmission() }, ip));
-      const r2 = await POST(makeRequest({ submission: validSubmission() }, ip));
-      const r3 = await POST(makeRequest({ submission: validSubmission() }, ip));
-      const r4 = await POST(makeRequest({ submission: validSubmission() }, ip));
-      expect([r1.status, r2.status, r3.status]).toEqual([200, 200, 200]);
-      expect(r4.status).toBe(429);
+      const results: number[] = [];
+      for (let i = 0; i < 7; i++) {
+        const res = await POST(
+          makeRequest({ submission: validSubmission() }, ip)
+        );
+        results.push(res.status);
+      }
+      expect(results.slice(0, 6)).toEqual([200, 200, 200, 200, 200, 200]);
+      expect(results[6]).toBe(429);
     });
   });
 });

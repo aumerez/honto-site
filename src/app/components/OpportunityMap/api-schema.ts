@@ -29,6 +29,7 @@ import {
   SECURITY_REQUIREMENTS,
   STAGES,
   TEAM_FUNCTIONS,
+  TECH_CATEGORIES,
   TECH_OPTIONS,
   TIMEFRAMES,
   URGENT_AREAS,
@@ -39,6 +40,7 @@ import {
   isValidUrl,
   validateContact,
   type OpportunityMapSubmission,
+  type TechCategoryOther,
   type TechStackAnswers,
 } from "./schema";
 
@@ -130,7 +132,12 @@ function normalizeTech(raw: unknown): TechStackAnswers {
       SECURITY_REQUIREMENTS
     ),
     deploymentModel: asEnum(t.deploymentModel, DEPLOYMENT_MODELS),
-    otherSystems: trimmed(t.otherSystems, FIELD_LIMITS.otherSystems),
+    ...(Object.fromEntries(
+      TECH_CATEGORIES.map((c) => [
+        `${c}Other`,
+        trimmed(t[`${c}Other`], FIELD_LIMITS.otherText),
+      ])
+    ) as TechCategoryOther),
   };
 }
 
@@ -138,7 +145,17 @@ export type NormalizeResult =
   | { ok: true; submission: OpportunityMapSubmission }
   | { ok: false; issues: string[] };
 
-export function normalizeSubmission(raw: unknown): NormalizeResult {
+/**
+ * `stage` controls which fields are required:
+ *  - "business": only the business context and goals (the early notification).
+ *  - "full": the whole diagnostic plus valid contact (the final lead).
+ */
+export type SubmissionStage = "business" | "full";
+
+export function normalizeSubmission(
+  raw: unknown,
+  stage: SubmissionStage = "full"
+): NormalizeResult {
   if (!raw || typeof raw !== "object") {
     return { ok: false, issues: ["Invalid submission."] };
   }
@@ -214,26 +231,29 @@ export function normalizeSubmission(raw: unknown): NormalizeResult {
   };
 
   const issues: string[] = [];
-  const cv = validateContact(contact);
-  if (cv.errors.company) issues.push("Company name is required.");
-  if (cv.errors.contactName) issues.push("Contact name is required.");
-  if (cv.errors.email)
-    issues.push(
-      cv.errors.email === "invalid"
-        ? "A valid email is required."
-        : "Email is required."
-    );
-  if (cv.errors.role) issues.push("Role is required.");
-  if (cv.errors.consent) issues.push("Consent is required.");
   if (company.website && !isValidUrl(company.website))
     issues.push("Website must be a valid URL.");
   if (!isCompanyProfileComplete(company))
     issues.push("Business context is incomplete.");
   if (!isBusinessComplete(business))
     issues.push("Business goals are incomplete.");
-  if (!isProcessComplete(processAns))
-    issues.push("Process answers are incomplete.");
-  if (!isTeamComplete(team)) issues.push("Team answers are incomplete.");
+
+  if (stage === "full") {
+    const cv = validateContact(contact);
+    if (cv.errors.company) issues.push("Company name is required.");
+    if (cv.errors.contactName) issues.push("Contact name is required.");
+    if (cv.errors.email)
+      issues.push(
+        cv.errors.email === "invalid"
+          ? "A valid email is required."
+          : "Email is required."
+      );
+    if (cv.errors.role) issues.push("Role is required.");
+    if (cv.errors.consent) issues.push("Consent is required.");
+    if (!isProcessComplete(processAns))
+      issues.push("Process answers are incomplete.");
+    if (!isTeamComplete(team)) issues.push("Team answers are incomplete.");
+  }
 
   if (issues.length > 0) return { ok: false, issues };
   return { ok: true, submission };

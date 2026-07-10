@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server";
-import { normalizeSubmission } from "@/app/components/OpportunityMap/api-schema";
+import {
+  normalizeSubmission,
+  type SubmissionStage,
+} from "@/app/components/OpportunityMap/api-schema";
 import { generateReport } from "@/app/components/OpportunityMap/report";
-import { buildLeadEmail } from "@/app/components/OpportunityMap/lead-email";
+import {
+  buildBusinessEmail,
+  buildLeadEmail,
+} from "@/app/components/OpportunityMap/lead-email";
 import {
   deliverLead,
   isLeadEmailConfigured,
@@ -11,7 +17,8 @@ import {
 export const runtime = "nodejs";
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
-const RATE_LIMIT_MAX = 3;
+// Two notifications per completed session (business + full), with headroom.
+const RATE_LIMIT_MAX = 6;
 const rateLimitBuckets = new Map<string, number[]>();
 
 export function __resetRateLimitForTest() {
@@ -73,8 +80,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const wrapped = (body as { submission?: unknown }) ?? {};
-  const result = normalizeSubmission(wrapped.submission ?? body);
+  const wrapped = (body as { submission?: unknown; stage?: unknown }) ?? {};
+  const stage: SubmissionStage =
+    wrapped.stage === "business" ? "business" : "full";
+  const result = normalizeSubmission(wrapped.submission ?? body, stage);
   if (!result.ok) {
     return NextResponse.json(
       { ok: false, error: "Invalid submission", issues: result.issues },
@@ -85,8 +94,11 @@ export async function POST(request: Request) {
   const { submission } = result;
   // The report is always derived server-side so score-critical fields cannot be
   // manipulated by the client.
-  const report = generateReport(submission);
-  const email = buildLeadEmail(submission, report);
+  const report = stage === "full" ? generateReport(submission) : null;
+  const email =
+    stage === "full" && report
+      ? buildLeadEmail(submission, report)
+      : buildBusinessEmail(submission);
 
   if (!isLeadEmailConfigured()) {
     if (process.env.NODE_ENV === "production") {
@@ -97,7 +109,7 @@ export async function POST(request: Request) {
       );
     }
     // Local/dev: preserve the contract without requiring credentials.
-    logStubbedLead(submission.company.companyName, report.signal.score);
+    logStubbedLead(submission.company.companyName, report?.signal.score ?? 0);
     return NextResponse.json({ ok: true, delivery: "stub" });
   }
 
