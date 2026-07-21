@@ -323,7 +323,6 @@
     "statWells": "Wells managed",
     "statRetention": "Knowledge retained",
     "statResponse": "Response time",
-
     "problemEyebrow": "The Problem",
     "problemHeadingLine1": "Your Company Already",
     "problemHeadingLine2": "Knows the Answer",
@@ -336,7 +335,6 @@
     "problemChatsDetail": "Critical context lives in WhatsApp chats, emails, and meetings. Impossible to search, impossible to scale.",
     "problemSilos": "Siloed across operations",
     "problemSilosDetail": "Each well, each field, each team operates in isolation. Lessons learned in one operation never reach the next.",
-
     "unifiedEyebrow": "Unified Knowledge",
     "unifiedHeadingLine1": "One Platform. Every Format.",
     "unifiedHeadingLine2": "All Your Knowledge.",
@@ -353,7 +351,6 @@
     "unifiedAudioDesc": "Voice memos, podcast-style briefings, field audio — converted to searchable knowledge.",
     "unifiedExpertTitle": "Expert Reasoning",
     "unifiedExpertDesc": "Decision rationale, troubleshooting logic, heuristics — the 'why' behind expert choices, preserved.",
-
     "accessEyebrow": "Multi-Channel Access",
     "accessHeadingLine1": "Access Knowledge",
     "accessHeadingLine2": "Where You Work",
@@ -368,7 +365,6 @@
     "accessReportsDesc": "Automated insights surfaced through scheduled reports and live dashboards.",
     "accessOfflineTitle": "Offline Field Access",
     "accessOfflineDesc": "Full functionality in the field, even without connectivity. Syncs when back online.",
-
     "transformEyebrow": "The Transformation",
     "transformHeadingLine1": "From Individual Experience",
     "transformHeadingLine2": "To Organizational Intelligence",
@@ -385,7 +381,6 @@
     "transformAfter3": "Every engineer benefits from the best experts",
     "transformAfter4": "Institutional memory grows continuously",
     "transformAfter5": "New hires access decades of experience on day one",
-
     "oilgasEyebrow": "Industry Native",
     "oilgasHeadingLine1": "Built for Petroleum",
     "oilgasHeadingLine2": "Operations",
@@ -402,7 +397,6 @@
     "oilgasUnitsDesc": "Native understanding of bbl/d, psi, WOR, GOR, API gravity, and the units your teams use every day.",
     "oilgasStandardsTitle": "Standards Compliant",
     "oilgasStandardsDesc": "Built-in awareness of API, ISO, and SPE standards. Responses aligned with industry norms and regulatory requirements.",
-
     "diffEyebrow": "Why honto.ops",
     "diffHeadingLine1": "Not Just AI —",
     "diffHeadingLine2": "Operational Memory",
@@ -419,7 +413,6 @@
     "diffRow4HontoOps": "Builds institutional memory",
     "diffRow5Generic": "One-size-fits-all",
     "diffRow5HontoOps": "Petroleum-native intelligence",
-
     "ctaEyebrow": "Contact",
     "ctaHeadingLine1": "Your Best Engineers,",
     "ctaHeadingLine2": "Available Everywhere — Forever",
@@ -626,10 +619,22 @@
       "titlePost": " for your teams.",
       "description": "honto.ops watches your systems, reads your docs, and answers the questions your senior experts field fifty times a week — with the same judgment, at 2am, in every timezone.",
       "features": [
-        { "k": "Capture", "v": "Every decision, indexed." },
-        { "k": "Scale", "v": "One expert, whole org." },
-        { "k": "Ground", "v": "Cites every answer." },
-        { "k": "Audit", "v": "Logged, replayable." }
+        {
+          "k": "Capture",
+          "v": "Every decision, indexed."
+        },
+        {
+          "k": "Scale",
+          "v": "One expert, whole org."
+        },
+        {
+          "k": "Ground",
+          "v": "Cites every answer."
+        },
+        {
+          "k": "Audit",
+          "v": "Logged, replayable."
+        }
       ],
       "cta": "Explore honto.ops",
       "imageAlt": "honto.ops product visualization"
@@ -1017,8 +1022,12 @@
     "cta": "Start the map",
     "flowHeading": "The diagnostic",
     "flowIntro": "Six focused sections. Your map builds as you go.",
-    "progress": { "label": "Progress" },
-    "status": { "pending": "Pending" },
+    "progress": {
+      "label": "Progress"
+    },
+    "status": {
+      "pending": "Pending"
+    },
     "board": {
       "title": "System map",
       "subtitle": "Your diagnostic assembles here as you answer.",
@@ -1139,6 +1148,317 @@
       "title": "Review your map with Honto",
       "body": "Walk through your readiness map with our team and leave with a concrete first phase.",
       "cta": "Book a review with Honto"
+    },
+    "questions": {
+      "labels": {
+        "companyName": "Company name",
+        "website": "Company website",
+        "industry": "Industry",
+        "companySize": "Company size",
+        "stage": "Stage / operating model",
+        "mainPressure": "Main business pressure right now",
+        "priorityOutcomes": "Priority outcomes",
+        "urgentArea": "Most urgent area",
+        "timeframe": "Desired timeframe",
+        "manualWorkLevel": "How much manual, repetitive work does the team carry?",
+        "repetitiveWorkflows": "Which repetitive workflows take the most time?",
+        "approvalBottlenecks": "Approval bottlenecks",
+        "reportingPain": "How painful is reporting today?",
+        "dataCopyPaste": "How often is data copied between systems by hand?",
+        "commFragmentation": "Communication fragmentation",
+        "overloadedFunctions": "Which teams or functions are overloaded?",
+        "knowledgeConcentration": "Where is critical know-how concentrated?",
+        "decisionBottlenecks": "Do decisions get stuck waiting on a few people?",
+        "knowledgeRisk": "Risk if a key function were suddenly unavailable",
+        "handoffIssues": "Do handoffs between teams cause problems?",
+        "crm": "CRM",
+        "erp": "ERP / Finance",
+        "warehouse": "Data warehouse / lake",
+        "comms": "Communication",
+        "ticketing": "Ticketing / support",
+        "identity": "Identity / SSO",
+        "productivity": "Productivity / docs",
+        "databases": "Databases",
+        "customApps": "Custom applications",
+        "apiAvailability": "API availability across your systems",
+        "integrationReadiness": "Integration readiness",
+        "dataReadiness": "Data readiness",
+        "securityRequirements": "Security / compliance requirements",
+        "deploymentModel": "Deployment model",
+        "contactName": "Your name",
+        "email": "Work email",
+        "role": "Your role",
+        "phone": "Phone",
+        "companyLinkedin": "Company LinkedIn page",
+        "consent": "I agree to be contacted about my results."
+      },
+      "helpers": {
+        "website": "Optional — your public company website.",
+        "priorityOutcomes": "Select all that apply.",
+        "manualWorkLevel": "1 = minimal, 5 = severe.",
+        "reportingPain": "1 = effortless, 5 = very painful.",
+        "knowledgeConcentration": "By function only — do not name individuals.",
+        "knowledgeRisk": "1 = low, 5 = critical.",
+        "deploymentModel": "On-premise or compliance-heavy needs.",
+        "phone": "Optional.",
+        "companyLinkedin": "Optional — your public company page only."
+      },
+      "options": {
+        "industry": {
+          "fintech": "Financial services",
+          "healthcare": "Healthcare",
+          "retail": "Retail / eCommerce",
+          "manufacturing": "Manufacturing",
+          "logistics": "Logistics",
+          "tech": "Tech / SaaS",
+          "services": "Professional services",
+          "publicSector": "Public sector",
+          "other": "Other"
+        },
+        "companySize": {
+          "1-10": "1–10",
+          "11-50": "11–50",
+          "51-200": "51–200",
+          "201-1000": "201–1,000",
+          "1000+": "1,000+"
+        },
+        "stage": {
+          "startup": "Early-stage startup",
+          "scaling": "Scaling",
+          "established": "Established",
+          "transforming": "Transforming / modernizing"
+        },
+        "mainPressure": {
+          "growth": "Pressure to grow",
+          "margin": "Protecting margins",
+          "competition": "Competitive pressure",
+          "retention": "Customer retention",
+          "efficiency": "Operational efficiency",
+          "compliance": "Compliance / risk",
+          "other": "Other"
+        },
+        "priorityOutcomes": {
+          "growth": "Grow revenue",
+          "cost": "Cut cost",
+          "speed": "Move faster",
+          "quality": "Improve quality",
+          "cx": "Better customer experience",
+          "compliance": "Reduce compliance risk",
+          "visibility": "More visibility / reporting"
+        },
+        "urgentArea": {
+          "sales": "Sales",
+          "marketing": "Marketing",
+          "operations": "Operations",
+          "finance": "Finance",
+          "support": "Customer support",
+          "product": "Product",
+          "data": "Data / analytics",
+          "hr": "People / HR",
+          "other": "Other"
+        },
+        "timeframe": {
+          "asap": "As soon as possible",
+          "1-3mo": "1–3 months",
+          "3-6mo": "3–6 months",
+          "6-12mo": "6–12 months",
+          "exploring": "Just exploring"
+        },
+        "manualWorkLevel": {
+          "1": "1",
+          "2": "2",
+          "3": "3",
+          "4": "4",
+          "5": "5"
+        },
+        "repetitiveWorkflows": {
+          "dataEntry": "Manual data entry",
+          "reporting": "Building reports",
+          "scheduling": "Scheduling / coordination",
+          "invoicing": "Invoicing / billing",
+          "onboarding": "Customer or staff onboarding",
+          "reconciliation": "Reconciliation",
+          "statusUpdates": "Status updates / chasing",
+          "other": "Other"
+        },
+        "approvalBottlenecks": {
+          "none": "No real bottlenecks",
+          "minor": "Minor delays",
+          "frequent": "Frequent delays",
+          "severe": "Severe / blocking delays"
+        },
+        "reportingPain": {
+          "1": "1",
+          "2": "2",
+          "3": "3",
+          "4": "4",
+          "5": "5"
+        },
+        "dataCopyPaste": {
+          "rare": "Rarely",
+          "sometimes": "Sometimes",
+          "often": "Often",
+          "constant": "Constantly"
+        },
+        "commFragmentation": {
+          "low": "Low — mostly in one place",
+          "medium": "Medium — a few tools",
+          "high": "High — scattered across many tools"
+        },
+        "overloadedFunctions": {
+          "engineering": "Engineering",
+          "product": "Product",
+          "sales": "Sales",
+          "marketing": "Marketing",
+          "operations": "Operations",
+          "finance": "Finance",
+          "data": "Data / analytics",
+          "support": "Customer support",
+          "leadership": "Leadership"
+        },
+        "knowledgeConcentration": {
+          "engineering": "Engineering",
+          "product": "Product",
+          "sales": "Sales",
+          "marketing": "Marketing",
+          "operations": "Operations",
+          "finance": "Finance",
+          "data": "Data / analytics",
+          "support": "Customer support",
+          "leadership": "Leadership"
+        },
+        "decisionBottlenecks": {
+          "none": "No",
+          "some": "Sometimes",
+          "frequent": "Frequently"
+        },
+        "knowledgeRisk": {
+          "1": "1",
+          "2": "2",
+          "3": "3",
+          "4": "4",
+          "5": "5"
+        },
+        "handoffIssues": {
+          "rare": "Rarely",
+          "sometimes": "Sometimes",
+          "often": "Often"
+        },
+        "crm": {
+          "salesforce": "Salesforce",
+          "hubspot": "HubSpot",
+          "pipedrive": "Pipedrive",
+          "zoho": "Zoho",
+          "dynamics": "Microsoft Dynamics",
+          "none": "None",
+          "other": "Other"
+        },
+        "erp": {
+          "sap": "SAP",
+          "netsuite": "Oracle NetSuite",
+          "dynamics": "Microsoft Dynamics",
+          "quickbooks": "QuickBooks",
+          "xero": "Xero",
+          "contpaqi": "Contpaqi",
+          "none": "None",
+          "other": "Other"
+        },
+        "warehouse": {
+          "snowflake": "Snowflake",
+          "bigquery": "BigQuery",
+          "redshift": "Redshift",
+          "databricks": "Databricks",
+          "none": "None",
+          "other": "Other"
+        },
+        "comms": {
+          "slack": "Slack",
+          "teams": "Microsoft Teams",
+          "googleWorkspace": "Google Workspace",
+          "emailOnly": "Email only",
+          "other": "Other"
+        },
+        "ticketing": {
+          "zendesk": "Zendesk",
+          "intercom": "Intercom",
+          "freshdesk": "Freshdesk",
+          "jira": "Jira",
+          "none": "None",
+          "other": "Other"
+        },
+        "identity": {
+          "okta": "Okta",
+          "entra": "Entra / Azure AD",
+          "googleWorkspace": "Google Workspace",
+          "auth0": "Auth0",
+          "none": "None",
+          "other": "Other"
+        },
+        "productivity": {
+          "notion": "Notion",
+          "confluence": "Confluence",
+          "sharepoint": "SharePoint",
+          "googleDrive": "Google Drive",
+          "other": "Other"
+        },
+        "databases": {
+          "postgres": "PostgreSQL",
+          "mysql": "MySQL",
+          "mongodb": "MongoDB",
+          "sqlserver": "SQL Server",
+          "oracle": "Oracle",
+          "none": "None",
+          "other": "Other"
+        },
+        "customApps": {
+          "internalTools": "Internal tools",
+          "customerPortal": "Customer portal",
+          "dataPipelines": "Data pipelines",
+          "none": "None",
+          "other": "Other"
+        },
+        "apiAvailability": {
+          "most": "Most systems have APIs",
+          "some": "Some do",
+          "few": "Few do",
+          "none": "None / unsure",
+          "dontKnow": "Don't know"
+        },
+        "integrationReadiness": {
+          "high": "Well integrated",
+          "medium": "Partly integrated",
+          "low": "Mostly siloed",
+          "dontKnow": "Don't know"
+        },
+        "dataReadiness": {
+          "clean": "Clean and organized",
+          "mixed": "Mixed",
+          "messy": "Fragmented / messy",
+          "dontKnow": "Don't know"
+        },
+        "securityRequirements": {
+          "gdpr": "GDPR",
+          "hipaa": "HIPAA",
+          "soc2": "SOC 2",
+          "pci": "PCI",
+          "internal": "Internal-only data",
+          "none": "None"
+        },
+        "deploymentModel": {
+          "cloud": "Cloud-first",
+          "hybrid": "Hybrid",
+          "onPrem": "On-premise",
+          "regulated": "Regulated / restricted environment"
+        },
+        "role": {
+          "founderExec": "Founder / Executive",
+          "engineeringLead": "Engineering lead",
+          "opsProduct": "Ops / Product",
+          "other": "Other"
+        }
+      },
+      "techOtherLabel": "Other — {label}",
+      "techOtherHelper": "Optional — up to 250 characters."
     }
   }
 }

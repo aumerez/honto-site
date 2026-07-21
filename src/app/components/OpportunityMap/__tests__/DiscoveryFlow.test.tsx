@@ -102,6 +102,27 @@ describe("DiscoveryFlow", () => {
     expect(screen.getByText("Other — CRM")).toBeTruthy();
   });
 
+  it("renders question labels and options in Spanish", () => {
+    seed("BUSINESS_CONTEXT");
+    renderWithLocale(<DiscoveryFlow />, { locale: "es" });
+    clickButton(/retomar diagnóstico/i);
+    // Chrome and the question copy are both localized.
+    expect(stageHeading("Contexto del negocio")).toBeTruthy();
+    expect(screen.getByText("Nombre de la empresa")).toBeTruthy();
+    // An option label is translated too, and the English source is gone.
+    const industry = document.querySelector('select[name="industry"]');
+    expect(industry?.textContent).toContain("Servicios financieros");
+    expect(screen.queryByText("Company name")).toBeNull();
+  });
+
+  it("renders question labels in Portuguese", () => {
+    seed("BUSINESS_CONTEXT");
+    renderWithLocale(<DiscoveryFlow />, { locale: "pt" });
+    clickButton(/retomar diagnóstico/i);
+    expect(screen.getByText("Nome da empresa")).toBeTruthy();
+    expect(screen.queryByText("Company name")).toBeNull();
+  });
+
   it("gates the report until contact fields validate", () => {
     // Company name carries over from business context — never re-asked here.
     seed("CONTACT_GATE", {

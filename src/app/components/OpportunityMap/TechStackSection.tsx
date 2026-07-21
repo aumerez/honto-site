@@ -2,7 +2,8 @@
 
 import { Fragment } from "react";
 import QuestionCard from "./QuestionCard";
-import { questionsForSection, type AnswerValue } from "./questions";
+import { type AnswerValue, type OmQuestionsCopy } from "./questions";
+import { useLocalizedQuestions } from "./useLocalizedQuestions";
 import {
   FIELD_LIMITS,
   TECH_CATEGORIES,
@@ -13,13 +14,18 @@ import {
 
 const TECH_CATEGORY_SET = new Set<string>(TECH_CATEGORIES);
 
-function otherQuestionFor(category: TechCategory, label: string): Question {
+function otherQuestionFor(
+  category: TechCategory,
+  label: string,
+  copy: OmQuestionsCopy | undefined
+): Question {
+  const template = copy?.techOtherLabel ?? "Other — {label}";
   return {
     id: otherKeyFor(category),
     section: "SYSTEM_LANDSCAPE",
     type: "text",
-    label: `Other — ${label}`,
-    helper: "Optional — up to 250 characters.",
+    label: template.replace("{label}", label),
+    helper: copy?.techOtherHelper ?? "Optional — up to 250 characters.",
     required: false,
     maxLength: FIELD_LIMITS.otherText,
   };
@@ -42,17 +48,18 @@ export default function TechStackSection({
   onChange: (id: string, value: AnswerValue) => void;
   note: string;
 }) {
+  const { forSection, copy } = useLocalizedQuestions();
   return (
     <div>
       <p className="om-tech-note">{note}</p>
       <div className="om-questions">
-        {questionsForSection("SYSTEM_LANDSCAPE").map((q) => {
+        {forSection("SYSTEM_LANDSCAPE").map((q) => {
           const selected =
             TECH_CATEGORY_SET.has(q.id) &&
             Array.isArray(values[q.id]) &&
             (values[q.id] as string[]).includes("other");
           const other = selected
-            ? otherQuestionFor(q.id as TechCategory, q.label)
+            ? otherQuestionFor(q.id as TechCategory, q.label, copy)
             : null;
           return (
             <Fragment key={q.id}>

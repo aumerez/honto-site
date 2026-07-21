@@ -573,6 +573,47 @@ export function questionsForSection(section: QuestionSection): Question[] {
 
 export type AnswerValue = string | string[] | boolean;
 
+/* ── Localization overlay ────────────────────────────────────────────────
+ * English is the source copy authored above; localized strings live in the
+ * locale dictionaries under `opportunityMap.questions`. The overlay replaces
+ * a question's label/helper/option labels with localized text, falling back
+ * to English for any missing key so a partial translation never breaks the
+ * form. Structural fields (id, type, required) are never touched.
+ */
+
+export type OmQuestionsCopy = {
+  labels?: Record<string, string>;
+  helpers?: Record<string, string>;
+  /** Per-question map of option value → localized label. */
+  options?: Record<string, Record<string, string>>;
+  /** "Other — {label}" template + helper for the tech-inventory free-text. */
+  techOtherLabel?: string;
+  techOtherHelper?: string;
+};
+
+export function localizeQuestion(
+  q: Question,
+  copy: OmQuestionsCopy | undefined
+): Question {
+  if (!copy) return q;
+  const label = copy.labels?.[q.id] ?? q.label;
+  const helper =
+    q.helper != null ? (copy.helpers?.[q.id] ?? q.helper) : q.helper;
+  const optMap = copy.options?.[q.id];
+  const options =
+    q.options && optMap
+      ? q.options.map((o) => ({ ...o, label: optMap[o.value] ?? o.label }))
+      : q.options;
+  return { ...q, label, helper, options };
+}
+
+export function localizeQuestions(
+  list: Question[],
+  copy: OmQuestionsCopy | undefined
+): Question[] {
+  return copy ? list.map((q) => localizeQuestion(q, copy)) : list;
+}
+
 /**
  * Data-driven required-field check. Returns the ids of required questions that
  * are unanswered. Skippable sections never block (return an empty list).

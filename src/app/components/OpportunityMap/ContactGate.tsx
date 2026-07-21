@@ -1,7 +1,8 @@
 "use client";
 
 import QuestionCard from "./QuestionCard";
-import { questionsForSection, type AnswerValue } from "./questions";
+import { type AnswerValue } from "./questions";
+import { useLocalizedQuestions } from "./useLocalizedQuestions";
 
 /**
  * Contact capture. The report stays gated until these validate (enforced by the
@@ -18,10 +19,11 @@ export default function ContactGate({
   onChange: (id: string, value: AnswerValue) => void;
   privacy: string[];
 }) {
+  const { forSection } = useLocalizedQuestions();
   return (
     <div>
       <div className="om-questions">
-        {questionsForSection("CONTACT_GATE").map((q) => (
+        {forSection("CONTACT_GATE").map((q) => (
           <QuestionCard
             key={q.id}
             question={q}

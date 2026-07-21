@@ -1,7 +1,8 @@
 "use client";
 
 import QuestionCard from "./QuestionCard";
-import { questionsForSection, type AnswerValue } from "./questions";
+import { type AnswerValue } from "./questions";
+import { useLocalizedQuestions } from "./useLocalizedQuestions";
 
 /** Renders the business context or business goals questions as cards. */
 export default function BusinessSection({
@@ -15,9 +16,10 @@ export default function BusinessSection({
   errors: Record<string, string>;
   onChange: (id: string, value: AnswerValue) => void;
 }) {
+  const { forSection } = useLocalizedQuestions();
   return (
     <div className="om-questions">
-      {questionsForSection(section).map((q) => (
+      {forSection(section).map((q) => (
         <QuestionCard
           key={q.id}
           question={q}

@@ -323,7 +323,6 @@
     "statWells": "Pozos gestionados",
     "statRetention": "Conocimiento retenido",
     "statResponse": "Tiempo de respuesta",
-
     "problemEyebrow": "El Problema",
     "problemHeadingLine1": "Tu Empresa Ya Tiene",
     "problemHeadingLine2": "La Respuesta",
@@ -336,7 +335,6 @@
     "problemChatsDetail": "Contexto crítico vive en chats de WhatsApp, correos y reuniones. Imposible de buscar, imposible de escalar.",
     "problemSilos": "Aislado entre operaciones",
     "problemSilosDetail": "Cada pozo, cada campo, cada equipo opera en aislamiento. Las lecciones aprendidas en una operación nunca llegan a la siguiente.",
-
     "unifiedEyebrow": "Conocimiento Unificado",
     "unifiedHeadingLine1": "Una Plataforma. Cada Formato.",
     "unifiedHeadingLine2": "Todo Tu Conocimiento.",
@@ -353,7 +351,6 @@
     "unifiedAudioDesc": "Memos de voz, briefings tipo podcast, audio de campo — convertidos a conocimiento buscable.",
     "unifiedExpertTitle": "Razonamiento Experto",
     "unifiedExpertDesc": "Lógica de decisiones, razonamiento de diagnóstico, heurísticas — el 'por qué' detrás de las decisiones expertas, preservado.",
-
     "accessEyebrow": "Acceso Multicanal",
     "accessHeadingLine1": "Accede al Conocimiento",
     "accessHeadingLine2": "Donde Trabajas",
@@ -368,7 +365,6 @@
     "accessReportsDesc": "Insights automatizados a través de reportes programados y dashboards en vivo.",
     "accessOfflineTitle": "Acceso Offline en Campo",
     "accessOfflineDesc": "Funcionalidad completa en campo, incluso sin conectividad. Se sincroniza al volver en línea.",
-
     "transformEyebrow": "La Transformación",
     "transformHeadingLine1": "De Experiencia Individual",
     "transformHeadingLine2": "A Inteligencia Organizacional",
@@ -385,7 +381,6 @@
     "transformAfter3": "Cada ingeniero se beneficia de los mejores expertos",
     "transformAfter4": "La memoria institucional crece continuamente",
     "transformAfter5": "Los nuevos ingresos acceden a décadas de experiencia desde el día uno",
-
     "oilgasEyebrow": "Nativo de la Industria",
     "oilgasHeadingLine1": "Construido para Operaciones",
     "oilgasHeadingLine2": "Petroleras",
@@ -402,7 +397,6 @@
     "oilgasUnitsDesc": "Comprensión nativa de bbl/d, psi, WOR, GOR, gravedad API y las unidades que tus equipos usan todos los días.",
     "oilgasStandardsTitle": "Cumple Estándares",
     "oilgasStandardsDesc": "Conocimiento integrado de estándares API, ISO y SPE. Respuestas alineadas con normas de la industria y requisitos regulatorios.",
-
     "diffEyebrow": "Por Qué honto.ops",
     "diffHeadingLine1": "No Solo IA —",
     "diffHeadingLine2": "Memoria Operacional",
@@ -419,7 +413,6 @@
     "diffRow4HontoOps": "Construye memoria institucional",
     "diffRow5Generic": "Talla única",
     "diffRow5HontoOps": "Inteligencia nativa petrolera",
-
     "ctaEyebrow": "Contacto",
     "ctaHeadingLine1": "Tus Mejores Ingenieros,",
     "ctaHeadingLine2": "Disponibles en Todas Partes — Siempre",
@@ -638,10 +631,22 @@
       "titlePost": " experto para tus equipos.",
       "description": "honto.ops observa tus sistemas, lee tus documentos y responde las preguntas que tus expertos senior reciben cincuenta veces a la semana — con el mismo criterio, a las 2am, en cualquier zona horaria.",
       "features": [
-        { "k": "Captura", "v": "Cada decisión, indexada." },
-        { "k": "Escala", "v": "Un experto, toda la empresa." },
-        { "k": "Fundamenta", "v": "Cita cada respuesta." },
-        { "k": "Audita", "v": "Registrado y reproducible." }
+        {
+          "k": "Captura",
+          "v": "Cada decisión, indexada."
+        },
+        {
+          "k": "Escala",
+          "v": "Un experto, toda la empresa."
+        },
+        {
+          "k": "Fundamenta",
+          "v": "Cita cada respuesta."
+        },
+        {
+          "k": "Audita",
+          "v": "Registrado y reproducible."
+        }
       ],
       "cta": "Explorar honto.ops",
       "imageAlt": "Visualización del producto honto.ops"
@@ -1029,8 +1034,12 @@
     "cta": "Iniciar el mapa",
     "flowHeading": "El diagnóstico",
     "flowIntro": "Seis secciones enfocadas. Tu mapa se construye a medida que avanzas.",
-    "progress": { "label": "Progreso" },
-    "status": { "pending": "Pendiente" },
+    "progress": {
+      "label": "Progreso"
+    },
+    "status": {
+      "pending": "Pendiente"
+    },
     "board": {
       "title": "Mapa de sistemas",
       "subtitle": "Tu diagnóstico se arma aquí a medida que respondes.",
@@ -1151,6 +1160,254 @@
       "title": "Revisa tu mapa con Honto",
       "body": "Recorre tu mapa de madurez con nuestro equipo y llévate una primera fase concreta.",
       "cta": "Agenda una revisión con Honto"
+    },
+    "questions": {
+      "labels": {
+        "companyName": "Nombre de la empresa",
+        "website": "Sitio web de la empresa",
+        "industry": "Industria",
+        "companySize": "Tamaño de la empresa",
+        "stage": "Etapa / modelo operativo",
+        "mainPressure": "Principal presión del negocio ahora",
+        "priorityOutcomes": "Resultados prioritarios",
+        "urgentArea": "Área más urgente",
+        "timeframe": "Plazo deseado",
+        "manualWorkLevel": "¿Cuánto trabajo manual y repetitivo carga el equipo?",
+        "repetitiveWorkflows": "¿Qué flujos de trabajo repetitivos consumen más tiempo?",
+        "approvalBottlenecks": "Cuellos de botella en aprobaciones",
+        "reportingPain": "¿Qué tan difícil es generar reportes hoy?",
+        "dataCopyPaste": "¿Con qué frecuencia se copian datos entre sistemas a mano?",
+        "commFragmentation": "Fragmentación de la comunicación",
+        "overloadedFunctions": "¿Qué equipos o funciones están sobrecargados?",
+        "knowledgeConcentration": "¿Dónde se concentra el conocimiento crítico?",
+        "decisionBottlenecks": "¿Las decisiones se traban esperando a pocas personas?",
+        "knowledgeRisk": "Riesgo si una función clave quedara de pronto sin disponibilidad",
+        "handoffIssues": "¿Los traspasos entre equipos causan problemas?",
+        "crm": "CRM",
+        "erp": "ERP / Finanzas",
+        "warehouse": "Data warehouse / lago de datos",
+        "comms": "Comunicación",
+        "ticketing": "Tickets / soporte",
+        "identity": "Identidad / SSO",
+        "productivity": "Productividad / documentos",
+        "databases": "Bases de datos",
+        "customApps": "Aplicaciones a medida",
+        "apiAvailability": "Disponibilidad de APIs en tus sistemas",
+        "integrationReadiness": "Preparación para integraciones",
+        "dataReadiness": "Preparación de los datos",
+        "securityRequirements": "Requisitos de seguridad / cumplimiento",
+        "deploymentModel": "Modelo de despliegue",
+        "contactName": "Tu nombre",
+        "email": "Correo de trabajo",
+        "role": "Tu rol",
+        "phone": "Teléfono",
+        "companyLinkedin": "Página de LinkedIn de la empresa",
+        "consent": "Acepto que me contacten sobre mis resultados."
+      },
+      "helpers": {
+        "website": "Opcional — el sitio web público de tu empresa.",
+        "priorityOutcomes": "Selecciona todas las que apliquen.",
+        "manualWorkLevel": "1 = mínimo, 5 = severo.",
+        "reportingPain": "1 = sin esfuerzo, 5 = muy difícil.",
+        "knowledgeConcentration": "Solo por función — no nombres a personas.",
+        "knowledgeRisk": "1 = bajo, 5 = crítico.",
+        "deploymentModel": "Necesidades on-premise o con alto cumplimiento.",
+        "phone": "Opcional.",
+        "companyLinkedin": "Opcional — solo tu página pública de empresa."
+      },
+      "techOtherLabel": "Otro — {label}",
+      "techOtherHelper": "Opcional — hasta 250 caracteres.",
+      "options": {
+        "industry": {
+          "fintech": "Servicios financieros",
+          "healthcare": "Salud",
+          "retail": "Retail / eCommerce",
+          "manufacturing": "Manufactura",
+          "logistics": "Logística",
+          "tech": "Tecnología / SaaS",
+          "services": "Servicios profesionales",
+          "publicSector": "Sector público",
+          "other": "Otro"
+        },
+        "stage": {
+          "startup": "Startup en etapa temprana",
+          "scaling": "En escalamiento",
+          "established": "Consolidada",
+          "transforming": "En transformación / modernización"
+        },
+        "mainPressure": {
+          "growth": "Presión por crecer",
+          "margin": "Proteger márgenes",
+          "competition": "Presión competitiva",
+          "retention": "Retención de clientes",
+          "efficiency": "Eficiencia operativa",
+          "compliance": "Cumplimiento / riesgo",
+          "other": "Otro"
+        },
+        "priorityOutcomes": {
+          "growth": "Aumentar ingresos",
+          "cost": "Reducir costos",
+          "speed": "Ir más rápido",
+          "quality": "Mejorar la calidad",
+          "cx": "Mejor experiencia del cliente",
+          "compliance": "Reducir riesgo de cumplimiento",
+          "visibility": "Más visibilidad / reportes"
+        },
+        "urgentArea": {
+          "sales": "Ventas",
+          "marketing": "Marketing",
+          "operations": "Operaciones",
+          "finance": "Finanzas",
+          "support": "Atención al cliente",
+          "product": "Producto",
+          "data": "Datos / analítica",
+          "hr": "Personas / RR. HH.",
+          "other": "Otro"
+        },
+        "timeframe": {
+          "asap": "Lo antes posible",
+          "1-3mo": "1–3 meses",
+          "3-6mo": "3–6 meses",
+          "6-12mo": "6–12 meses",
+          "exploring": "Solo explorando"
+        },
+        "repetitiveWorkflows": {
+          "dataEntry": "Captura manual de datos",
+          "reporting": "Elaboración de reportes",
+          "scheduling": "Agenda / coordinación",
+          "invoicing": "Facturación / cobros",
+          "onboarding": "Onboarding de clientes o personal",
+          "reconciliation": "Conciliaciones",
+          "statusUpdates": "Actualizaciones de estado / seguimiento",
+          "other": "Otro"
+        },
+        "approvalBottlenecks": {
+          "none": "Sin cuellos de botella reales",
+          "minor": "Demoras menores",
+          "frequent": "Demoras frecuentes",
+          "severe": "Demoras severas / bloqueantes"
+        },
+        "dataCopyPaste": {
+          "rare": "Rara vez",
+          "sometimes": "A veces",
+          "often": "A menudo",
+          "constant": "Constantemente"
+        },
+        "commFragmentation": {
+          "low": "Baja — casi todo en un solo lugar",
+          "medium": "Media — algunas herramientas",
+          "high": "Alta — dispersa en muchas herramientas"
+        },
+        "overloadedFunctions": {
+          "engineering": "Ingeniería",
+          "product": "Producto",
+          "sales": "Ventas",
+          "marketing": "Marketing",
+          "operations": "Operaciones",
+          "finance": "Finanzas",
+          "data": "Datos / analítica",
+          "support": "Atención al cliente",
+          "leadership": "Liderazgo"
+        },
+        "knowledgeConcentration": {
+          "engineering": "Ingeniería",
+          "product": "Producto",
+          "sales": "Ventas",
+          "marketing": "Marketing",
+          "operations": "Operaciones",
+          "finance": "Finanzas",
+          "data": "Datos / analítica",
+          "support": "Atención al cliente",
+          "leadership": "Liderazgo"
+        },
+        "decisionBottlenecks": {
+          "none": "No",
+          "some": "A veces",
+          "frequent": "Con frecuencia"
+        },
+        "handoffIssues": {
+          "rare": "Rara vez",
+          "sometimes": "A veces",
+          "often": "A menudo"
+        },
+        "apiAvailability": {
+          "most": "La mayoría de los sistemas tienen API",
+          "some": "Algunos sí",
+          "few": "Pocos",
+          "none": "Ninguno / no estoy seguro",
+          "dontKnow": "No lo sé"
+        },
+        "integrationReadiness": {
+          "high": "Bien integrados",
+          "medium": "Parcialmente integrados",
+          "low": "Mayormente aislados",
+          "dontKnow": "No lo sé"
+        },
+        "dataReadiness": {
+          "clean": "Limpios y organizados",
+          "mixed": "Mixtos",
+          "messy": "Fragmentados / desordenados",
+          "dontKnow": "No lo sé"
+        },
+        "securityRequirements": {
+          "gdpr": "GDPR",
+          "hipaa": "HIPAA",
+          "soc2": "SOC 2",
+          "pci": "PCI",
+          "internal": "Solo datos internos",
+          "none": "Ninguno"
+        },
+        "deploymentModel": {
+          "cloud": "Primero la nube",
+          "hybrid": "Híbrido",
+          "onPrem": "On-premise",
+          "regulated": "Entorno regulado / restringido"
+        },
+        "role": {
+          "founderExec": "Fundador(a) / Ejecutivo(a)",
+          "engineeringLead": "Líder de ingeniería",
+          "opsProduct": "Operaciones / Producto",
+          "other": "Otro"
+        },
+        "crm": {
+          "none": "Ninguno",
+          "other": "Otro"
+        },
+        "erp": {
+          "none": "Ninguno",
+          "other": "Otro"
+        },
+        "warehouse": {
+          "none": "Ninguno",
+          "other": "Otro"
+        },
+        "comms": {
+          "emailOnly": "Solo correo",
+          "other": "Otro"
+        },
+        "ticketing": {
+          "none": "Ninguno",
+          "other": "Otro"
+        },
+        "identity": {
+          "none": "Ninguno",
+          "other": "Otro"
+        },
+        "productivity": {
+          "other": "Otro"
+        },
+        "databases": {
+          "none": "Ninguno",
+          "other": "Otro"
+        },
+        "customApps": {
+          "internalTools": "Herramientas internas",
+          "customerPortal": "Portal de clientes",
+          "dataPipelines": "Pipelines de datos",
+          "none": "Ninguno",
+          "other": "Otro"
+        }
+      }
     }
   }
 }
