@@ -1,7 +1,8 @@
 "use client";
 
 import QuestionCard from "./QuestionCard";
-import { questionsForSection, type AnswerValue } from "./questions";
+import { type AnswerValue } from "./questions";
+import { useLocalizedQuestions } from "./useLocalizedQuestions";
 
 /** Manual work, friction, bottleneck, and repetitive-workflow questions. */
 export default function ProcessSection({
@@ -13,9 +14,10 @@ export default function ProcessSection({
   errors: Record<string, string>;
   onChange: (id: string, value: AnswerValue) => void;
 }) {
+  const { forSection } = useLocalizedQuestions();
   return (
     <div className="om-questions">
-      {questionsForSection("PROCESS_DRAG").map((q) => (
+      {forSection("PROCESS_DRAG").map((q) => (
         <QuestionCard
           key={q.id}
           question={q}

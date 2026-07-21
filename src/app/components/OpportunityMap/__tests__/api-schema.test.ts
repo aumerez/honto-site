@@ -70,6 +70,35 @@ describe("normalizeSubmission", () => {
     if (!r.ok) expect(r.issues.some((i) => /website/i.test(i))).toBe(true);
   });
 
+  it("accepts a scheme-less website by prepending https://", () => {
+    for (const input of ["acme.com", "www.acme.com", "acme.io/path"]) {
+      const s = valid();
+      s.company.website = input;
+      const r = normalizeSubmission(s);
+      expect(r.ok).toBe(true);
+      if (r.ok) expect(r.submission.company.website).toBe(`https://${input}`);
+    }
+  });
+
+  it("leaves an already-schemed website untouched", () => {
+    const s = valid();
+    s.company.website = "https://acme.com";
+    const r = normalizeSubmission(s);
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.submission.company.website).toBe("https://acme.com");
+  });
+
+  it("normalizes a scheme-less company LinkedIn URL (full stage)", () => {
+    const s = valid();
+    s.contact.companyLinkedin = "linkedin.com/company/acme";
+    const r = normalizeSubmission(s, "full");
+    expect(r.ok).toBe(true);
+    if (r.ok)
+      expect(r.submission.contact.companyLinkedin).toBe(
+        "https://linkedin.com/company/acme"
+      );
+  });
+
   it("rejects banned/private field names", () => {
     const cases = [
       { ...valid(), password: "x" },

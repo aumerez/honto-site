@@ -1,7 +1,8 @@
 "use client";
 
 import QuestionCard from "./QuestionCard";
-import { questionsForSection, type AnswerValue } from "./questions";
+import { type AnswerValue } from "./questions";
+import { useLocalizedQuestions } from "./useLocalizedQuestions";
 
 /** Team load, knowledge concentration, decision and handoff questions. */
 export default function TeamSection({
@@ -13,9 +14,10 @@ export default function TeamSection({
   errors: Record<string, string>;
   onChange: (id: string, value: AnswerValue) => void;
 }) {
+  const { forSection } = useLocalizedQuestions();
   return (
     <div className="om-questions">
-      {questionsForSection("EXPERT_LEVERAGE").map((q) => (
+      {forSection("EXPERT_LEVERAGE").map((q) => (
         <QuestionCard
           key={q.id}
           question={q}
