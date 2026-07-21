@@ -98,6 +98,18 @@ function trimmed(v: unknown, max: number): string {
   return t.length > max ? "" : t;
 }
 
+/**
+ * Coerce a user-entered URL into a validatable one. The UI accepts optional URL
+ * fields without enforcing a scheme, so a value like "acme.com" would otherwise
+ * fail server validation and reject the whole submission. Prepend https:// when
+ * the scheme is missing; leave empty values empty.
+ */
+function trimmedUrl(v: unknown, max: number): string {
+  const t = trimmed(v, max);
+  if (!t) return "";
+  return /^https?:\/\//i.test(t) ? t : `https://${t}`;
+}
+
 function asEnum<T extends string>(v: unknown, allowed: readonly T[]): T | "" {
   if (typeof v !== "string") return "";
   return (allowed as readonly string[]).includes(v) ? (v as T) : "";
@@ -172,7 +184,7 @@ export function normalizeSubmission(
 
   const company = {
     companyName: trimmed(c.companyName, FIELD_LIMITS.shortText),
-    website: trimmed(c.website, FIELD_LIMITS.url),
+    website: trimmedUrl(c.website, FIELD_LIMITS.url),
     industry: asEnum(c.industry, INDUSTRIES),
     companySize: asEnum(c.companySize, COMPANY_SIZES),
     stage: asEnum(c.stage, STAGES),
@@ -216,7 +228,7 @@ export function normalizeSubmission(
     // Company name carries over from business context (never asked twice).
     company: company.companyName,
     phone: trimmed(ct.phone, FIELD_LIMITS.phone),
-    companyLinkedin: trimmed(ct.companyLinkedin, FIELD_LIMITS.url),
+    companyLinkedin: trimmedUrl(ct.companyLinkedin, FIELD_LIMITS.url),
     consent: ct.consent === true,
   };
 
