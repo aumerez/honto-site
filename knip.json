@@ -1,4 +1,0 @@
-{
-  "ignoreDependencies": ["@vitest/coverage-v8", "postcss-load-config"],
-  "ignoreExportsUsedInFile": true
-}

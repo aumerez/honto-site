@@ -1,31 +1,10 @@
-# OS files
-.DS_Store
-Thumbs.db
-Desktop.ini
-*.swp
-*.swo
-*~
-
-# IDE and editor directories
-.idea/
-.vscode/
-*.sublime-project
-*.sublime-workspace
-
-# Local tooling state
-.brv/
-
-# Python virtual environment (used for pre-commit)
-.venv/
-
-# Node.js
-node_modules/
-
-# Next.js
-.next/
-out/
-next-env.d.ts
-tsconfig.tsbuildinfo
-
-# Environment files
+node_modules
+.next
+out
+.env
+.env.local
 .env*.local
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+.vercel
