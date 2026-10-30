@@ -1,80 +1,78 @@
-# honto-site
+# honto-site-2
 
-A Next.js + TypeScript website repository with development guardrails established before feature work.
+The new honto.ai website: homepage, the **Book a demo** questionnaire (English, Spanish, Portuguese) and the **Prospects** admin page where every submission is stored.
 
-## Current Status
+Built with Next.js 14 (App Router) and TypeScript. No UI framework; styles live in `app/globals.css`.
 
-**Guardrail setup is complete.** All 10 phases of the guardrails rollout have been implemented. The repo is ready for application development.
+## What's inside
 
-The tech stack is **Next.js + TypeScript**. A minimal app shell exists. No features have been built yet — the focus so far has been on establishing quality infrastructure for group LLM-assisted development.
+| Route | What it is |
+| --- | --- |
+| `/` | Homepage with the scroll-driven logo intro, use cases and calls to action |
+| `/technical` | Technical overview: benefits, cost and traceability differentiators, the three layers (Honto Ops, WholoGraph, WholoBase) |
+| `/book` | Book-a-demo questionnaire → live systems map → AI maturity level → Calendly booking. `?lang=es` or `?lang=pt` opens it in Spanish or Portuguese |
+| `/admin` | Prospects: every submission, filters, search, details, CSV export (password protected) |
+| `POST /api/submissions` | Saves a questionnaire, emails the team and sends the prospect their report |
+| `POST /api/submissions/:id/booking` | Marks a submission as booked when Calendly confirms the meeting |
+| `GET /api/admin/export` | CSV of all submissions (password protected) |
 
-## Documentation
+### How a submission flows
 
-All planning and policy documents live in [`docs/guardrails/`](docs/guardrails/):
+1. The prospect answers 5 short steps. The map on the right builds as they answer.
+2. They see their AI maturity level (1–5), top 3 opportunities and estimated hours/month to free up. The score uses the same formula on the client and the server (`lib/questionnaire.ts → scoreLevel`).
+3. They enter name, work email and role. The submission is saved and emailed to everyone in `NOTIFY_EMAILS` (default: fegloff@gmail.com, aumerez@honto.ai). The prospect receives their report by email.
+4. Calendly opens inline, already filled in with their name, email, company and processes. When they book, the submission is marked **booked** and the team gets a second email.
+5. Everything appears in `/admin`.
 
-| Document                                                          | Purpose                                                |
-| ----------------------------------------------------------------- | ------------------------------------------------------ |
-| [Implementation Plan](docs/guardrails/implementation_plan.md)     | Master plan for guardrail rollout                      |
-| [Repository Policy](docs/guardrails/repo_policy.md)               | Contribution rules and structural constraints          |
-| [Docs Freshness Policy](docs/guardrails/docs_freshness_policy.md) | How documentation is kept current                      |
-| [Phased Backlog](docs/guardrails/phased_backlog.md)               | Concrete execution phases with completion criteria     |
-| [Stack Decision](docs/guardrails/stack_decision.md)               | Framework choice rationale and downstream implications |
-| [Final Closure Report](docs/guardrails/final_closure_report.md)   | Summary of all implemented guardrails                  |
+## Setup
 
-## Developer Setup
-
-```sh
-# Install Node dependencies
+```bash
 npm install
-
-# Install pre-commit hooks (file hygiene, format enforcement, security)
-python3 -m venv .venv
-source .venv/bin/activate
-pip install pre-commit
-pre-commit install
+cp .env.example .env.local   # fill in the values below
+npm run db:migrate           # creates the submissions table
+npm run dev                  # http://localhost:3000
 ```
 
-## Available Commands
+### Environment variables
 
-| Command                        | Purpose                                  |
-| ------------------------------ | ---------------------------------------- |
-| `npm run lint`                 | Run ESLint on all source files           |
-| `npm run lint:fix`             | Run ESLint with auto-fix                 |
-| `npm run format`               | Format all files with Prettier           |
-| `npm run format:check`         | Check formatting without modifying files |
-| `npm test`                     | Run tests (Vitest)                       |
-| `npm run test:watch`           | Run tests in watch mode                  |
-| `npm run test:coverage`        | Run tests with coverage report           |
-| `npm run typecheck`            | Run TypeScript type checking             |
-| `npm run build`                | Production build (Next.js)               |
-| `npm run check:dead-code`      | Detect unused deps, exports, and files   |
-| `npm run check:docs`           | Run all docs health checks               |
-| `npm run check:docs-freshness` | Check docs metadata and staleness        |
-| `npm run check:links`          | Validate internal markdown links         |
-| `npm run check:todos`          | Check TODO/FIXME policy compliance       |
-| `npm run check:deps`           | Report outdated dependencies             |
-| `npm run check:hygiene`        | Run all scheduled hygiene checks         |
-| `npm run verify`               | Run full local validation suite          |
-| `pre-commit run --all-files`   | Run all pre-commit hooks manually        |
+| Variable | Needed for |
+| --- | --- |
+| `DATABASE_URL` | Postgres connection string (Vercel Postgres, Neon, Supabase…). Without it, submissions are not stored. |
+| `DATABASE_SSL` | `true` by default; set `false` for a local Postgres without SSL |
+| `RESEND_API_KEY` | Sending emails through [Resend](https://resend.com). Without it, no emails are sent. |
+| `EMAIL_FROM` | Sender, on a domain verified in Resend, e.g. `Honto <demo@honto.ai>` |
+| `NOTIFY_EMAILS` | Comma-separated team addresses notified on every submission |
+| `NEXT_PUBLIC_CALENDLY_URL` | Your Calendly event link, e.g. `https://calendly.com/honto/demo` |
+| `CALENDLY_TOKEN` | Optional. Calendly personal access token, used to save the booked time |
+| `NEXT_PUBLIC_SITE_URL` | Public URL, used for the "Open in Prospects" link in emails |
+| `ADMIN_USER`, `ADMIN_PASSWORD` | Login for `/admin` |
 
-## Stack
+### Calendly
 
-**Next.js + TypeScript** with npm. See [Stack Decision](docs/guardrails/stack_decision.md) for full rationale.
+In your Calendly event type, add two custom questions so the invite already explains the demo:
 
-Guardrails setup is complete. The repo is ready for feature development.
+1. **Company** (question 1)
+2. **What should we show you?** (question 2)
 
-## CI and PR Process
+The page fills them in automatically (`a1`, `a2`). To store the exact meeting time in Prospects, create a personal access token in Calendly (Integrations → API & Webhooks) and set `CALENDLY_TOKEN`.
 
-GitHub Actions runs on every push to `main` and on all pull requests. The workflow validates: lint, format, typecheck, tests, dead-code detection, docs health, and build. See [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+### Deploy on Vercel
 
-All PRs use a [template](.github/pull_request_template.md) that requires test impact and docs impact statements. Code ownership is defined in [CODEOWNERS](.github/CODEOWNERS). See [Repository Policy](docs/guardrails/repo_policy.md) for full contribution rules.
+1. Import this repository in Vercel.
+2. Add a Postgres database (Storage → Postgres, or connect Neon/Supabase) so `DATABASE_URL` is set.
+3. Add the other environment variables.
+4. Run `npm run db:migrate` once against the production database (locally with the production `DATABASE_URL`).
 
-A [scheduled hygiene workflow](.github/workflows/hygiene.yml) runs weekly to check TODO/FIXME policy compliance, dependency freshness, and docs staleness.
+## Editing content
 
-## What Has Not Been Decided
+- Homepage copy: `app/page.tsx` and `components/HomeTop.tsx` (intro words).
+- Use cases (39 cards in 6 groups): `lib/useCases.ts`.
+- Questionnaire questions, options, translations and scoring: `lib/questionnaire.ts`.
+- Colors and type: CSS variables at the top of `app/globals.css`.
 
-- Styling approach (Tailwind, CSS Modules, etc.)
-- Component library
-- Deployment target
-- State management
-- Database or CMS
+## Still to do
+
+- Replace the customer-story placeholders on the homepage (`[X]%`, `[Company]`) with a verified result.
+- The IT questionnaire link in Book a demo points to a page that doesn't exist yet.
+- The execution trail on `/technical` uses illustrative example data; replace it with a real trace.
+- Spanish and Portuguese versions of the homepage (the booking flow is already translated).
